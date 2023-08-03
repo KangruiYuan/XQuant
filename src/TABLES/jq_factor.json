@@ -1,0 +1,1514 @@
+{
+    "net_working_capital": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "total_operating_revenue_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_profit_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_operate_cash_flow_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_revenue_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "sale_expense_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "retained_earnings": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "total_operating_cost_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "non_operating_net_profit_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_invest_cash_flow_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "administration_expense_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_interest_expense": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "total_profit_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_finance_cash_flow_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "OperateNetIncome": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "asset_impairment_loss_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "np_parent_company_owners_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_cost_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "goods_sale_and_service_render_cash_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "market_cap": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "circulating_market_cap": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_non_operating_income_to_total_profit": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "sale_expense_to_operating_revenue": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_tax_to_operating_revenue_ratio_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_operate_cash_flow_to_operate_income": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_operating_cash_flow_coverage": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "quick_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "debt_to_equity_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "super_quick_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "inventory_turnover_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_profit_growth_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "long_debt_to_working_capital_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "current_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_operate_cash_flow_to_asset": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "non_current_asset_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "total_asset_turnover_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "long_debt_to_asset_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "debt_to_tangible_equity_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ROAEBITTTM": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_profit_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "long_term_debt_to_asset_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "current_asset_turnover_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_profit_to_total_profit": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "debt_to_asset_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_operate_cash_flow_to_total_liability": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "cash_rate_of_sales": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_profit_to_operating_revenue": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "admin_expense_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "invest_income_associates_to_total_profit": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "equity_to_asset_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "goods_service_cash_to_operating_revenue_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "cash_to_current_liability": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_operate_cash_flow_to_total_current_liability": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ACCA": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "gross_income_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "account_receivable_turnover_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "equity_turnover_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_cost_to_operating_revenue_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "LVGI": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "SGI": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "DSRI": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "profit_margin_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "SGAI": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "total_operating_revenue_per_share_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "cash_and_equivalents_per_share": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "surplus_reserve_fund_per_share": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "retained_profit_per_share": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_revenue_per_share_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_asset_per_share": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "total_operating_revenue_per_share": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "retained_earnings_per_share": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_revenue_per_share": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_operate_cash_flow_per_share": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_profit_per_share_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "eps_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "cashflow_per_share_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_profit_per_share": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "capital_reserve_fund_per_share": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VROC12": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "TVMA6": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VEMA10": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VOL5": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "BR": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VEMA12": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "TVMA20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "DAVOL5": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VDIFF": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "WVAD": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "MAWVAD": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VSTD10": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ATR14": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VOL10": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "DAVOL10": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VDEA": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VSTD20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ATR6": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VOL20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "DAVOL20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VMACD": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "AR": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VOL60": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "turnover_volatility": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VOL120": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VROC6": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "TVSTD20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ARBR": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "money_flow_20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VEMA5": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VOL240": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VEMA26": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "VOSC": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "TVSTD6": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "PSY": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_revenue_growth_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "total_asset_growth_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_operate_cashflow_growth_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "total_profit_growth_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "np_parent_company_owners_growth_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_asset_growth_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Variance20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Skewness20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Kurtosis20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "sharpe_ratio_20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Variance60": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Skewness60": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Kurtosis60": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "sharpe_ratio_60": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Variance120": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Skewness120": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Kurtosis120": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "sharpe_ratio_120": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "boll_down": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "boll_up": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "EMA5": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "EMAC10": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "EMAC12": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "EMAC20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "EMAC26": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "EMAC120": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "MAC5": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "MAC10": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "MAC20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "MAC60": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "MAC120": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "MACDC": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "MFI14": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "price_no_fq": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "arron_down_25": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "BBIC": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "bear_power": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "BIAS5": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "BIAS10": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "BIAS20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "BIAS60": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "bull_power": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "CCI10": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "CCI15": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "CCI20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "CCI88": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "fifty_two_week_close_rank": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "MASS": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Price1M": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Price3M": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Price1Y": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Rank1M": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ROC12": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ROC120": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ROC20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ROC6": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ROC60": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "single_day_VPT": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "single_day_VPT_12": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "single_day_VPT_6": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "TRIX10": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "TRIX5": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "Volume1M": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "gross_profit_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "DEGM": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "DEGM_8y": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "maximum_margin": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "margin_stability": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "accounts_payable_turnover_days": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "account_receivable_turnover_days": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "inventory_turnover_days": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "OperatingCycle": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "cash_flow_to_price_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "sales_to_price_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "value_change_profit_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_debt": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "non_recurring_gain_loss": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_operate_cash_flow_to_net_debt": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "adjusted_profit_to_total_profit": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "cfo_to_ev": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "MLEV": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "financing_cash_growth_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "PEG": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "leverage": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "book_to_price_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "liquidity": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "cash_earnings_to_price_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "earnings_growth": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "earnings_to_price_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "market_leverage": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "natural_log_of_market_cap": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "average_share_turnover_quarterly": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "cumulative_range": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "share_turnover_monthly": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "book_leverage": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "average_share_turnover_annual": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "debt_to_assets": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "sales_growth": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "CR20": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "interest_carry_current_liability": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "interest_free_current_liability": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_profit_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_profit_growth_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "roe_ttm_8y": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "total_profit_to_cost_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "accounts_payable_turnover_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "roe_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "EBITDA": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "fixed_assets_turnover_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "roa_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "equity_to_fixed_asset_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "financial_expense_rate": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "fixed_asset_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_profit_to_total_operate_revenue_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "financial_expense_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "EBIT": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "net_profit_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_assets": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "financial_assets": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "historical_sigma": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "daily_standard_deviation": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "residual_volatility": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "beta": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "PLRC12": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "PLRC24": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "PLRC6": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "arron_up_25": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "momentum": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "non_linear_size": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "roic_ttm": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "financial_liability": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "operating_liability": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "predicted_earnings_to_price_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "earnings_yield": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "short_term_predicted_earnings_growth": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "GMI": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "intangible_asset_ratio": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "size": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "roa_ttm_8y": {
+        "assets": "jq_factor",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    }
+}

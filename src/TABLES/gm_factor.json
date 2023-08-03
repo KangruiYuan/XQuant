@@ -1,0 +1,704 @@
+{
+  "ACCA": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "accounts_payable_turnover_days": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "accounts_payable_turnover_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "account_receivable_turnover_days": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "account_receivable_turnover_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "adjusted_profit_to_total_profit": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "administration_expense_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "admin_expense_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "asset_impairment_loss_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "capital_reserve_fund_per_share": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "cashflow_per_share_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "cash_and_equivalents_per_share": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "cash_rate_of_sales": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "cash_to_current_liability": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "cfo_to_ev": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "circulating_market_cap": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "current_asset_turnover_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "current_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "debt_to_asset_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "debt_to_equity_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "debt_to_tangible_equity_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "DSRI": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "EBIT": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "equity_to_asset_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "equity_to_fixed_asset_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "equity_turnover_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "financial_assets": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "financial_expense_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "financial_expense_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "financial_liability": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "financing_cash_growth_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "fixed_assets_turnover_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "fixed_asset_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "goods_sale_and_service_render_cash_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "goods_service_cash_to_operating_revenue_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "gross_income_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "Index_Market_data": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "intangible_asset_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "interest_carry_current_liability": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "interest_free_current_liability": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "inventory_turnover_days": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "inventory_turnover_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "invest_income_associates_to_total_profit": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "long_debt_to_asset_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "long_debt_to_working_capital_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "long_term_debt_to_asset_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "LVGI": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "market_cap": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "Market_data": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "MLEV": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_asset_growth_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_debt": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_finance_cash_flow_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_interest_expense": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_invest_cash_flow_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_non_operating_income_to_total_profit": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_operate_cashflow_growth_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_operate_cash_flow_per_share": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_operate_cash_flow_to_asset": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_operate_cash_flow_to_net_debt": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_operate_cash_flow_to_operate_income": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_operate_cash_flow_to_total_current_liability": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_operate_cash_flow_to_total_liability": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_operate_cash_flow_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_operating_cash_flow_coverage": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_profit_growth_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_profit_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_profit_to_total_operate_revenue_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_profit_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "net_working_capital": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "non_current_asset_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "non_operating_net_profit_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "non_recurring_gain_loss": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "np_parent_company_owners_growth_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "np_parent_company_owners_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "OperateNetIncome": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "OperatingCycle": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_assets": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_cost_to_operating_revenue_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_cost_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_liability": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_profit_growth_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_profit_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_profit_to_operating_revenue": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_profit_to_total_profit": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_profit_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_revenue_growth_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_revenue_per_share": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_revenue_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "operating_tax_to_operating_revenue_ratio_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "path.txt": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "profit_margin_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "quick_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "retained_earnings": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "retained_earnings_per_share": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "retained_profit_per_share": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "ROAEBITTTM": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "roa_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "roa_ttm_8y": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "roe_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "roe_ttm_8y": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "sale_expense_to_operating_revenue": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "sale_expense_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "SGI": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "size": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "super_quick_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "surplus_reserve_fund_per_share": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "total_asset_growth_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "total_asset_turnover_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "total_operating_cost_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "total_operating_revenue_per_share": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "total_operating_revenue_per_share_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "total_operating_revenue_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "total_profit_growth_rate": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "total_profit_to_cost_ratio": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "total_profit_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "value_change_profit_ttm": {
+    "assets": "gm_factor",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  }
+}

@@ -1,0 +1,146 @@
+{
+    "HKshszHold": {
+        "assets": "dataYes",
+        "description": "沪深港通持股记录",
+        "date_column": "endDate",
+        "ticker_column": "ticker"
+    },
+    "MktEqud": {
+        "assets": "dataYes",
+        "description": "沪深股票日行情",
+        "date_column": "tradeDate",
+        "ticker_column": "ticker"
+    },
+    "mIdxCloseWeight": {
+        "assets": "dataYes",
+        "description": "指数月度权重",
+        "date_column": "effDate",
+        "ticker_column": "ticker"
+    },
+    "MktIdx": {
+        "assets": "dataYes",
+        "description": "指数日行情",
+        "date_column": "tradeDate",
+        "ticker_column": "ticker"
+    },
+    "IndustryID_Sw21": {
+        "assets": "dataYes",
+        "description": "申万行业分类2021",
+        "date_column": "date",
+        "ticker_column": "winCode"
+    },
+    "MktLimit": {
+        "assets": "dataYes",
+        "description": "沪深涨跌停限制",
+        "date_column": "tradeDate",
+        "ticker_column": "ticker"
+    },
+    "SecST": {
+        "assets": "dataYes",
+        "description": "沪深ST",
+        "date_column": "tradeDate",
+        "ticker_column": "ticker"
+    },
+    "SecHalt": {
+        "assets": "dataYes",
+        "description": "沪深停复牌",
+        "date_column": "haltBeginTime",
+        "ticker_column": "ticker"
+    },
+    "ResConIndex": {
+        "assets": "dataYes",
+        "description": "指数一致预期数据表",
+        "date_column": "repForeDate",
+        "ticker_column": "indexCode"
+    },
+    "ResConIndexFy12": {
+        "assets": "dataYes",
+        "description": "指数一致预期动态预测数据表",
+        "date_column": "repForeDate",
+        "ticker_column": "indexCode"
+    },
+    "ResConIndustryCitic": {
+        "assets": "dataYes",
+        "description": "中信行业一致预期数据表",
+        "date_column": "repForeDate",
+        "ticker_column": "induID"
+    },
+    "ResConIndustryCiticFy12": {
+        "assets": "dataYes",
+        "description": "中信行业一致预期动态预测数据表",
+        "date_column": "repForeDate",
+        "ticker_column": "induID"
+    },
+    "ResConIndustrySw": {
+        "assets": "dataYes",
+        "description": "申万行业一致预期数据表",
+        "date_column": "repForeDate",
+        "ticker_column": "induID"
+    },
+    "ResConIndustrySwFy12": {
+        "assets": "dataYes",
+        "description": "申万行业一致预期动态预测数据表",
+        "date_column": "repForeDate",
+        "ticker_column": "induID"
+    },
+    "ResConSecReportHeat": {
+        "assets": "dataYes",
+        "description": "个股研报热度统计数据表",
+        "date_column": "repForeDate",
+        "ticker_column": "secCode"
+    },
+    "ResConSecFy12": {
+        "assets": "dataYes",
+        "description": "个股一致预期动态预测数据表",
+        "date_column": "repForeDate",
+        "ticker_column": "secCode"
+    },
+    "ResConSecCoredata": {
+        "assets": "dataYes",
+        "description": "个股一致预期核心表",
+        "date_column": "repForeDate",
+        "ticker_column": "secCode"
+    },
+    "ResConSecTarpriScore": {
+        "assets": "dataYes",
+        "description": "个股一致预期目标价与评级表",
+        "date_column": "repForeDate",
+        "ticker_column": "secCode"
+    },
+    "ResConSecCorederi": {
+        "assets": "dataYes",
+        "description": "个股一致预期核心加工表",
+        "date_column": "repForeDate",
+        "ticker_column": "secCode"
+    },
+    "FdmtDerPit": {
+        "assets": "dataYes",
+        "description": "财务衍生数据 (Point in time)",
+        "date_column": "publishDate",
+        "ticker_column": "ticker"
+    },
+    "RMExposureDay": {
+        "assets": "dataYes",
+        "description": "因子暴露表",
+        "date_column": "tradeDate",
+        "ticker_column": "ticker"
+    },
+    "FdmtIndiRtnPit": {
+        "assets": "dataYes",
+        "description": "财务指标—盈利能力 (Point in time)",
+        "date_column": "endDate",
+        "ticker_column": "ticker"
+    },
+    "MktEqudEval": {
+        "assets": "dataYes",
+        "description": "沪深估值信息",
+        "date_column": "tradeDate",
+        "ticker_column": "ticker"
+    },
+    "FdmtIndiPSPit": {
+        "assets": "dataYes",
+        "description": "财务指标—每股 (Point in time)",
+        "date_column": "endDate",
+        "ticker_column": "ticker"
+    }
+}

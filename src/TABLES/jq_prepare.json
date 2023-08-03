@@ -1,0 +1,26 @@
+{
+    "financial_sheet": {
+        "assets": "prepare",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "market_financial_sheet": {
+        "assets": "prepare",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "market_sheet": {
+        "assets": "prepare",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    },
+    "ResConSecCorederi_sheet": {
+        "assets": "prepare",
+        "description": "",
+        "date_column": "rpt_date",
+        "ticker_column": "symbol"
+    }
+}

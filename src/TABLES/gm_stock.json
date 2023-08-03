@@ -1,0 +1,92 @@
+{
+  "fundamentals_balance": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "fundamentals_cashflow": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "fundamentals_income": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "share_change": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "gmData_history": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "bob",
+    "ticker_column": "symbol"
+  },
+  "gmData_history_1m": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "bob",
+    "ticker_column": "symbol"
+  },
+  "gmData_bench_price": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "trade_date",
+    "ticker_column": "symbol"
+  },
+  "trading_derivative_indicator": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "deriv_finance_indicator": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "balance_sheet": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "pub_date",
+    "ticker_column": "symbol"
+  },
+  "continuous_contracts": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "trade_date",
+    "ticker_column": "symbol"
+  },
+  "future_daily": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "trade_date",
+    "ticker_column": "symbol"
+  },
+  "symbol_industry": {
+    "assets": "gm_stock",
+    "description": "",
+    "date_column": "query_date",
+    "ticker_column": "symbol"
+  },
+  "bench_price": {
+    "assets": "gmStock",
+    "description": "",
+    "date_column": "trade_date",
+    "ticker_column": "symbol"
+  },
+  "stock_price": {
+    "assets": "gmStock",
+    "description": "",
+    "date_column": "trade_date",
+    "ticker_column": "symbol"
+  }
+}

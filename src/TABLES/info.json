@@ -1,0 +1,30 @@
+{
+  "SecID_E_info": {
+    "assets": "info",
+    "description": "DataAPI.SecIDGet, assetClass=E"
+  },
+  "SecID_IDX_info": {
+    "assets": "info",
+    "description": "DataAPI.SecIDGet, assetClass=IDX, exchangeCD=[XSHE, HSHG]"
+  },
+  "SysCode_info": {
+    "assets": "info",
+    "description": "DataAPI.SysCodeGet"
+  },
+  "PartyID_info": {
+    "assets": "info",
+    "description": "DataAPI.PartyIDGet"
+  },
+  "bench_info": {
+    "assets": "info",
+    "description": ""
+  },
+  "EquDiv_info": {
+    "assets": "info",
+    "description": "DataAPI.EquDivGet"
+  },
+  "TradeCal": {
+    "assets": "info",
+    "description": "DataAPI.TradeCalGet"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "Broker_Data": {
+    "assets": "gm_future",
+    "description": "",
+    "date_column": "date",
+    "ticker_column": ""
+  },
+  "Price_Volume_Data/main": {
+    "assets": "gm_future",
+    "description": "",
+    "date_column": "bob",
+    "ticker_column": ""
+  },
+  "Price_Volume_Data/submain": {
+    "assets": "gm_future",
+    "description": "",
+    "date_column": "bob",
+    "ticker_column": ""
+  }
+}
