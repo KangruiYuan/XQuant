@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="961f5139-6713-4bf9-890a-9d37b00e0752" name="Changes" comment="" />
+    <list default="true" id="961f5139-6713-4bf9-890a-9d37b00e0752" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/TABLES/dataYes.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/TABLES/em.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/TABLES/gm_factor.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/TABLES/gm_future.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/TABLES/gm_stock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/TABLES/info.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/TABLES/prepare.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/consts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/quant.const.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/inheritor/utils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/test/inheritor_test.py" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="2TSafzEDatXFNTn6wVcRgEV0uLu" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -16,7 +37,8 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/yuankangrui/XQuant",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "E:/yuankangrui/Quant_Share_Local",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -53,6 +75,7 @@
       <option name="presentableId" value="Default" />
       <updated>1691039042805</updated>
       <workItem from="1691039043834" duration="5000" />
+      <workItem from="1691041061617" duration="97000" />
     </task>
     <servers />
   </component>

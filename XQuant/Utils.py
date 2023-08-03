@@ -39,7 +39,7 @@ class Config:
     datatables = datatables
 
     stock_table: pd.DataFrame = pd.read_hdf(
-        "{}/stock_info.h5".format(database_dir["root"])
+        "{}/stock_info.h5".format(database_dir["info"])
     )
     stock_list = stock_table["symbol"].tolist()
     stock_num_list = stock_table["sec_id"].unique().tolist()
@@ -119,7 +119,7 @@ class Config:
     )
 
     trade_date_table: pd.DataFrame = pd.read_hdf(
-        "{}/tradeDate_info.h5".format(database_dir["root"])
+        "{}/tradeDate_info.h5".format(database_dir["info"])
     )
     trade_date_list = trade_date_table["tradeDate"].dropna().to_list()
 

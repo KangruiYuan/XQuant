@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Quant_Share_Local/.idea/Quant_Share_Local.iml" filepath="$PROJECT_DIR$/../Quant_Share_Local/.idea/Quant_Share_Local.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/XQuant.iml" filepath="$PROJECT_DIR$/.idea/XQuant.iml" />
     </modules>
   </component>
