@@ -30,7 +30,9 @@ def thread_load_file(load_list: list[str], **kwargs):
         if len(res) > 0:
             # 拼接数据
             try:
-                if isinstance(res.index[0], datetime) or TradeDate.is_date(res.index[0]):
+                if isinstance(res.index[0], datetime) or TradeDate.is_date(
+                    res.index[0]
+                ):
                     res = res.reset_index()
             except ParserError:
                 res = res.reset_index(drop=True)
@@ -39,13 +41,13 @@ def thread_load_file(load_list: list[str], **kwargs):
 
 
 def get_data(
-        name: str,
-        begin: TimeType = None,
-        end: TimeType = None,
-        fields: Union[str, list] = None,
-        ticker: Union[str, int, list] = None,
-        engine: Literal["py", "sql"] = "py",
-        **kwargs,
+    name: str,
+    begin: TimeType = None,
+    end: TimeType = None,
+    fields: Union[str, list] = None,
+    ticker: Union[str, int, list] = None,
+    engine: Literal["py", "sql"] = "py",
+    **kwargs,
 ):
     if name not in datatables:
         raise KeyError("{} is not ready for use!".format(name))
@@ -85,13 +87,13 @@ def get_data(
 
 
 def get_data_general(
-        name: str,
-        path: str,
-        begin: TimeType = None,
-        end: TimeType = None,
-        fields: Union[str, list] = None,
-        ticker: Union[str, int, list] = None,
-        **kwargs,
+    name: str,
+    path: str,
+    begin: TimeType = None,
+    end: TimeType = None,
+    fields: Union[str, list] = None,
+    ticker: Union[str, int, list] = None,
+    **kwargs,
 ):
     table_folder = Path(path) / name
     if not table_folder.exists():
@@ -166,33 +168,42 @@ def get_data_general(
 
 
 def select(
-        name: str,
-        data: pd.DataFrame,
-        begin: TimeType = None,
-        end: TimeType = None,
-        fields: list[str] = None,
-        ticker: list[str, int] = None,
-        **kwargs,
+    name: str,
+    data: pd.DataFrame,
+    begin: TimeType = None,
+    end: TimeType = None,
+    fields: list[str] = None,
+    ticker: list[str, int] = None,
+    **kwargs,
 ):
+    try:
+        date_column = datatables[name]["date_column"]
+    except KeyError:
+        date_column = None
+        print("{} 不支持ticker筛选".format(name))
 
-    if begin is not None or end is not None:
-        try:
-            date_column = datatables[name]["date_column"]
-            data = select_date(data, begin, end, date_column)
-        except KeyError:
-            print("{} 不支持ticker筛选".format(name))
+    try:
+        ticker_column = datatables[name]["ticker_column"]
+    except KeyError:
+        ticker_column = None
+        print("{} 不支持ticker筛选".format(name))
 
-    if ticker is not None:
-        try:
-            ticker_column = datatables[name]["ticker_column"]
-            data = select_ticker(data, ticker, ticker_column)
-        except KeyError:
-            print("{} 不支持ticker筛选".format(name))
+    if (begin is not None or end is not None) and date_column is not None:
+        data = select_date(data, begin, end, date_column)
+    if ticker is not None and ticker_column is not None:
+        data = select_ticker(data, ticker, ticker_column)
+
+    if ticker_column is not None and date_column is not None:
+        data = data.drop_duplicates(subset=[ticker_column, date_column])
+    else:
+        data = data.drop_duplicates()
 
     if fields is not None:
         data = select_fields(data, fields)
 
     return data
+
+
 
 
 def select_date(data: pd.DataFrame, begin: TimeType, end: TimeType, date_column: str):
