@@ -13,14 +13,10 @@ from .Consts import datatables
 import numpy as np
 import pandas as pd
 
-TimeType = Union[str, int, datetime, date, pd.Timestamp]
 
-__all__ = [
-    "Formatter",
-    "TradeDate",
-    "Config",
-    "Common",
-]
+__all__ = ["Formatter", "TradeDate", "Config", "Common", "TimeType"]
+
+TimeType = Union[str, int, datetime, date, pd.Timestamp]
 
 
 class Config:
@@ -135,7 +131,6 @@ class TradeDate:
     def is_date(
         cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
     ) -> bool | str:
-
         return Formatter.is_date(date_repr, pattern_return, **kwargs)
 
     @classmethod
@@ -144,7 +139,6 @@ class TradeDate:
         date_repr: Union[TimeType, pd.Series, list, tuple],
         **kwargs,
     ) -> pd.Series | pd.Timestamp:
-
         return Formatter.date(date_repr, **kwargs)
 
     @classmethod
@@ -321,7 +315,6 @@ class Formatter:
         date_repr: Union[TimeType, pd.Series, list, tuple],
         **kwargs,
     ) -> pd.Series | pd.Timestamp:
-
         if isinstance(date_repr, (list, tuple, pd.Series)):
             if isinstance(date_repr[0], (datetime, date)):
                 return pd.to_datetime(date_repr)
@@ -395,6 +388,11 @@ class Formatter:
         format_code = "{:06.0f}.{}".format(code, tail)
         return format_code
 
+    @classmethod
+    def format_code(cls, code: Union[Sequence, int, str], kind="stock"):
+        if kind == "stock":
+            return [cls.stock(c) for c in code]
+
 
 class Common:
     @classmethod
@@ -438,7 +436,7 @@ class Common:
 
     @classmethod
     def packaging(
-            cls, series: Sequence, pat: int, iterator: bool = False
+        cls, series: Sequence, pat: int, iterator: bool = False
     ) -> Sequence[Sequence] | Iterator:
         """
         :param series:
@@ -455,9 +453,9 @@ class Common:
 
     @classmethod
     def get_config(
-            cls,
-            filename: Union[str, os.PathLike] = Path(__file__).parent / "quant.const.ini",
-            section: str = None,
+        cls,
+        filename: Union[str, os.PathLike] = Path(__file__).parent / "quant.const.ini",
+        section: str = None,
     ) -> OrderedDict:
         """
 
