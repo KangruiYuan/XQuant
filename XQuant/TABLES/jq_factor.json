@@ -1487,12 +1487,6 @@
         "date_column": "rpt_date",
         "ticker_column": "symbol"
     },
-    "GMI": {
-        "assets": "jq_factor",
-        "description": "",
-        "date_column": "rpt_date",
-        "ticker_column": "symbol"
-    },
     "intangible_asset_ratio": {
         "assets": "jq_factor",
         "description": "",

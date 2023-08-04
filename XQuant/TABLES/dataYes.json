@@ -142,5 +142,17 @@
         "description": "财务指标—每股 (Point in time)",
         "date_column": "endDate",
         "ticker_column": "ticker"
-    }
+    },
+    "bench_price": {
+        "assets": "dataYes",
+        "description": "",
+        "date_column": "trade_date",
+        "ticker_column": "symbol"
+      },
+    "stock_price": {
+        "assets": "dataYes",
+        "description": "",
+        "date_column": "trade_date",
+        "ticker_column": "symbol"
+      }
 }

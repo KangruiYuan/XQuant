@@ -105,27 +105,29 @@ def get_data_general(
         load_list = []
         h5_file_name_list = [str(i) for i in table_folder.glob("*.h5")]
         if begin:
-            if "Q" in h5_file_name_list[0]:
+            Q_Y_pattern = r"Y(\d+)_Q(\d+)"
+            Y_pattern = r"Y(\d+)"
+            if re.search(Q_Y_pattern, h5_file_name_list[0]):
                 load_begin, load_end = TradeDate.extend_date_span(begin, end, "Q")
                 begin_num = load_begin.year * 10 + load_begin.month // 3
                 end_num = load_end.year * 10 + load_end.month // 3
-                pattern = r"(\w+)_Y(\d+)_Q(\d+).h5"
+                pattern = r"Y(\d+)_Q(\d+).h5"
                 for filename in h5_file_name_list:
                     match = re.search(pattern, filename)
                     if match:
-                        _, year, month = match.groups()
+                        year, month = match.groups()
                         filename_int = int(year) * 10 + int(month)
                         if begin_num <= filename_int <= end_num:
                             load_list.append(filename)
-            elif "Y" in h5_file_name_list[0]:
+            elif re.search(Y_pattern, h5_file_name_list[0]):
                 load_begin, load_end = TradeDate.extend_date_span(begin, end, "Y")
                 begin_num = load_begin.year
                 end_num = load_end.year
-                pattern = r"(\w+)_Y(\d+).h5"
+                pattern = r"Y(\d+).h5"
                 for filename in h5_file_name_list:
                     match = re.search(pattern, filename)
                     if match:
-                        _, year = match.groups()
+                        year = match.groups()[0]
                         filename_int = int(year)
                         if begin_num <= filename_int <= end_num:
                             load_list.append(filename)
@@ -134,21 +136,21 @@ def get_data_general(
         else:
             if "Q" in h5_file_name_list[0]:
                 end_num = end.year * 10 + np.ceil(end.month / 3)
-                pattern = r"(\w+)_Y(\d+)_Q(\d+).h5"
+                pattern = r"Y(\d+)_Q(\d+).h5"
                 for filename in h5_file_name_list:
                     match = re.search(pattern, filename)
                     if match:
-                        _, year, month = match.groups()
+                        year, month = match.groups()
                         filename_int = int(year) * 10 + int(month)
                         if filename_int <= end_num:
                             load_list.append(filename)
             elif "Y" in h5_file_name_list[0]:
                 end_num = end.year
-                pattern = r"(\w+)_Y(\d+).h5"
+                pattern = r"Y(\d+).h5"
                 for filename in h5_file_name_list:
                     match = re.search(pattern, filename)
                     if match:
-                        _, year = match.groups()
+                        year = match.groups()[0]
                         filename_int = int(year)
                         if filename_int <= end_num:
                             load_list.append(filename)

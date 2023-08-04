@@ -76,17 +76,5 @@
     "description": "",
     "date_column": "query_date",
     "ticker_column": "symbol"
-  },
-  "bench_price": {
-    "assets": "gmStock",
-    "description": "",
-    "date_column": "trade_date",
-    "ticker_column": "symbol"
-  },
-  "stock_price": {
-    "assets": "gmStock",
-    "description": "",
-    "date_column": "trade_date",
-    "ticker_column": "symbol"
   }
 }

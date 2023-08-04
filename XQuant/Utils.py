@@ -1,5 +1,6 @@
+import json
 import os
-from collections import OrderedDict
+from collections import OrderedDict, defaultdict
 from configparser import ConfigParser
 from datetime import datetime, date
 from functools import wraps
@@ -8,13 +9,15 @@ from typing import Sequence, Iterator
 from typing import Union, Literal, Tuple, Any
 
 from pathlib import Path
+import h5py
+from tqdm import tqdm
 
 from .Consts import datatables
 import numpy as np
 import pandas as pd
+import re
 
-
-__all__ = ["Formatter", "TradeDate", "Config", "Common", "TimeType"]
+__all__ = ["Formatter", "TradeDate", "Config", "Tools", "TimeType"]
 
 TimeType = Union[str, int, datetime, date, pd.Timestamp]
 
@@ -129,21 +132,21 @@ class TradeDate:
 
     @classmethod
     def is_date(
-        cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
+            cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
     ) -> bool | str:
         return Formatter.is_date(date_repr, pattern_return, **kwargs)
 
     @classmethod
     def format_date(
-        cls,
-        date_repr: Union[TimeType, pd.Series, list, tuple],
-        **kwargs,
+            cls,
+            date_repr: Union[TimeType, pd.Series, list, tuple],
+            **kwargs,
     ) -> pd.Series | pd.Timestamp:
         return Formatter.date(date_repr, **kwargs)
 
     @classmethod
     def extend_date_span(
-        cls, begin: TimeType, end: TimeType, freq: Literal["Q", "q", "Y", "y", "M", "m"]
+            cls, begin: TimeType, end: TimeType, freq: Literal["Q", "q", "Y", "y", "M", "m"]
     ) -> tuple[datetime, datetime]:
         """
         将区间[begin, end] 进行拓宽, 依据freq将拓展至指定位置, 详见下
@@ -191,7 +194,7 @@ class TradeDate:
 
     @classmethod
     def binary_search(
-        cls, arr: Union[pd.Series, list, tuple, np.ndarray], target: TimeType
+            cls, arr: Union[pd.Series, list, tuple, np.ndarray], target: TimeType
     ) -> Tuple[bool, int]:
         """
         :param arr:
@@ -215,9 +218,9 @@ class TradeDate:
 
     @classmethod
     def shift_trade_date(
-        cls,
-        date_repr: TimeType,
-        lag: int,
+            cls,
+            date_repr: TimeType,
+            lag: int,
     ) -> pd.Timestamp:
         """
         :param date_repr:
@@ -243,14 +246,14 @@ class TradeDate:
             res, index_end = cls.binary_search(cls.trade_date_list, end)
             if not res:
                 index_end += 1
-            return cls.trade_date_list[index_begin : index_end + 1]
+            return cls.trade_date_list[index_begin: index_end + 1]
         elif lag is not None:
             if lag < 0:
                 index_end = index_begin
                 index_begin -= lag
             else:
                 index_end = index_begin + lag
-            return cls.trade_date_list[index_begin : index_end + 1]
+            return cls.trade_date_list[index_begin: index_end + 1]
         else:
             raise AttributeError("Pass attribute end or lag to the function!")
 
@@ -258,7 +261,7 @@ class TradeDate:
 class Formatter:
     @classmethod
     def is_date(
-        cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
+            cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
     ) -> bool | str:
         if not isinstance(date_repr, str):
             date_repr = str(date_repr)
@@ -293,13 +296,13 @@ class Formatter:
                 date_str_res += temp
 
         pattern = (
-            "%Y年%m月%d日",
-            "%Y-%m-%d",
-            "%y年%m月%d日",
-            "%y-%m-%d",
-            "%Y/%m/%d",
-            "%Y%m%d",
-        ) + kwargs.get("pattern", ())
+                      "%Y年%m月%d日",
+                      "%Y-%m-%d",
+                      "%y年%m月%d日",
+                      "%y-%m-%d",
+                      "%Y/%m/%d",
+                      "%Y%m%d",
+                  ) + kwargs.get("pattern", ())
         for i in pattern:
             try:
                 ret = strptime(date_str_res, i)
@@ -311,9 +314,9 @@ class Formatter:
 
     @classmethod
     def date(
-        cls,
-        date_repr: Union[TimeType, pd.Series, list, tuple],
-        **kwargs,
+            cls,
+            date_repr: Union[TimeType, pd.Series, list, tuple],
+            **kwargs,
     ) -> pd.Series | pd.Timestamp:
         if isinstance(date_repr, (list, tuple, pd.Series)):
             if isinstance(date_repr[0], (datetime, date)):
@@ -394,7 +397,7 @@ class Formatter:
             return [cls.stock(c) for c in code]
 
 
-class Common:
+class Tools:
     @classmethod
     def info_lag(cls, data: pd.DataFrame, n_lag: int, clean: bool = False):
         """
@@ -436,7 +439,7 @@ class Common:
 
     @classmethod
     def packaging(
-        cls, series: Sequence, pat: int, iterator: bool = False
+            cls, series: Sequence, pat: int, iterator: bool = False
     ) -> Sequence[Sequence] | Iterator:
         """
         :param series:
@@ -447,15 +450,15 @@ class Common:
         assert pat > 0
         if iterator:
             for i in range(0, len(series), pat):
-                yield series[i : i + pat]
+                yield series[i: i + pat]
         else:
-            return [series[i : i + pat] for i in range(0, len(series), pat)]
+            return [series[i: i + pat] for i in range(0, len(series), pat)]
 
     @classmethod
     def get_config(
-        cls,
-        filename: Union[str, os.PathLike] = Path(__file__).parent / "quant.const.ini",
-        section: str = None,
+            cls,
+            filename: Union[str, os.PathLike] = Path(__file__).parent / "quant.const.ini",
+            section: str = None,
     ) -> OrderedDict:
         """
 
@@ -477,3 +480,92 @@ class Common:
                 res[sec] = tmp
 
         return res
+
+    @classmethod
+    def get_newest_file(cls, name: str):
+        assets = datatables[name]['assets']
+        base_folder = Config.database_dir[assets]
+        data_folder = Path(base_folder) / name
+        files = [str(i) for i in data_folder.glob("*.h5")]
+        if not files:
+            file = data_folder.with_suffix(".h5")
+            if file.exists():
+                return file
+            else:
+                raise NotImplementedError(data_folder)
+        newest_file = ""
+        newest_date = 0
+        Q_Y_pattern = r"Y(\d+)_Q(\d+)"
+        Y_pattern = r"Y(\d+)"
+        if re.search(Q_Y_pattern, files[0]):
+            for file in files:
+                match = re.search(Q_Y_pattern, file)
+                if match:
+                    year, month = match.groups()
+                    date_num = int(year) * 10 + int(month)
+                    if date_num > newest_date:
+                        newest_file = file
+                        newest_date = date_num
+        elif re.search(Y_pattern, files[0]):
+            for file in files:
+                match = re.search(Y_pattern, file)
+                if match:
+                    year = match.groups()[0]
+                    date_num = int(year)
+                    if date_num > newest_date:
+                        newest_file = file
+                        newest_date = date_num
+        else:
+            # TODO: 考虑其他文件格式的h5文件
+            raise KeyError("请检查{}, 文件不符合{}_Y*_Q*组织形式".format(base_folder, name))
+        if newest_file:
+            return newest_file
+        else:
+            raise KeyError("请检查{}, 文件不符合{}_Y*_Q*组织形式".format(base_folder, name))
+
+    @classmethod
+    def search_keyword(cls,
+                       keyword: str,
+                       fuzzy: bool = True,
+                       limit: int = 5,
+                       update: bool = False,
+                       initial_path: str = './attrs.json',
+                       **kwargs):
+        """
+        :param initial_path: The initialization path of the log file
+        :param keyword: the content you want to search for
+        :param fuzzy: fuzzy matching or not
+        :param limit: number of the results
+        :param update: forced updating
+        :return:
+        """
+        initial_path = Path(initial_path)
+        if not initial_path.exists() or update:
+            attrs_map = defaultdict(list)
+            with tqdm(datatables.keys()) as t:
+                t.set_description("正在初始化...")
+                for name in t:
+                    try:
+                        path = cls.get_newest_file(name)
+                    except (IndexError, KeyError, NotImplementedError) as e:
+                        if kwargs.get('verbose', True):
+                            print(e)
+                        continue
+                    data = h5py.File(path)
+                    try:
+                        if "S" in str(data["a"]["axis0"].dtype):
+                            columns = data["a"]["axis0"][:]
+                        elif "S" in str(data["a"]["axis1"].dtype):
+                            columns = data["a"]["axis1"][:]
+                    except KeyError:
+                        continue
+                    for c in columns:
+                        attrs_map[c.decode("utf-8")].append(name)
+                    t.set_postfix({"状态": "{} 写入成功".format(name)})
+                with initial_path.open("w") as write_file:
+                    json.dump(attrs_map, write_file, indent=4)
+        else:
+            with initial_path.open() as read_file:
+                attrs_map = json.load(read_file)
+
+        return attrs_map

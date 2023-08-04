@@ -6,7 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="961f5139-6713-4bf9-890a-9d37b00e0752" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModuleTests/BaseTest.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/ModuleTests/BaseTest.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModuleTests/SingleFuncTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ModuleTests/SingleFuncTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModuleTests/Utils_Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/ModuleTests/Utils_Test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/XQuant/Collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/Collector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XQuant/TABLES/dataYes.json" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/TABLES/dataYes.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XQuant/TABLES/em.json" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/TABLES/em.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XQuant/TABLES/gm_stock.json" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/TABLES/gm_stock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XQuant/TABLES/jq_factor.json" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/TABLES/jq_factor.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XQuant/TABLES/jq_prepare.json" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/TABLES/jq_prepare.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XQuant/Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/Utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +32,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../Quant_Share_Local" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -44,6 +53,7 @@
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
@@ -76,20 +86,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="dev_EMDownload" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Quant_Share_Local" />
+    <configuration name="Utils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="XQuant" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/dev_dataDownload" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/XQuant" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/dev_dataDownload/dev_EMDownload.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/XQuant/Utils.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -176,9 +186,9 @@
       <list>
         <item itemvalue="Python tests.Python tests in Collector_Test.py" />
         <item itemvalue="Python.SingleFuncTest" />
-        <item itemvalue="Python.dev_EMUpdate" />
-        <item itemvalue="Python.dev_EMDownload" />
         <item itemvalue="Python tests.Python tests in Utils_Test.py" />
+        <item itemvalue="Python.Utils" />
+        <item itemvalue="Python.dev_EMUpdate" />
       </list>
     </recent_temporary>
   </component>
@@ -192,7 +202,7 @@
       <updated>1691039042805</updated>
       <workItem from="1691039043834" duration="5000" />
       <workItem from="1691041061617" duration="97000" />
-      <workItem from="1691041251961" duration="12946000" />
+      <workItem from="1691041251961" duration="23726000" />
     </task>
     <servers />
   </component>
@@ -207,14 +217,25 @@
           <line>8</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/H5DataSet.py</url>
+          <line>137</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="jupyter-line">
+          <url>notebook://E:/yuankangrui/XQuant/ModuleTests/BaseTest.ipynb</url>
+          <line>13</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/XQuant$dev_EMDownload.coverage" NAME="dev_EMDownload Coverage Results" MODIFIED="1691043630363" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/dev_dataDownload" />
     <SUITE FILE_PATH="coverage/XQuant$dev_EMUpdate.coverage" NAME="dev_EMUpdate Coverage Results" MODIFIED="1691043678909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../Quant_Share_Local/Euclid_work/Quant_Share/dev_dataDownload" />
-    <SUITE FILE_PATH="coverage/XQuant$SingleFuncTest.coverage" NAME="SingleFuncTest Coverage Results" MODIFIED="1691053203136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ModuleTests" />
+    <SUITE FILE_PATH="coverage/XQuant$SingleFuncTest.coverage" NAME="SingleFuncTest Coverage Results" MODIFIED="1691126356186" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ModuleTests" />
     <SUITE FILE_PATH="coverage/XQuant$main.coverage" NAME="main Coverage Results" MODIFIED="1691041328425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/XQuant$.coverage" NAME=" Coverage Results" MODIFIED="1691054400584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ModuleTests" />
+    <SUITE FILE_PATH="coverage/XQuant$.coverage" NAME=" Coverage Results" MODIFIED="1691126461737" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ModuleTests" />
+    <SUITE FILE_PATH="coverage/XQuant$Utils.coverage" NAME="Utils Coverage Results" MODIFIED="1691117195051" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/XQuant" />
   </component>
 </project>

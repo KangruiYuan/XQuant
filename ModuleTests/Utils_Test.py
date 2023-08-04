@@ -1,7 +1,7 @@
 import unittest
 import pandas as pd
 from datetime import datetime
-from XQuant import TradeDate, Common, Config, Formatter
+from XQuant import TradeDate, Tools, Config, Formatter
 
 
 class MyTestCase(unittest.TestCase):
@@ -38,12 +38,15 @@ class MyTestCase(unittest.TestCase):
 
     def test_packaging(self):
         my_sequence = [1, 2, 3, 4, 5]
-        res = [i for i in Common.packaging(my_sequence, pat=2, iterator=True)]
+        res = [i for i in Tools.packaging(my_sequence, pat=2, iterator=True)]
         expect_res = [[1, 2], [3, 4], [5]]
         self.assertEqual(res, expect_res)
 
     def test_datatables(self):
         self.assertEqual(True, "HKshszHold" in Config.datatables)
+
+    def test_get_new_file(self):
+        self.assertEqual("2023" in Tools.get_newest_file("ResConSecTarpriScore"), True)
 
 
 if __name__ == "__main__":

@@ -89,12 +89,6 @@
         "date_column": "tradeDate",
         "ticker_column": "codes"
     },
-    "000802SH": {
-        "assets": "em",
-        "description": "",
-        "date_column": "TRADEDATE",
-        "ticker_column": "SECUCODE"
-    },
     "Domestic_main_contract_daily": {
         "assets": "em",
         "description": "",
