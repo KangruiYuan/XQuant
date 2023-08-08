@@ -13,8 +13,14 @@ table_record_files = table_record_folder.glob("*.json")
 datatables = {}
 
 for file in table_record_files:
-    with open(file, "r", encoding='utf-8') as fp:
+    with open(file, "r", encoding="utf-8") as fp:
         tmp = json.load(fp)
-        datatables.update(tmp)
-
+        if file.stem == "gm_factor":
+            another = {}
+            for key in tmp:
+                another[key + "_gm"] = tmp[key]
+            datatables.update(another)
+            del another
+        else:
+            datatables.update(tmp)
 del tmp

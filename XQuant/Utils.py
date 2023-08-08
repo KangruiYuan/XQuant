@@ -10,6 +10,7 @@ from typing import Union, Literal, Tuple, Any
 
 from pathlib import Path
 import h5py
+from fuzzywuzzy import process
 from tqdm import tqdm
 
 from .Consts import datatables
@@ -132,21 +133,21 @@ class TradeDate:
 
     @classmethod
     def is_date(
-            cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
+        cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
     ) -> bool | str:
         return Formatter.is_date(date_repr, pattern_return, **kwargs)
 
     @classmethod
     def format_date(
-            cls,
-            date_repr: Union[TimeType, pd.Series, list, tuple],
-            **kwargs,
+        cls,
+        date_repr: Union[TimeType, pd.Series, list, tuple],
+        **kwargs,
     ) -> pd.Series | pd.Timestamp:
         return Formatter.date(date_repr, **kwargs)
 
     @classmethod
     def extend_date_span(
-            cls, begin: TimeType, end: TimeType, freq: Literal["Q", "q", "Y", "y", "M", "m"]
+        cls, begin: TimeType, end: TimeType, freq: Literal["Q", "q", "Y", "y", "M", "m"]
     ) -> tuple[datetime, datetime]:
         """
         将区间[begin, end] 进行拓宽, 依据freq将拓展至指定位置, 详见下
@@ -171,7 +172,6 @@ class TradeDate:
             if not pd.offsets.DateOffset().is_quarter_end(end):
                 end = end + pd.offsets.QuarterEnd(n=1)
             return begin, end
-
         elif freq in ["Y", "y"]:
             if not pd.offsets.DateOffset().is_year_start(begin):
                 begin = begin - pd.offsets.YearBegin(n=1)
@@ -194,7 +194,7 @@ class TradeDate:
 
     @classmethod
     def binary_search(
-            cls, arr: Union[pd.Series, list, tuple, np.ndarray], target: TimeType
+        cls, arr: Union[pd.Series, list, tuple, np.ndarray], target: TimeType
     ) -> Tuple[bool, int]:
         """
         :param arr:
@@ -218,9 +218,9 @@ class TradeDate:
 
     @classmethod
     def shift_trade_date(
-            cls,
-            date_repr: TimeType,
-            lag: int,
+        cls,
+        date_repr: TimeType,
+        lag: int,
     ) -> pd.Timestamp:
         """
         :param date_repr:
@@ -246,14 +246,14 @@ class TradeDate:
             res, index_end = cls.binary_search(cls.trade_date_list, end)
             if not res:
                 index_end += 1
-            return cls.trade_date_list[index_begin: index_end + 1]
+            return cls.trade_date_list[index_begin : index_end + 1]
         elif lag is not None:
             if lag < 0:
                 index_end = index_begin
                 index_begin -= lag
             else:
                 index_end = index_begin + lag
-            return cls.trade_date_list[index_begin: index_end + 1]
+            return cls.trade_date_list[index_begin : index_end + 1]
         else:
             raise AttributeError("Pass attribute end or lag to the function!")
 
@@ -261,7 +261,7 @@ class TradeDate:
 class Formatter:
     @classmethod
     def is_date(
-            cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
+        cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
     ) -> bool | str:
         if not isinstance(date_repr, str):
             date_repr = str(date_repr)
@@ -296,13 +296,13 @@ class Formatter:
                 date_str_res += temp
 
         pattern = (
-                      "%Y年%m月%d日",
-                      "%Y-%m-%d",
-                      "%y年%m月%d日",
-                      "%y-%m-%d",
-                      "%Y/%m/%d",
-                      "%Y%m%d",
-                  ) + kwargs.get("pattern", ())
+            "%Y年%m月%d日",
+            "%Y-%m-%d",
+            "%y年%m月%d日",
+            "%y-%m-%d",
+            "%Y/%m/%d",
+            "%Y%m%d",
+        ) + kwargs.get("pattern", ())
         for i in pattern:
             try:
                 ret = strptime(date_str_res, i)
@@ -314,9 +314,9 @@ class Formatter:
 
     @classmethod
     def date(
-            cls,
-            date_repr: Union[TimeType, pd.Series, list, tuple],
-            **kwargs,
+        cls,
+        date_repr: Union[TimeType, pd.Series, list, tuple],
+        **kwargs,
     ) -> pd.Series | pd.Timestamp:
         if isinstance(date_repr, (list, tuple, pd.Series)):
             if isinstance(date_repr[0], (datetime, date)):
@@ -377,7 +377,7 @@ class Formatter:
                 elif code[-6:].isdigit():
                     num = code[-6:]
                 else:
-                    raise ValueError("Invalid stock code")
+                    raise ValueError(f"Invalid stock code {code}")
                 code = int(num)
             else:
                 return np.nan
@@ -392,9 +392,32 @@ class Formatter:
         return format_code
 
     @classmethod
+    def future(cls, code: str):
+        if "qe" in code:
+            out = code.split("_")[0].upper()
+        else:
+            out = code.split(".")[1]
+            if "_" in out:
+                out = out.split("_")[0].upper()
+
+        if out in Config.futures_list:
+            return out
+        else:
+            raise KeyError("{} is not format futures!".format(code))
+
+    @classmethod
     def format_code(cls, code: Union[Sequence, int, str], kind="stock"):
         if kind == "stock":
-            return [cls.stock(c) for c in code]
+            func = cls.stock
+        elif kind == "future":
+            func = cls.future
+        else:
+            raise NotImplementedError(f"Method not implemented for {kind}")
+
+        if isinstance(code, (list, tuple, pd.Series)):
+            return [func(c) for c in code]
+        elif isinstance(code, (int, str)):
+            return func(code)
 
 
 class Tools:
@@ -439,7 +462,7 @@ class Tools:
 
     @classmethod
     def packaging(
-            cls, series: Sequence, pat: int, iterator: bool = False
+        cls, series: Sequence, pat: int, iterator: bool = False
     ) -> Sequence[Sequence] | Iterator:
         """
         :param series:
@@ -450,15 +473,15 @@ class Tools:
         assert pat > 0
         if iterator:
             for i in range(0, len(series), pat):
-                yield series[i: i + pat]
+                yield series[i : i + pat]
         else:
-            return [series[i: i + pat] for i in range(0, len(series), pat)]
+            return [series[i : i + pat] for i in range(0, len(series), pat)]
 
     @classmethod
     def get_config(
-            cls,
-            filename: Union[str, os.PathLike] = Path(__file__).parent / "quant.const.ini",
-            section: str = None,
+        cls,
+        filename: Union[str, os.PathLike] = Path(__file__).parent / "quant.const.ini",
+        section: str = None,
     ) -> OrderedDict:
         """
 
@@ -483,7 +506,7 @@ class Tools:
 
     @classmethod
     def get_newest_file(cls, name: str):
-        assets = datatables[name]['assets']
+        assets = datatables[name]["assets"]
         base_folder = Config.database_dir[assets]
         data_folder = Path(base_folder) / name
         files = [str(i) for i in data_folder.glob("*.h5")]
@@ -524,13 +547,15 @@ class Tools:
             raise KeyError("请检查{}, 文件不符合{}_Y*_Q*组织形式".format(base_folder, name))
 
     @classmethod
-    def search_keyword(cls,
-                       keyword: str,
-                       fuzzy: bool = True,
-                       limit: int = 5,
-                       update: bool = False,
-                       initial_path: str = './attrs.json',
-                       **kwargs):
+    def search_keyword(
+        cls,
+        keyword: str,
+        fuzzy: bool = True,
+        limit: int = 5,
+        update: bool = False,
+        initial_path: str = "./attrs.json",
+        **kwargs,
+    ):
         """
         :param initial_path: The initialization path of the log file
         :param keyword: the content you want to search for
@@ -548,16 +573,20 @@ class Tools:
                     try:
                         path = cls.get_newest_file(name)
                     except (IndexError, KeyError, NotImplementedError) as e:
-                        if kwargs.get('verbose', True):
+                        if kwargs.get("verbose", True):
                             print(e)
                         continue
+                    # TODO: 该方法无法正常使用时选用get_data
                     data = h5py.File(path)
                     try:
                         if "S" in str(data["a"]["axis0"].dtype):
                             columns = data["a"]["axis0"][:]
                         elif "S" in str(data["a"]["axis1"].dtype):
                             columns = data["a"]["axis1"][:]
-                    except KeyError:
+                    except KeyError as e:
+                        if kwargs.get("verbose", True):
+                            print(e)
+                            print(path)
                         continue
                     for c in columns:
                         attrs_map[c.decode("utf-8")].append(name)
@@ -568,4 +597,17 @@ class Tools:
             with initial_path.open() as read_file:
                 attrs_map = json.load(read_file)
 
+        dic = {}
+        if fuzzy:
+            res = process.extract(keyword, attrs_map.keys(), limit=limit)
+            for candidate, score in res:
+                dic[candidate] = attrs_map[candidate]
+        else:
+            res = list(filter(lambda x: keyword in x or keyword == x, attrs_map.keys()))
+            count = 0
+            for candidate in res:
+                dic[candidate] = attrs_map[candidate]
+                count += 1
+                if count >= limit:
+                    break
         return attrs_map
