@@ -976,6 +976,123 @@
     "symbol": [
         "bench_price",
         "stock_price",
+        "ACCA_gm",
+        "accounts_payable_turnover_days_gm",
+        "accounts_payable_turnover_rate_gm",
+        "account_receivable_turnover_days_gm",
+        "account_receivable_turnover_rate_gm",
+        "adjusted_profit_to_total_profit_gm",
+        "administration_expense_ttm_gm",
+        "admin_expense_rate_gm",
+        "asset_impairment_loss_ttm_gm",
+        "capital_reserve_fund_per_share_gm",
+        "cashflow_per_share_ttm_gm",
+        "cash_and_equivalents_per_share_gm",
+        "cash_rate_of_sales_gm",
+        "cash_to_current_liability_gm",
+        "cfo_to_ev_gm",
+        "circulating_market_cap_gm",
+        "current_asset_turnover_rate_gm",
+        "current_ratio_gm",
+        "debt_to_asset_ratio_gm",
+        "debt_to_equity_ratio_gm",
+        "debt_to_tangible_equity_ratio_gm",
+        "DSRI_gm",
+        "EBIT_gm",
+        "equity_to_asset_ratio_gm",
+        "equity_to_fixed_asset_ratio_gm",
+        "equity_turnover_rate_gm",
+        "financial_assets_gm",
+        "financial_expense_rate_gm",
+        "financial_expense_ttm_gm",
+        "financial_liability_gm",
+        "financing_cash_growth_rate_gm",
+        "fixed_assets_turnover_rate_gm",
+        "fixed_asset_ratio_gm",
+        "goods_sale_and_service_render_cash_ttm_gm",
+        "goods_service_cash_to_operating_revenue_ttm_gm",
+        "gross_income_ratio_gm",
+        "Index_Market_data_gm",
+        "intangible_asset_ratio_gm",
+        "interest_carry_current_liability_gm",
+        "interest_free_current_liability_gm",
+        "inventory_turnover_days_gm",
+        "inventory_turnover_rate_gm",
+        "invest_income_associates_to_total_profit_gm",
+        "long_debt_to_asset_ratio_gm",
+        "long_debt_to_working_capital_ratio_gm",
+        "long_term_debt_to_asset_ratio_gm",
+        "LVGI_gm",
+        "market_cap_gm",
+        "Market_data_gm",
+        "MLEV_gm",
+        "net_asset_growth_rate_gm",
+        "net_debt_gm",
+        "net_finance_cash_flow_ttm_gm",
+        "net_interest_expense_gm",
+        "net_invest_cash_flow_ttm_gm",
+        "net_non_operating_income_to_total_profit_gm",
+        "net_operate_cashflow_growth_rate_gm",
+        "net_operate_cash_flow_per_share_gm",
+        "net_operate_cash_flow_to_asset_gm",
+        "net_operate_cash_flow_to_net_debt_gm",
+        "net_operate_cash_flow_to_operate_income_gm",
+        "net_operate_cash_flow_to_total_current_liability_gm",
+        "net_operate_cash_flow_to_total_liability_gm",
+        "net_operate_cash_flow_ttm_gm",
+        "net_operating_cash_flow_coverage_gm",
+        "net_profit_growth_rate_gm",
+        "net_profit_ratio_gm",
+        "net_profit_to_total_operate_revenue_ttm_gm",
+        "net_profit_ttm_gm",
+        "net_working_capital_gm",
+        "non_current_asset_ratio_gm",
+        "non_operating_net_profit_ttm_gm",
+        "non_recurring_gain_loss_gm",
+        "np_parent_company_owners_growth_rate_gm",
+        "np_parent_company_owners_ttm_gm",
+        "OperateNetIncome_gm",
+        "OperatingCycle_gm",
+        "operating_assets_gm",
+        "operating_cost_to_operating_revenue_ratio_gm",
+        "operating_cost_ttm_gm",
+        "operating_liability_gm",
+        "operating_profit_growth_rate_gm",
+        "operating_profit_ratio_gm",
+        "operating_profit_to_operating_revenue_gm",
+        "operating_profit_to_total_profit_gm",
+        "operating_profit_ttm_gm",
+        "operating_revenue_growth_rate_gm",
+        "operating_revenue_per_share_gm",
+        "operating_revenue_ttm_gm",
+        "operating_tax_to_operating_revenue_ratio_ttm_gm",
+        "profit_margin_ttm_gm",
+        "quick_ratio_gm",
+        "retained_earnings_gm",
+        "retained_earnings_per_share_gm",
+        "retained_profit_per_share_gm",
+        "ROAEBITTTM_gm",
+        "roa_ttm_gm",
+        "roa_ttm_8y_gm",
+        "roe_ttm_gm",
+        "roe_ttm_8y_gm",
+        "sale_expense_to_operating_revenue_gm",
+        "sale_expense_ttm_gm",
+        "SGI_gm",
+        "super_quick_ratio_gm",
+        "surplus_reserve_fund_per_share_gm",
+        "total_asset_growth_rate_gm",
+        "total_asset_turnover_rate_gm",
+        "total_operating_cost_ttm_gm",
+        "total_operating_revenue_per_share_gm",
+        "total_operating_revenue_per_share_ttm_gm",
+        "total_operating_revenue_ttm_gm",
+        "total_profit_growth_rate_gm",
+        "total_profit_to_cost_ratio_gm",
+        "total_profit_ttm_gm",
+        "value_change_profit_ttm_gm",
+        "Price_Volume_Data/main",
+        "Price_Volume_Data/submain",
         "fundamentals_balance",
         "fundamentals_cashflow",
         "fundamentals_income",
@@ -1285,6 +1402,8 @@
     "position": [
         "bench_price",
         "stock_price",
+        "Price_Volume_Data/main",
+        "Price_Volume_Data/submain",
         "gmData_history",
         "gmData_bench_price",
         "future_daily"
@@ -1802,7 +1921,284 @@
         "Stock_A_daily",
         "Stock_B_daily"
     ],
+    "end_date": [
+        "ACCA_gm",
+        "accounts_payable_turnover_days_gm",
+        "accounts_payable_turnover_rate_gm",
+        "account_receivable_turnover_days_gm",
+        "account_receivable_turnover_rate_gm",
+        "adjusted_profit_to_total_profit_gm",
+        "administration_expense_ttm_gm",
+        "admin_expense_rate_gm",
+        "asset_impairment_loss_ttm_gm",
+        "capital_reserve_fund_per_share_gm",
+        "cashflow_per_share_ttm_gm",
+        "cash_and_equivalents_per_share_gm",
+        "cash_rate_of_sales_gm",
+        "cash_to_current_liability_gm",
+        "cfo_to_ev_gm",
+        "circulating_market_cap_gm",
+        "current_asset_turnover_rate_gm",
+        "current_ratio_gm",
+        "debt_to_asset_ratio_gm",
+        "debt_to_equity_ratio_gm",
+        "debt_to_tangible_equity_ratio_gm",
+        "DSRI_gm",
+        "EBIT_gm",
+        "equity_to_asset_ratio_gm",
+        "equity_to_fixed_asset_ratio_gm",
+        "equity_turnover_rate_gm",
+        "financial_assets_gm",
+        "financial_expense_rate_gm",
+        "financial_expense_ttm_gm",
+        "financial_liability_gm",
+        "financing_cash_growth_rate_gm",
+        "fixed_assets_turnover_rate_gm",
+        "fixed_asset_ratio_gm",
+        "goods_sale_and_service_render_cash_ttm_gm",
+        "goods_service_cash_to_operating_revenue_ttm_gm",
+        "gross_income_ratio_gm",
+        "Index_Market_data_gm",
+        "intangible_asset_ratio_gm",
+        "interest_carry_current_liability_gm",
+        "interest_free_current_liability_gm",
+        "inventory_turnover_days_gm",
+        "inventory_turnover_rate_gm",
+        "invest_income_associates_to_total_profit_gm",
+        "long_debt_to_asset_ratio_gm",
+        "long_debt_to_working_capital_ratio_gm",
+        "long_term_debt_to_asset_ratio_gm",
+        "LVGI_gm",
+        "market_cap_gm",
+        "Market_data_gm",
+        "MLEV_gm",
+        "net_asset_growth_rate_gm",
+        "net_debt_gm",
+        "net_finance_cash_flow_ttm_gm",
+        "net_interest_expense_gm",
+        "net_invest_cash_flow_ttm_gm",
+        "net_non_operating_income_to_total_profit_gm",
+        "net_operate_cashflow_growth_rate_gm",
+        "net_operate_cash_flow_per_share_gm",
+        "net_operate_cash_flow_to_asset_gm",
+        "net_operate_cash_flow_to_net_debt_gm",
+        "net_operate_cash_flow_to_operate_income_gm",
+        "net_operate_cash_flow_to_total_current_liability_gm",
+        "net_operate_cash_flow_to_total_liability_gm",
+        "net_operate_cash_flow_ttm_gm",
+        "net_operating_cash_flow_coverage_gm",
+        "net_profit_growth_rate_gm",
+        "net_profit_ratio_gm",
+        "net_profit_to_total_operate_revenue_ttm_gm",
+        "net_profit_ttm_gm",
+        "net_working_capital_gm",
+        "non_current_asset_ratio_gm",
+        "non_operating_net_profit_ttm_gm",
+        "non_recurring_gain_loss_gm",
+        "np_parent_company_owners_growth_rate_gm",
+        "np_parent_company_owners_ttm_gm",
+        "OperateNetIncome_gm",
+        "OperatingCycle_gm",
+        "operating_assets_gm",
+        "operating_cost_to_operating_revenue_ratio_gm",
+        "operating_cost_ttm_gm",
+        "operating_liability_gm",
+        "operating_profit_growth_rate_gm",
+        "operating_profit_ratio_gm",
+        "operating_profit_to_operating_revenue_gm",
+        "operating_profit_to_total_profit_gm",
+        "operating_profit_ttm_gm",
+        "operating_revenue_growth_rate_gm",
+        "operating_revenue_per_share_gm",
+        "operating_revenue_ttm_gm",
+        "operating_tax_to_operating_revenue_ratio_ttm_gm",
+        "profit_margin_ttm_gm",
+        "quick_ratio_gm",
+        "retained_earnings_gm",
+        "retained_earnings_per_share_gm",
+        "retained_profit_per_share_gm",
+        "ROAEBITTTM_gm",
+        "roa_ttm_gm",
+        "roa_ttm_8y_gm",
+        "roe_ttm_gm",
+        "roe_ttm_8y_gm",
+        "sale_expense_to_operating_revenue_gm",
+        "sale_expense_ttm_gm",
+        "SGI_gm",
+        "super_quick_ratio_gm",
+        "surplus_reserve_fund_per_share_gm",
+        "total_asset_growth_rate_gm",
+        "total_asset_turnover_rate_gm",
+        "total_operating_cost_ttm_gm",
+        "total_operating_revenue_per_share_gm",
+        "total_operating_revenue_per_share_ttm_gm",
+        "total_operating_revenue_ttm_gm",
+        "total_profit_growth_rate_gm",
+        "total_profit_to_cost_ratio_gm",
+        "total_profit_ttm_gm",
+        "value_change_profit_ttm_gm",
+        "trading_derivative_indicator",
+        "deriv_finance_indicator",
+        "balance_sheet"
+    ],
+    "MANANETR": [
+        "ACCA_gm",
+        "cash_rate_of_sales_gm",
+        "cfo_to_ev_gm",
+        "net_operate_cashflow_growth_rate_gm",
+        "net_operate_cash_flow_to_operate_income_gm",
+        "net_operate_cash_flow_to_total_current_liability_gm",
+        "net_operate_cash_flow_to_total_liability_gm",
+        "net_operate_cash_flow_ttm_gm",
+        "net_operating_cash_flow_coverage_gm"
+    ],
+    "NETPROFIT": [
+        "ACCA_gm",
+        "adjusted_profit_to_total_profit_gm",
+        "EBIT_gm",
+        "net_profit_growth_rate_gm",
+        "net_profit_ratio_gm",
+        "net_profit_to_total_operate_revenue_ttm_gm",
+        "net_profit_ttm_gm",
+        "roa_ttm_gm",
+        "roa_ttm_8y_gm",
+        "roe_ttm_gm",
+        "roe_ttm_8y_gm"
+    ],
+    "TOTASSET": [
+        "ACCA_gm",
+        "debt_to_asset_ratio_gm",
+        "equity_to_asset_ratio_gm",
+        "fixed_asset_ratio_gm",
+        "intangible_asset_ratio_gm",
+        "long_debt_to_asset_ratio_gm",
+        "long_term_debt_to_asset_ratio_gm",
+        "net_operate_cash_flow_to_asset_gm",
+        "non_current_asset_ratio_gm",
+        "operating_assets_gm",
+        "ROAEBITTTM_gm",
+        "roa_ttm_gm",
+        "roa_ttm_8y_gm",
+        "total_asset_growth_rate_gm",
+        "total_asset_turnover_rate_gm",
+        "balance_sheet"
+    ],
     "pub_date": [
+        "ACCA_gm",
+        "accounts_payable_turnover_days_gm",
+        "accounts_payable_turnover_rate_gm",
+        "account_receivable_turnover_days_gm",
+        "account_receivable_turnover_rate_gm",
+        "adjusted_profit_to_total_profit_gm",
+        "administration_expense_ttm_gm",
+        "admin_expense_rate_gm",
+        "asset_impairment_loss_ttm_gm",
+        "capital_reserve_fund_per_share_gm",
+        "cashflow_per_share_ttm_gm",
+        "cash_and_equivalents_per_share_gm",
+        "cash_rate_of_sales_gm",
+        "cash_to_current_liability_gm",
+        "cfo_to_ev_gm",
+        "circulating_market_cap_gm",
+        "current_asset_turnover_rate_gm",
+        "current_ratio_gm",
+        "debt_to_asset_ratio_gm",
+        "debt_to_equity_ratio_gm",
+        "debt_to_tangible_equity_ratio_gm",
+        "DSRI_gm",
+        "EBIT_gm",
+        "equity_to_asset_ratio_gm",
+        "equity_to_fixed_asset_ratio_gm",
+        "equity_turnover_rate_gm",
+        "financial_assets_gm",
+        "financial_expense_rate_gm",
+        "financial_expense_ttm_gm",
+        "financial_liability_gm",
+        "financing_cash_growth_rate_gm",
+        "fixed_assets_turnover_rate_gm",
+        "fixed_asset_ratio_gm",
+        "goods_sale_and_service_render_cash_ttm_gm",
+        "goods_service_cash_to_operating_revenue_ttm_gm",
+        "gross_income_ratio_gm",
+        "Index_Market_data_gm",
+        "intangible_asset_ratio_gm",
+        "interest_carry_current_liability_gm",
+        "interest_free_current_liability_gm",
+        "inventory_turnover_days_gm",
+        "inventory_turnover_rate_gm",
+        "invest_income_associates_to_total_profit_gm",
+        "long_debt_to_asset_ratio_gm",
+        "long_debt_to_working_capital_ratio_gm",
+        "long_term_debt_to_asset_ratio_gm",
+        "LVGI_gm",
+        "market_cap_gm",
+        "Market_data_gm",
+        "MLEV_gm",
+        "net_asset_growth_rate_gm",
+        "net_debt_gm",
+        "net_finance_cash_flow_ttm_gm",
+        "net_interest_expense_gm",
+        "net_invest_cash_flow_ttm_gm",
+        "net_non_operating_income_to_total_profit_gm",
+        "net_operate_cashflow_growth_rate_gm",
+        "net_operate_cash_flow_per_share_gm",
+        "net_operate_cash_flow_to_asset_gm",
+        "net_operate_cash_flow_to_net_debt_gm",
+        "net_operate_cash_flow_to_operate_income_gm",
+        "net_operate_cash_flow_to_total_current_liability_gm",
+        "net_operate_cash_flow_to_total_liability_gm",
+        "net_operate_cash_flow_ttm_gm",
+        "net_operating_cash_flow_coverage_gm",
+        "net_profit_growth_rate_gm",
+        "net_profit_ratio_gm",
+        "net_profit_to_total_operate_revenue_ttm_gm",
+        "net_profit_ttm_gm",
+        "net_working_capital_gm",
+        "non_current_asset_ratio_gm",
+        "non_operating_net_profit_ttm_gm",
+        "non_recurring_gain_loss_gm",
+        "np_parent_company_owners_growth_rate_gm",
+        "np_parent_company_owners_ttm_gm",
+        "OperateNetIncome_gm",
+        "OperatingCycle_gm",
+        "operating_assets_gm",
+        "operating_cost_to_operating_revenue_ratio_gm",
+        "operating_cost_ttm_gm",
+        "operating_liability_gm",
+        "operating_profit_growth_rate_gm",
+        "operating_profit_ratio_gm",
+        "operating_profit_to_operating_revenue_gm",
+        "operating_profit_to_total_profit_gm",
+        "operating_profit_ttm_gm",
+        "operating_revenue_growth_rate_gm",
+        "operating_revenue_per_share_gm",
+        "operating_revenue_ttm_gm",
+        "operating_tax_to_operating_revenue_ratio_ttm_gm",
+        "profit_margin_ttm_gm",
+        "quick_ratio_gm",
+        "retained_earnings_gm",
+        "retained_earnings_per_share_gm",
+        "retained_profit_per_share_gm",
+        "ROAEBITTTM_gm",
+        "roa_ttm_gm",
+        "roa_ttm_8y_gm",
+        "roe_ttm_gm",
+        "roe_ttm_8y_gm",
+        "sale_expense_to_operating_revenue_gm",
+        "sale_expense_ttm_gm",
+        "SGI_gm",
+        "super_quick_ratio_gm",
+        "surplus_reserve_fund_per_share_gm",
+        "total_asset_growth_rate_gm",
+        "total_asset_turnover_rate_gm",
+        "total_operating_cost_ttm_gm",
+        "total_operating_revenue_per_share_gm",
+        "total_operating_revenue_per_share_ttm_gm",
+        "total_operating_revenue_ttm_gm",
+        "total_profit_growth_rate_gm",
+        "total_profit_to_cost_ratio_gm",
+        "total_profit_ttm_gm",
+        "value_change_profit_ttm_gm",
         "fundamentals_balance",
         "fundamentals_cashflow",
         "fundamentals_income",
@@ -2065,6 +2461,596 @@
         "market_financial_sheet",
         "market_sheet",
         "ResConSecCorederi_sheet"
+    ],
+    "ACCPAYRT": [
+        "accounts_payable_turnover_days_gm",
+        "deriv_finance_indicator",
+        "financial_sheet",
+        "market_financial_sheet"
+    ],
+    "BIZCOST": [
+        "accounts_payable_turnover_rate_gm",
+        "gross_income_ratio_gm",
+        "inventory_turnover_rate_gm",
+        "operating_cost_to_operating_revenue_ratio_gm",
+        "operating_cost_ttm_gm",
+        "total_profit_to_cost_ratio_gm"
+    ],
+    "ACCOPAYA": [
+        "accounts_payable_turnover_rate_gm",
+        "financial_liability_gm",
+        "interest_free_current_liability_gm",
+        "operating_liability_gm",
+        "balance_sheet"
+    ],
+    "NOTESPAYA": [
+        "accounts_payable_turnover_rate_gm",
+        "interest_free_current_liability_gm",
+        "balance_sheet"
+    ],
+    "PREP": [
+        "accounts_payable_turnover_rate_gm",
+        "balance_sheet"
+    ],
+    "ACCRECGTURNRT": [
+        "account_receivable_turnover_days_gm",
+        "deriv_finance_indicator",
+        "financial_sheet",
+        "market_financial_sheet"
+    ],
+    "BIZINCO": [
+        "account_receivable_turnover_rate_gm",
+        "cash_rate_of_sales_gm",
+        "current_asset_turnover_rate_gm",
+        "DSRI_gm",
+        "equity_turnover_rate_gm",
+        "fixed_assets_turnover_rate_gm",
+        "goods_service_cash_to_operating_revenue_ttm_gm",
+        "gross_income_ratio_gm",
+        "net_profit_ratio_gm",
+        "operating_cost_to_operating_revenue_ratio_gm",
+        "operating_profit_ratio_gm",
+        "operating_revenue_growth_rate_gm",
+        "operating_revenue_ttm_gm",
+        "operating_tax_to_operating_revenue_ratio_ttm_gm",
+        "profit_margin_ttm_gm",
+        "SGI_gm",
+        "total_asset_turnover_rate_gm"
+    ],
+    "ACCORECE": [
+        "account_receivable_turnover_rate_gm",
+        "DSRI_gm",
+        "super_quick_ratio_gm",
+        "balance_sheet"
+    ],
+    "NOTESRECE": [
+        "account_receivable_turnover_rate_gm",
+        "financial_assets_gm",
+        "operating_assets_gm",
+        "super_quick_ratio_gm",
+        "balance_sheet"
+    ],
+    "ADVAPAYM": [
+        "account_receivable_turnover_rate_gm",
+        "financial_liability_gm",
+        "interest_free_current_liability_gm",
+        "operating_liability_gm",
+        "balance_sheet"
+    ],
+    "NPCUT": [
+        "adjusted_profit_to_total_profit_gm",
+        "non_recurring_gain_loss_gm",
+        "deriv_finance_indicator",
+        "financial_sheet",
+        "market_financial_sheet"
+    ],
+    "MANAEXPE": [
+        "administration_expense_ttm_gm",
+        "admin_expense_rate_gm",
+        "total_profit_to_cost_ratio_gm"
+    ],
+    "year": [
+        "administration_expense_ttm_gm",
+        "asset_impairment_loss_ttm_gm",
+        "circulating_market_cap_gm",
+        "EBIT_gm",
+        "financial_assets_gm",
+        "financial_expense_ttm_gm",
+        "goods_sale_and_service_render_cash_ttm_gm",
+        "interest_free_current_liability_gm",
+        "market_cap_gm",
+        "net_debt_gm",
+        "net_finance_cash_flow_ttm_gm",
+        "net_interest_expense_gm",
+        "net_invest_cash_flow_ttm_gm",
+        "net_operate_cash_flow_ttm_gm",
+        "net_profit_ttm_gm",
+        "non_operating_net_profit_ttm_gm",
+        "np_parent_company_owners_ttm_gm",
+        "OperateNetIncome_gm",
+        "operating_assets_gm",
+        "operating_cost_ttm_gm",
+        "operating_liability_gm",
+        "operating_profit_ttm_gm",
+        "operating_revenue_ttm_gm",
+        "retained_earnings_gm",
+        "sale_expense_ttm_gm",
+        "total_operating_cost_ttm_gm",
+        "total_operating_revenue_ttm_gm",
+        "total_profit_ttm_gm",
+        "value_change_profit_ttm_gm"
+    ],
+    "BIZTOTINCO": [
+        "admin_expense_rate_gm",
+        "financial_expense_rate_gm",
+        "net_operate_cash_flow_to_operate_income_gm",
+        "net_profit_to_total_operate_revenue_ttm_gm",
+        "operating_profit_to_operating_revenue_gm",
+        "sale_expense_to_operating_revenue_gm",
+        "total_operating_revenue_per_share_ttm_gm",
+        "total_operating_revenue_ttm_gm"
+    ],
+    "ASSEIMPALOSS": [
+        "asset_impairment_loss_ttm_gm"
+    ],
+    "CRPS": [
+        "capital_reserve_fund_per_share_gm",
+        "deriv_finance_indicator"
+    ],
+    "NCFPS": [
+        "cashflow_per_share_ttm_gm",
+        "deriv_finance_indicator"
+    ],
+    "TOTAL_SHARE": [
+        "cash_and_equivalents_per_share_gm",
+        "total_operating_revenue_per_share_ttm_gm",
+        "trading_derivative_indicator"
+    ],
+    "FINALCASHBALA": [
+        "cash_and_equivalents_per_share_gm",
+        "cash_to_current_liability_gm",
+        "net_debt_gm"
+    ],
+    "TOTALCURRLIAB": [
+        "cash_to_current_liability_gm",
+        "current_ratio_gm",
+        "financial_liability_gm",
+        "interest_carry_current_liability_gm",
+        "long_debt_to_working_capital_ratio_gm",
+        "net_operate_cash_flow_to_total_current_liability_gm",
+        "net_working_capital_gm",
+        "operating_liability_gm",
+        "quick_ratio_gm",
+        "super_quick_ratio_gm",
+        "balance_sheet"
+    ],
+    "TOTMKTCAP": [
+        "cfo_to_ev_gm",
+        "market_cap_gm",
+        "MLEV_gm",
+        "trading_derivative_indicator",
+        "market_financial_sheet",
+        "market_sheet",
+        "ResConSecCorederi_sheet"
+    ],
+    "NEGOTIABLEMV": [
+        "circulating_market_cap_gm",
+        "trading_derivative_indicator",
+        "market_financial_sheet",
+        "market_sheet",
+        "ResConSecCorederi_sheet"
+    ],
+    "TOTCURRASSET": [
+        "current_asset_turnover_rate_gm",
+        "current_ratio_gm",
+        "long_debt_to_working_capital_ratio_gm",
+        "net_working_capital_gm",
+        "quick_ratio_gm",
+        "balance_sheet"
+    ],
+    "TOTLIAB": [
+        "debt_to_asset_ratio_gm",
+        "debt_to_equity_ratio_gm",
+        "debt_to_tangible_equity_ratio_gm",
+        "net_operate_cash_flow_to_total_liability_gm",
+        "operating_liability_gm",
+        "balance_sheet"
+    ],
+    "PARESHARRIGH": [
+        "debt_to_equity_ratio_gm",
+        "balance_sheet"
+    ],
+    "TOTLIABSHAREQUI": [
+        "debt_to_tangible_equity_ratio_gm",
+        "balance_sheet"
+    ],
+    "INTAASSET": [
+        "debt_to_tangible_equity_ratio_gm",
+        "intangible_asset_ratio_gm",
+        "balance_sheet"
+    ],
+    "GOODWILL": [
+        "debt_to_tangible_equity_ratio_gm",
+        "intangible_asset_ratio_gm",
+        "balance_sheet"
+    ],
+    "FINEXPE": [
+        "EBIT_gm",
+        "financial_expense_rate_gm",
+        "financial_expense_ttm_gm",
+        "total_profit_to_cost_ratio_gm"
+    ],
+    "INCOTAXEXPE": [
+        "EBIT_gm"
+    ],
+    "RIGHAGGR": [
+        "equity_to_asset_ratio_gm",
+        "equity_to_fixed_asset_ratio_gm",
+        "equity_turnover_rate_gm",
+        "net_asset_growth_rate_gm",
+        "roe_ttm_gm",
+        "roe_ttm_8y_gm",
+        "balance_sheet"
+    ],
+    "FIXEDASSEIMMO": [
+        "equity_to_fixed_asset_ratio_gm",
+        "fixed_assets_turnover_rate_gm",
+        "fixed_asset_ratio_gm",
+        "balance_sheet"
+    ],
+    "ENGIMATE": [
+        "equity_to_fixed_asset_ratio_gm",
+        "fixed_assets_turnover_rate_gm",
+        "fixed_asset_ratio_gm",
+        "balance_sheet"
+    ],
+    "CONSPROG": [
+        "equity_to_fixed_asset_ratio_gm",
+        "fixed_assets_turnover_rate_gm",
+        "fixed_asset_ratio_gm",
+        "balance_sheet"
+    ],
+    "CURFDS": [
+        "financial_assets_gm",
+        "operating_assets_gm",
+        "super_quick_ratio_gm",
+        "balance_sheet"
+    ],
+    "TRADFINASSET": [
+        "financial_assets_gm",
+        "operating_assets_gm",
+        "super_quick_ratio_gm",
+        "balance_sheet"
+    ],
+    "INTERECE": [
+        "financial_assets_gm",
+        "operating_assets_gm",
+        "balance_sheet"
+    ],
+    "DIVIDRECE": [
+        "financial_assets_gm",
+        "operating_assets_gm",
+        "balance_sheet"
+    ],
+    "AVAISELLASSE": [
+        "financial_assets_gm",
+        "operating_assets_gm",
+        "balance_sheet"
+    ],
+    "HOLDINVEDUE": [
+        "financial_assets_gm",
+        "operating_assets_gm",
+        "balance_sheet"
+    ],
+    "LONGBORR": [
+        "financial_liability_gm",
+        "long_debt_to_asset_ratio_gm",
+        "operating_liability_gm",
+        "balance_sheet"
+    ],
+    "BDSPAYA": [
+        "financial_liability_gm",
+        "operating_liability_gm",
+        "balance_sheet"
+    ],
+    "COPEWORKERSAL": [
+        "financial_liability_gm",
+        "operating_liability_gm",
+        "balance_sheet"
+    ],
+    "TAXESPAYA": [
+        "financial_liability_gm",
+        "interest_free_current_liability_gm",
+        "operating_liability_gm",
+        "balance_sheet"
+    ],
+    "OTHERPAY": [
+        "financial_liability_gm",
+        "interest_free_current_liability_gm",
+        "operating_liability_gm",
+        "balance_sheet"
+    ],
+    "DEFEREVE": [
+        "financial_liability_gm",
+        "operating_liability_gm",
+        "balance_sheet",
+        "financial_sheet",
+        "market_financial_sheet"
+    ],
+    "OTHERCURRELIABI": [
+        "financial_liability_gm",
+        "interest_free_current_liability_gm",
+        "operating_liability_gm",
+        "balance_sheet"
+    ],
+    "NONINTCURLIABS": [
+        "financial_liability_gm",
+        "interest_carry_current_liability_gm",
+        "operating_liability_gm",
+        "deriv_finance_indicator"
+    ],
+    "FINNETCFLOW": [
+        "financing_cash_growth_rate_gm",
+        "net_finance_cash_flow_ttm_gm"
+    ],
+    "LABORGETCASH": [
+        "goods_sale_and_service_render_cash_ttm_gm",
+        "goods_service_cash_to_operating_revenue_ttm_gm"
+    ],
+    "high": [
+        "Index_Market_data_gm",
+        "Market_data_gm",
+        "Price_Volume_Data/main",
+        "Price_Volume_Data/submain",
+        "gmData_history",
+        "market_financial_sheet",
+        "market_sheet"
+    ],
+    "close": [
+        "Index_Market_data_gm",
+        "Market_data_gm",
+        "Price_Volume_Data/main",
+        "Price_Volume_Data/submain",
+        "gmData_history",
+        "market_financial_sheet",
+        "market_sheet"
+    ],
+    "low": [
+        "Index_Market_data_gm",
+        "Market_data_gm",
+        "Price_Volume_Data/main",
+        "Price_Volume_Data/submain",
+        "gmData_history",
+        "market_financial_sheet",
+        "market_sheet"
+    ],
+    "volume": [
+        "Index_Market_data_gm",
+        "Market_data_gm",
+        "Broker_Data",
+        "Price_Volume_Data/main",
+        "Price_Volume_Data/submain",
+        "gmData_history",
+        "market_financial_sheet",
+        "market_sheet"
+    ],
+    "amount": [
+        "Index_Market_data_gm",
+        "Market_data_gm",
+        "Price_Volume_Data/main",
+        "Price_Volume_Data/submain",
+        "gmData_history",
+        "market_financial_sheet",
+        "market_sheet"
+    ],
+    "DEVEEXPE": [
+        "intangible_asset_ratio_gm",
+        "balance_sheet"
+    ],
+    "INTEPAYA": [
+        "interest_free_current_liability_gm",
+        "balance_sheet"
+    ],
+    "INVTURNRT": [
+        "inventory_turnover_days_gm",
+        "deriv_finance_indicator",
+        "financial_sheet",
+        "market_financial_sheet"
+    ],
+    "INVE": [
+        "inventory_turnover_rate_gm",
+        "quick_ratio_gm",
+        "balance_sheet"
+    ],
+    "ASSOINVEPROF": [
+        "invest_income_associates_to_total_profit_gm"
+    ],
+    "TOTPROFIT": [
+        "invest_income_associates_to_total_profit_gm",
+        "net_non_operating_income_to_total_profit_gm",
+        "OperateNetIncome_gm",
+        "operating_profit_to_total_profit_gm",
+        "ROAEBITTTM_gm",
+        "total_profit_growth_rate_gm",
+        "total_profit_to_cost_ratio_gm",
+        "total_profit_ttm_gm"
+    ],
+    "TOTALNONCLIAB": [
+        "long_debt_to_working_capital_ratio_gm",
+        "long_term_debt_to_asset_ratio_gm",
+        "MLEV_gm",
+        "balance_sheet"
+    ],
+    "ASSLIABRT": [
+        "LVGI_gm",
+        "deriv_finance_indicator"
+    ],
+    "open": [
+        "Market_data_gm",
+        "Price_Volume_Data/main",
+        "Price_Volume_Data/submain",
+        "gmData_history",
+        "market_financial_sheet",
+        "market_sheet"
+    ],
+    "FLOW_SHARE": [
+        "Market_data_gm",
+        "trading_derivative_indicator"
+    ],
+    "index_close": [
+        "Market_data_gm",
+        "market_financial_sheet",
+        "market_sheet"
+    ],
+    "TDEBT": [
+        "net_debt_gm",
+        "deriv_finance_indicator",
+        "financial_sheet",
+        "market_financial_sheet"
+    ],
+    "INTEEXPE": [
+        "net_interest_expense_gm",
+        "ROAEBITTTM_gm"
+    ],
+    "INTEINCO": [
+        "net_interest_expense_gm"
+    ],
+    "INVNETCASHFLOW": [
+        "net_invest_cash_flow_ttm_gm"
+    ],
+    "NONOREVE": [
+        "net_non_operating_income_to_total_profit_gm",
+        "non_operating_net_profit_ttm_gm"
+    ],
+    "NONOEXPE": [
+        "net_non_operating_income_to_total_profit_gm",
+        "non_operating_net_profit_ttm_gm"
+    ],
+    "OPNCFPS": [
+        "net_operate_cash_flow_per_share_gm",
+        "deriv_finance_indicator"
+    ],
+    "BIZNETCFLOW": [
+        "net_operate_cash_flow_to_asset_gm",
+        "net_operate_cash_flow_to_net_debt_gm"
+    ],
+    "NDEBT": [
+        "net_operate_cash_flow_to_net_debt_gm",
+        "deriv_finance_indicator",
+        "financial_sheet",
+        "market_financial_sheet"
+    ],
+    "BIZTOTCOST": [
+        "net_operate_cash_flow_to_operate_income_gm",
+        "total_operating_cost_ttm_gm"
+    ],
+    "PARENETP": [
+        "net_operating_cash_flow_coverage_gm",
+        "non_recurring_gain_loss_gm",
+        "np_parent_company_owners_growth_rate_gm",
+        "np_parent_company_owners_ttm_gm"
+    ],
+    "TOTALNONCASSETS": [
+        "non_current_asset_ratio_gm",
+        "balance_sheet"
+    ],
+    "OPANITOTP": [
+        "OperateNetIncome_gm",
+        "deriv_finance_indicator"
+    ],
+    "ACCRECGTURNDAYS": [
+        "OperatingCycle_gm",
+        "deriv_finance_indicator",
+        "financial_sheet",
+        "market_financial_sheet"
+    ],
+    "INVTURNDAYS": [
+        "OperatingCycle_gm",
+        "deriv_finance_indicator",
+        "financial_sheet",
+        "market_financial_sheet"
+    ],
+    "PERPROFIT": [
+        "operating_profit_growth_rate_gm",
+        "operating_profit_ratio_gm",
+        "operating_profit_to_operating_revenue_gm",
+        "operating_profit_ttm_gm",
+        "profit_margin_ttm_gm"
+    ],
+    "NOPI": [
+        "operating_profit_to_total_profit_gm",
+        "deriv_finance_indicator"
+    ],
+    "OPREVPS": [
+        "operating_revenue_per_share_gm",
+        "deriv_finance_indicator"
+    ],
+    "BIZTAX": [
+        "operating_tax_to_operating_revenue_ratio_ttm_gm"
+    ],
+    "RESE": [
+        "retained_earnings_gm",
+        "balance_sheet"
+    ],
+    "UNDIPROF": [
+        "retained_earnings_gm",
+        "balance_sheet"
+    ],
+    "REPS": [
+        "retained_earnings_per_share_gm",
+        "deriv_finance_indicator"
+    ],
+    "UPPS": [
+        "retained_profit_per_share_gm",
+        "deriv_finance_indicator"
+    ],
+    "SALESEXPE": [
+        "sale_expense_to_operating_revenue_gm",
+        "sale_expense_ttm_gm",
+        "total_profit_to_cost_ratio_gm"
+    ],
+    "OTHERRECE": [
+        "super_quick_ratio_gm",
+        "balance_sheet"
+    ],
+    "SRPS": [
+        "surplus_reserve_fund_per_share_gm",
+        "deriv_finance_indicator"
+    ],
+    "TOPREVPS": [
+        "total_operating_revenue_per_share_gm",
+        "deriv_finance_indicator"
+    ],
+    "NVALCHGIT": [
+        "value_change_profit_ttm_gm",
+        "deriv_finance_indicator",
+        "financial_sheet",
+        "market_financial_sheet"
+    ],
+    "contract": [
+        "Broker_Data"
+    ],
+    "company": [
+        "Broker_Data"
+    ],
+    "change": [
+        "Broker_Data"
+    ],
+    "number": [
+        "Broker_Data"
+    ],
+    "rankname": [
+        "Broker_Data"
+    ],
+    "bob": [
+        "Price_Volume_Data/main",
+        "Price_Volume_Data/submain",
+        "gmData_history"
+    ],
+    "eob": [
+        "Price_Volume_Data/main",
+        "Price_Volume_Data/submain",
+        "gmData_history"
     ],
     "rpt_date": [
         "fundamentals_balance",
@@ -3784,42 +4770,6 @@
         "market_financial_sheet",
         "market_sheet"
     ],
-    "open": [
-        "gmData_history",
-        "market_financial_sheet",
-        "market_sheet"
-    ],
-    "high": [
-        "gmData_history",
-        "market_financial_sheet",
-        "market_sheet"
-    ],
-    "low": [
-        "gmData_history",
-        "market_financial_sheet",
-        "market_sheet"
-    ],
-    "close": [
-        "gmData_history",
-        "market_financial_sheet",
-        "market_sheet"
-    ],
-    "volume": [
-        "gmData_history",
-        "market_financial_sheet",
-        "market_sheet"
-    ],
-    "amount": [
-        "gmData_history",
-        "market_financial_sheet",
-        "market_sheet"
-    ],
-    "bob": [
-        "gmData_history"
-    ],
-    "eob": [
-        "gmData_history"
-    ],
     "turn_rate": [
         "gmData_bench_price",
         "future_daily"
@@ -3837,14 +4787,6 @@
         "gmData_bench_price",
         "future_daily",
         "bench_info"
-    ],
-    "end_date": [
-        "trading_derivative_indicator",
-        "deriv_finance_indicator",
-        "balance_sheet"
-    ],
-    "FLOW_SHARE": [
-        "trading_derivative_indicator"
     ],
     "PSLFY": [
         "trading_derivative_indicator"
@@ -3891,15 +4833,6 @@
     "PETTM": [
         "trading_derivative_indicator"
     ],
-    "NEGOTIABLEMV": [
-        "trading_derivative_indicator",
-        "market_financial_sheet",
-        "market_sheet",
-        "ResConSecCorederi_sheet"
-    ],
-    "TOTAL_SHARE": [
-        "trading_derivative_indicator"
-    ],
     "DY": [
         "trading_derivative_indicator"
     ],
@@ -3908,12 +4841,6 @@
     ],
     "TCLOSE": [
         "trading_derivative_indicator"
-    ],
-    "TOTMKTCAP": [
-        "trading_derivative_indicator",
-        "market_financial_sheet",
-        "market_sheet",
-        "ResConSecCorederi_sheet"
     ],
     "PETTMNPAAEI": [
         "trading_derivative_indicator"
@@ -3924,9 +4851,6 @@
     "NPTONOCONMS": [
         "deriv_finance_indicator"
     ],
-    "REPS": [
-        "deriv_finance_indicator"
-    ],
     "COMPDEPRT": [
         "deriv_finance_indicator"
     ],
@@ -3934,9 +4858,6 @@
         "deriv_finance_indicator"
     ],
     "CAPIMORTCONMS": [
-        "deriv_finance_indicator"
-    ],
-    "ASSLIABRT": [
         "deriv_finance_indicator"
     ],
     "EQUTOFA": [
@@ -3956,11 +4877,6 @@
     ],
     "NPTOAVGTA": [
         "deriv_finance_indicator"
-    ],
-    "ACCRECGTURNRT": [
-        "deriv_finance_indicator",
-        "financial_sheet",
-        "market_financial_sheet"
     ],
     "EQUCONMS": [
         "deriv_finance_indicator"
@@ -4001,11 +4917,6 @@
     "EQUTOICCONMS": [
         "deriv_finance_indicator"
     ],
-    "NPCUT": [
-        "deriv_finance_indicator",
-        "financial_sheet",
-        "market_financial_sheet"
-    ],
     "TDEBTTOICCONMS": [
         "deriv_finance_indicator"
     ],
@@ -4039,12 +4950,6 @@
     "NAPS": [
         "deriv_finance_indicator"
     ],
-    "CRPS": [
-        "deriv_finance_indicator"
-    ],
-    "UPPS": [
-        "deriv_finance_indicator"
-    ],
     "NVALCHGITOTP": [
         "deriv_finance_indicator"
     ],
@@ -4066,24 +4971,11 @@
     "NFART": [
         "deriv_finance_indicator"
     ],
-    "SRPS": [
-        "deriv_finance_indicator"
-    ],
     "OPPRORT": [
         "deriv_finance_indicator"
     ],
-    "NVALCHGIT": [
-        "deriv_finance_indicator",
-        "financial_sheet",
-        "market_financial_sheet"
-    ],
     "SHTDEBT": [
         "deriv_finance_indicator"
-    ],
-    "INVTURNDAYS": [
-        "deriv_finance_indicator",
-        "financial_sheet",
-        "market_financial_sheet"
     ],
     "ROEANNUAL": [
         "deriv_finance_indicator"
@@ -4103,9 +4995,6 @@
     "OPANCFTOOPNI": [
         "deriv_finance_indicator"
     ],
-    "NOPI": [
-        "deriv_finance_indicator"
-    ],
     "CURASSTURNRT": [
         "deriv_finance_indicator"
     ],
@@ -4120,11 +5009,6 @@
     ],
     "DPS": [
         "deriv_finance_indicator"
-    ],
-    "ACCRECGTURNDAYS": [
-        "deriv_finance_indicator",
-        "financial_sheet",
-        "market_financial_sheet"
     ],
     "OPREVTOCURASS": [
         "deriv_finance_indicator"
@@ -4197,9 +5081,6 @@
     "CURLIABTOLTMLIABRT": [
         "deriv_finance_indicator"
     ],
-    "NCFPS": [
-        "deriv_finance_indicator"
-    ],
     "NAPSADJ": [
         "deriv_finance_indicator"
     ],
@@ -4221,11 +5102,6 @@
     "NPCONMSTOAVGTA": [
         "deriv_finance_indicator"
     ],
-    "ACCPAYRT": [
-        "deriv_finance_indicator",
-        "financial_sheet",
-        "market_financial_sheet"
-    ],
     "TATURNRT": [
         "deriv_finance_indicator"
     ],
@@ -4244,9 +5120,6 @@
     "OPNCFTOTLIAB": [
         "deriv_finance_indicator"
     ],
-    "OPNCFPS": [
-        "deriv_finance_indicator"
-    ],
     "CASHRT": [
         "deriv_finance_indicator"
     ],
@@ -4254,9 +5127,6 @@
         "deriv_finance_indicator"
     ],
     "NPTOTP": [
-        "deriv_finance_indicator"
-    ],
-    "NONINTCURLIABS": [
         "deriv_finance_indicator"
     ],
     "LTMLIABTOTACONMS": [
@@ -4277,16 +5147,10 @@
     "OPNCFTOOPTI": [
         "deriv_finance_indicator"
     ],
-    "OPANITOTP": [
-        "deriv_finance_indicator"
-    ],
     "TPTOEBIT": [
         "deriv_finance_indicator"
     ],
     "EM": [
-        "deriv_finance_indicator"
-    ],
-    "OPREVPS": [
         "deriv_finance_indicator"
     ],
     "EBITSCOVER": [
@@ -4319,21 +5183,11 @@
     "NAPSNEWP": [
         "deriv_finance_indicator"
     ],
-    "INVTURNRT": [
-        "deriv_finance_indicator",
-        "financial_sheet",
-        "market_financial_sheet"
-    ],
     "CURASSTURNDAYS": [
         "deriv_finance_indicator"
     ],
     "LTMDEBTTOWORKCAP": [
         "deriv_finance_indicator"
-    ],
-    "NDEBT": [
-        "deriv_finance_indicator",
-        "financial_sheet",
-        "market_financial_sheet"
     ],
     "EPSDILUTEDOP": [
         "deriv_finance_indicator"
@@ -4363,9 +5217,6 @@
         "deriv_finance_indicator"
     ],
     "NTANGASSTOTDEBT": [
-        "deriv_finance_indicator"
-    ],
-    "TOPREVPS": [
         "deriv_finance_indicator"
     ],
     "FCFFPS": [
@@ -4404,11 +5255,6 @@
     "EQUTURNRT": [
         "deriv_finance_indicator"
     ],
-    "TDEBT": [
-        "deriv_finance_indicator",
-        "financial_sheet",
-        "market_financial_sheet"
-    ],
     "CURRENTRT": [
         "deriv_finance_indicator"
     ],
@@ -4430,9 +5276,6 @@
     "ACCUDEPR": [
         "balance_sheet"
     ],
-    "FIXEDASSEIMMO": [
-        "balance_sheet"
-    ],
     "LOGPREPEXPE": [
         "balance_sheet"
     ],
@@ -4442,19 +5285,10 @@
     "SETTRESEDEPO": [
         "balance_sheet"
     ],
-    "TOTALNONCASSETS": [
-        "balance_sheet"
-    ],
     "PURCRESAASSET": [
         "balance_sheet"
     ],
     "SMERGERNONCASSE": [
-        "balance_sheet"
-    ],
-    "PARESHARRIGH": [
-        "balance_sheet"
-    ],
-    "OTHERPAY": [
         "balance_sheet"
     ],
     "EXPECURRLIAB": [
@@ -4469,28 +5303,16 @@
     "EQUIINVE": [
         "balance_sheet"
     ],
-    "GOODWILL": [
-        "balance_sheet"
-    ],
     "DOMETICKSETT": [
         "balance_sheet"
     ],
     "SFORMATTOTASSET": [
         "balance_sheet"
     ],
-    "CONSPROG": [
-        "balance_sheet"
-    ],
-    "ADVAPAYM": [
-        "balance_sheet"
-    ],
     "SFORMATCURRASSE": [
         "balance_sheet"
     ],
     "FIXEDASSENET": [
-        "balance_sheet"
-    ],
-    "ENGIMATE": [
         "balance_sheet"
     ],
     "TOPAYCASHDIVI": [
@@ -4505,16 +5327,10 @@
     "HYDRASSET": [
         "balance_sheet"
     ],
-    "TAXESPAYA": [
-        "balance_sheet"
-    ],
     "GENERISKRESE": [
         "balance_sheet"
     ],
     "REINRECE": [
-        "balance_sheet"
-    ],
-    "HOLDINVEDUE": [
         "balance_sheet"
     ],
     "FDSBORR": [
@@ -4529,16 +5345,7 @@
     "LCOPEWORKERSAL": [
         "balance_sheet"
     ],
-    "INTERECE": [
-        "balance_sheet"
-    ],
-    "TRADFINASSET": [
-        "balance_sheet"
-    ],
     "SPECPAYA": [
-        "balance_sheet"
-    ],
-    "ACCOPAYA": [
         "balance_sheet"
     ],
     "LONGRECE": [
@@ -4556,16 +5363,10 @@
     "DEFETAXASSET": [
         "balance_sheet"
     ],
-    "NOTESPAYA": [
-        "balance_sheet"
-    ],
     "DEFEINCOTAXLIAB": [
         "balance_sheet"
     ],
     "COPEWITHREINRECE": [
-        "balance_sheet"
-    ],
-    "BDSPAYA": [
         "balance_sheet"
     ],
     "SFORMATTOTLIAB": [
@@ -4574,25 +5375,13 @@
     "SMERGERCURRELIABI": [
         "balance_sheet"
     ],
-    "INTAASSET": [
-        "balance_sheet"
-    ],
-    "ACCORECE": [
-        "balance_sheet"
-    ],
     "SPECRESE": [
-        "balance_sheet"
-    ],
-    "COPEWORKERSAL": [
         "balance_sheet"
     ],
     "SUNEVENTOTASSET": [
         "balance_sheet"
     ],
     "LENDANDLOAN": [
-        "balance_sheet"
-    ],
-    "TOTLIABSHAREQUI": [
         "balance_sheet"
     ],
     "SFORMATCURRELIABI": [
@@ -4607,12 +5396,6 @@
     "OTHERFEEPAYA": [
         "balance_sheet"
     ],
-    "UNDIPROF": [
-        "balance_sheet"
-    ],
-    "PREP": [
-        "balance_sheet"
-    ],
     "SMERGERPARESHARRIGH": [
         "balance_sheet"
     ],
@@ -4620,9 +5403,6 @@
         "balance_sheet"
     ],
     "SUNEVENNONCLIAB": [
-        "balance_sheet"
-    ],
-    "INTEPAYA": [
         "balance_sheet"
     ],
     "DERILIAB": [
@@ -4638,9 +5418,6 @@
         "balance_sheet"
     ],
     "SELLREPASSE": [
-        "balance_sheet"
-    ],
-    "TOTASSET": [
         "balance_sheet"
     ],
     "SUNEVENASSETLIABEUQI": [
@@ -4703,15 +5480,6 @@
     "TRADFINLIAB": [
         "balance_sheet"
     ],
-    "RESE": [
-        "balance_sheet"
-    ],
-    "LONGBORR": [
-        "balance_sheet"
-    ],
-    "TOTALNONCLIAB": [
-        "balance_sheet"
-    ],
     "EXPINONCURRASSET": [
         "balance_sheet"
     ],
@@ -4748,9 +5516,6 @@
     "MINYSHARRIGH": [
         "balance_sheet"
     ],
-    "AVAISELLASSE": [
-        "balance_sheet"
-    ],
     "FIXEDASSEIMPA": [
         "balance_sheet"
     ],
@@ -4764,9 +5529,6 @@
         "balance_sheet"
     ],
     "LONGPAYA": [
-        "balance_sheet"
-    ],
-    "RIGHAGGR": [
         "balance_sheet"
     ],
     "OTHERLONGINVE": [
@@ -4787,16 +5549,10 @@
     "ACTITRADSECU": [
         "balance_sheet"
     ],
-    "INVE": [
-        "balance_sheet"
-    ],
     "MARGRECE": [
         "balance_sheet"
     ],
     "OTHERNONCASSE": [
-        "balance_sheet"
-    ],
-    "OTHERCURRELIABI": [
         "balance_sheet"
     ],
     "PLAC": [
@@ -4804,11 +5560,6 @@
     ],
     "LONGDEFEINCO": [
         "balance_sheet"
-    ],
-    "DEFEREVE": [
-        "balance_sheet",
-        "financial_sheet",
-        "market_financial_sheet"
     ],
     "MARGREQU": [
         "balance_sheet"
@@ -4819,34 +5570,16 @@
     "DUENONCLIAB": [
         "balance_sheet"
     ],
-    "OTHERRECE": [
-        "balance_sheet"
-    ],
-    "TOTLIAB": [
-        "balance_sheet"
-    ],
-    "DIVIDRECE": [
-        "balance_sheet"
-    ],
     "FIXEDASSECLEA": [
         "balance_sheet"
     ],
     "FIXEDASSENETW": [
         "balance_sheet"
     ],
-    "TOTALCURRLIAB": [
-        "balance_sheet"
-    ],
-    "DEVEEXPE": [
-        "balance_sheet"
-    ],
     "LIABHELDFORS": [
         "balance_sheet"
     ],
     "COPEPOUN": [
-        "balance_sheet"
-    ],
-    "NOTESRECE": [
         "balance_sheet"
     ],
     "SMERGERTOTLIABSHAREQUI": [
@@ -4858,13 +5591,7 @@
     "SMERGERTOTASSET": [
         "balance_sheet"
     ],
-    "CURFDS": [
-        "balance_sheet"
-    ],
     "SHORTTERMBDSPAYA": [
-        "balance_sheet"
-    ],
-    "TOTCURRASSET": [
         "balance_sheet"
     ],
     "industry_code": [
@@ -5829,10 +6556,6 @@
         "market_financial_sheet"
     ],
     "pre_index_close": [
-        "market_financial_sheet",
-        "market_sheet"
-    ],
-    "index_close": [
         "market_financial_sheet",
         "market_sheet"
     ],

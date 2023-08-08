@@ -539,12 +539,6 @@
     "date_column": "pub_date",
     "ticker_column": "symbol"
   },
-  "path.txt": {
-    "assets": "gm_factor",
-    "description": "",
-    "date_column": "pub_date",
-    "ticker_column": "symbol"
-  },
   "profit_margin_ttm": {
     "assets": "gm_factor",
     "description": "",

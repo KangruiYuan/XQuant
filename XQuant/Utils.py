@@ -14,6 +14,7 @@ from fuzzywuzzy import process
 from tqdm import tqdm
 
 from .Consts import datatables
+# from .Collector import DataAPI
 import numpy as np
 import pandas as pd
 import re
@@ -505,42 +506,64 @@ class Tools:
         return res
 
     @classmethod
-    def get_newest_file(cls, name: str):
+    def get_newest_file(cls, name: str, **kwargs):
         assets = datatables[name]["assets"]
+        if assets == "gm_factor":
+            name = name[:-3]
         base_folder = Config.database_dir[assets]
-        data_folder = Path(base_folder) / name
-        files = [str(i) for i in data_folder.glob("*.h5")]
-        if not files:
-            file = data_folder.with_suffix(".h5")
-            if file.exists():
-                return file
-            else:
-                raise NotImplementedError(data_folder)
+        table_folder = Path(base_folder) / name
         newest_file = ""
-        newest_date = 0
-        Q_Y_pattern = r"Y(\d+)_Q(\d+)"
-        Y_pattern = r"Y(\d+)"
-        if re.search(Q_Y_pattern, files[0]):
-            for file in files:
-                match = re.search(Q_Y_pattern, file)
-                if match:
-                    year, month = match.groups()
-                    date_num = int(year) * 10 + int(month)
-                    if date_num > newest_date:
-                        newest_file = file
-                        newest_date = date_num
-        elif re.search(Y_pattern, files[0]):
-            for file in files:
-                match = re.search(Y_pattern, file)
-                if match:
-                    year = match.groups()[0]
-                    date_num = int(year)
-                    if date_num > newest_date:
-                        newest_file = file
-                        newest_date = date_num
-        else:
-            # TODO: 考虑其他文件格式的h5文件
-            raise KeyError("请检查{}, 文件不符合{}_Y*_Q*组织形式".format(base_folder, name))
+        if assets in [
+                "dataYes",
+                "info",
+                "em",
+                "gm_stock",
+                "jq_prepare",
+                "jq_factor",
+            ]:
+            files = [str(i) for i in table_folder.glob("*.h5")]
+            if not files:
+                file = table_folder.with_suffix(".h5")
+                if file.exists():
+                    return file
+                else:
+                    raise NotImplementedError(table_folder)
+
+            newest_date = 0
+            Q_Y_pattern = r"Y(\d+)_Q(\d+)"
+            Y_pattern = r"Y(\d+)"
+            if re.search(Q_Y_pattern, files[0]):
+                for file in files:
+                    match = re.search(Q_Y_pattern, file)
+                    if match:
+                        year, month = match.groups()
+                        date_num = int(year) * 10 + int(month)
+                        if date_num > newest_date:
+                            newest_file = file
+                            newest_date = date_num
+            elif re.search(Y_pattern, files[0]):
+                for file in files:
+                    match = re.search(Y_pattern, file)
+                    if match:
+                        year = match.groups()[0]
+                        date_num = int(year)
+                        if date_num > newest_date:
+                            newest_file = file
+                            newest_date = date_num
+            else:
+                # TODO: 考虑其他文件格式的h5文件
+                raise KeyError("请检查{}, 文件不符合{}_Y*_Q*组织形式".format(base_folder, name))
+        elif assets in ["gm_future"]:
+            subfolders = [subfolder for subfolder in table_folder.iterdir() if subfolder.is_dir()]
+            if subfolders:
+                max_year = max([int(i.stem) for i in subfolders])
+                newest_folder = table_folder / str(max_year) / kwargs.get('sources', 'gm')
+                newest_file = list(newest_folder.glob("*.h5"))
+        elif assets in ["gm_factor"]:
+            subfolders = [subfolder for subfolder in table_folder.iterdir() if subfolder.is_dir()]
+            if subfolders:
+                max_year = max([int(i.stem) for i in subfolders])
+                newest_file = table_folder / str(max_year) / (name + ".h5")
         if newest_file:
             return newest_file
         else:
@@ -577,6 +600,8 @@ class Tools:
                             print(e)
                         continue
                     # TODO: 该方法无法正常使用时选用get_data
+                    if isinstance(path, list):
+                        path = path[0]
                     data = h5py.File(path)
                     try:
                         if "S" in str(data["a"]["axis0"].dtype):
@@ -610,4 +635,4 @@ class Tools:
                 count += 1
                 if count >= limit:
                     break
-        return attrs_map
+        return dic
