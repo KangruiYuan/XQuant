@@ -5,14 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="961f5139-6713-4bf9-890a-9d37b00e0752" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/XQuant/SQLAgent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/ISSUE_FOR_BUG.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/ISSUE_FOR_DEMAND.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ModuleTests/SingleFuncTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/ModuleTests/SingleFuncTest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XQuant/Collector.py" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/Collector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XQuant/Temp/gm_stock_1m.json" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/TABLES/sql.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XQuant/Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/Utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/XQuant/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -203,7 +198,7 @@
       <updated>1691039042805</updated>
       <workItem from="1691039043834" duration="5000" />
       <workItem from="1691041061617" duration="97000" />
-      <workItem from="1691041251961" duration="60935000" />
+      <workItem from="1691041251961" duration="62329000" />
     </task>
     <servers />
   </component>
