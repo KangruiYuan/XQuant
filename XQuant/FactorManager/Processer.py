@@ -9,6 +9,8 @@ import statsmodels.api as sm
 from typing import Union, Callable, Any, Literal
 from dask import dataframe as dd
 from pyfinance.utils import rolling_windows
+from statsmodels.regression.linear_model import WLS
+
 from ..Utils import Formatter, Tools
 
 ArrayType = Union[pd.Series, np.ndarray, list]
@@ -49,7 +51,7 @@ class Processer:
             const = np.ones(len(X))
             X = np.insert(X, 0, const, axis=1)
 
-        model = sm.WLS(y, X, weights=weight, missing="drop")
+        model: WLS = sm.WLS(y, X, weights=weight, missing="drop")
         result = model.fit()
         params = result.params
         if verbose:
