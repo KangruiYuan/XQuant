@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="961f5139-6713-4bf9-890a-9d37b00e0752" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/ISSUE_FOR_BUG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.github/ISSUE_TEMPLATE/ISSUE_FOR_DEMAND.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/XQuant/FactorManager/Processer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ModuleTests/BaseTest.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/ModuleTests/BaseTest.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/XQuant/FactorManager/Tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/XQuant/FactorManager/Tester.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +199,7 @@
       <updated>1691039042805</updated>
       <workItem from="1691039043834" duration="5000" />
       <workItem from="1691041061617" duration="97000" />
-      <workItem from="1691041251961" duration="62329000" />
+      <workItem from="1691041251961" duration="65845000" />
     </task>
     <servers />
   </component>

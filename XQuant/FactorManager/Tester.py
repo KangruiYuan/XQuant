@@ -1,6 +1,6 @@
 
 import pandas as pd
-class Factor:
+class Tester:
     @classmethod
     def ICIR(self, score: pd.DataFrame, returns: pd.DataFrame):
         pass
