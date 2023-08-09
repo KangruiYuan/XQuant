@@ -5,7 +5,7 @@ from configparser import ConfigParser
 from datetime import datetime, date
 from functools import wraps
 from time import strptime
-from typing import Sequence, Iterator
+from typing import Sequence, Iterator, Dict
 from typing import Union, Literal, Tuple, Any
 
 from pathlib import Path
@@ -14,7 +14,7 @@ from fuzzywuzzy import process
 from tqdm import tqdm
 
 from .Consts import datatables
-# from .Collector import DataAPI
+
 import numpy as np
 import pandas as pd
 import re
@@ -481,9 +481,10 @@ class Tools:
     @classmethod
     def get_config(
         cls,
-        filename: Union[str, os.PathLike] = Path(__file__).parent / "quant.const.ini",
+        filename: Union[str, os.PathLike] = Path(__file__).parent / "Tokens" /"quant.const.ini",
         section: str = None,
-    ) -> OrderedDict:
+        **kwargs
+    ) -> dict[str, str | dict[str, str]]:
         """
 
         :param filename:
@@ -494,14 +495,18 @@ class Tools:
         parser = ConfigParser()
         # read config file
         parser.read(filename)
-        res = OrderedDict()
+
         if section is None:
+            res = dict()
             for sec in parser.sections():
                 params = parser.items(sec)
-                tmp = OrderedDict()
-                for key, val in params:
-                    tmp[key] = val
+                tmp = dict(params)
                 res[sec] = tmp
+        else:
+            if parser.has_section(section):
+                res = dict(parser.items(section))
+            else:
+                raise KeyError(f"Section {section} not found")
 
         return res
 
@@ -514,13 +519,13 @@ class Tools:
         table_folder = Path(base_folder) / name
         newest_file = ""
         if assets in [
-                "dataYes",
-                "info",
-                "em",
-                "gm_stock",
-                "jq_prepare",
-                "jq_factor",
-            ]:
+            "dataYes",
+            "info",
+            "em",
+            "gm_stock",
+            "jq_prepare",
+            "jq_factor",
+        ]:
             files = [str(i) for i in table_folder.glob("*.h5")]
             if not files:
                 file = table_folder.with_suffix(".h5")
@@ -554,13 +559,19 @@ class Tools:
                 # TODO: 考虑其他文件格式的h5文件
                 raise KeyError("请检查{}, 文件不符合{}_Y*_Q*组织形式".format(base_folder, name))
         elif assets in ["gm_future"]:
-            subfolders = [subfolder for subfolder in table_folder.iterdir() if subfolder.is_dir()]
+            subfolders = [
+                subfolder for subfolder in table_folder.iterdir() if subfolder.is_dir()
+            ]
             if subfolders:
                 max_year = max([int(i.stem) for i in subfolders])
-                newest_folder = table_folder / str(max_year) / kwargs.get('sources', 'gm')
+                newest_folder = (
+                    table_folder / str(max_year) / kwargs.get("sources", "gm")
+                )
                 newest_file = list(newest_folder.glob("*.h5"))
         elif assets in ["gm_factor"]:
-            subfolders = [subfolder for subfolder in table_folder.iterdir() if subfolder.is_dir()]
+            subfolders = [
+                subfolder for subfolder in table_folder.iterdir() if subfolder.is_dir()
+            ]
             if subfolders:
                 max_year = max([int(i.stem) for i in subfolders])
                 newest_file = table_folder / str(max_year) / (name + ".h5")

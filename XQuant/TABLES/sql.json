@@ -1,0 +1,14 @@
+{
+    "gmData_history": {
+    "assets": "sql",
+    "description": "",
+    "date_column": "bob",
+    "ticker_column": "symbol"
+  },
+    "gmData_history_adj": {
+    "assets": "sql",
+    "description": "",
+    "date_column": "bob",
+    "ticker_column": "symbol"
+  }
+}

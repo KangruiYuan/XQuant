@@ -1,14 +1,16 @@
-import numpy as np
-import pandas as pd
+import re
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from .Utils import Config, TradeDate, TimeType, Formatter
-from typing import Union, Literal, Callable, Sequence
-from .Consts import datatables
 from datetime import datetime
 from pathlib import Path
+from typing import Union, Literal, Callable, Sequence
+
+import numpy as np
+import pandas as pd
 from pandas.errors import ParserError
-from tqdm import tqdm
-import re
+
+from .Consts import datatables
+from .Utils import Config, TradeDate, TimeType, Formatter
+from .SQLAgent import SQLAgent
 
 __all__ = ["thread_load_file", "DataAPI"]
 
@@ -55,8 +57,14 @@ class DataAPI:
         engine: Literal["py", "sql"] = "py",
         **kwargs,
     ):
+
         if name not in datatables:
-            raise KeyError("{} is not ready for use!".format(name))
+            raise KeyError("{} is not ready for use with .h5 file!".format(name))
+
+        assets = datatables[name]["assets"]
+        if assets == 'sql':
+            engine = 'sql'
+
         if end is None:
             end = datetime.today().strftime("%Y%m%d")
         end = TradeDate.format_date(end)
@@ -69,8 +77,6 @@ class DataAPI:
 
         if isinstance(ticker, (int, str)):
             ticker = [ticker]
-
-        assets = datatables[name]["assets"]
 
         if engine == "py":
             if assets in [
@@ -112,7 +118,53 @@ class DataAPI:
                 )
 
         elif engine == "sql":
+            assert datatables[name]['assets'] == 'sql'
+            return cls.get_data_from_sql(
+                name=name,
+                begin=begin,
+                end=end,
+                ticker=ticker
+            )
             pass
+
+    @classmethod
+    def get_data_from_sql(
+        cls,
+        name: str,
+        begin: TimeType = None,
+        end: TimeType = None,
+        ticker: list[str] = None,
+        conn = None,
+        **kwargs,
+    ):
+        if conn is None:
+            # conn = SQLAgent.postgres_connection(**kwargs)
+            conn = SQLAgent.postgres_engine()
+        SQL_QUERY = [f'SELECT * FROM "{name}"']
+        params = {}
+        condition = "WHERE"
+        ticker_column = datatables[name]['ticker_column']
+        date_column = datatables[name]['date_column']
+        assert ticker_column and date_column
+
+        if ticker is not None:
+            SQL_QUERY.append(f"{condition} {ticker_column} IN %(ticker)s")
+            params["ticker"] = tuple(ticker)
+            condition = "AND"
+
+        if begin is not None:
+            SQL_QUERY.append(f"{condition} {date_column} >= %(begin)s")
+            params['begin'] = begin
+            condition = "AND"
+
+        if end is not None:
+            SQL_QUERY.append(f"{condition} {date_column} <= %(end)s")
+            params['end'] = end
+            condition = "AND"
+        SQL_QUERY = " ".join(SQL_QUERY) + ";"
+
+        return pd.read_sql_query(SQL_QUERY, conn, params=params)
+
 
     @classmethod
     def get_data_gm_future(

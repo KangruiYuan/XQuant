@@ -1,8 +1,0 @@
-{
-    "gmData_history_1m": {
-    "assets": "gm_stock",
-    "description": "",
-    "date_column": "bob",
-    "ticker_column": "symbol"
-  }
-}
