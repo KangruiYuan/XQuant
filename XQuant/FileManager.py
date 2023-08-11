@@ -73,9 +73,16 @@ class BufferManager:
             cls._delete_files_recursive(subfolder)
 
         for file in tree["files"]:
-            file_path = cls.root_folder / tree["name"] / file["name"]
+            if tree["name"] != cls.root_folder.stem:
+                file_path = cls.root_folder / tree["name"] / file["name"]
+            else:
+                file_path = cls.root_folder / file["name"]
             try:
                 file_path.unlink()
                 print(f"Deleted: {file_path}")
             except Exception as e:
                 print(f"Error deleting {file_path}: {e}")
+
+        if tree["name"] != cls.root_folder.stem:
+            folder_path = cls.root_folder / tree["name"]
+            folder_path.rmdir()

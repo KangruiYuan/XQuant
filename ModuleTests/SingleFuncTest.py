@@ -6,6 +6,7 @@ from XQuant import Size
 from XQuant import BufferManager
 
 BufferManager.display_file_tree()
+BufferManager.delete_files()
 
 # s = Size(begin='20220101')
 # IC, IR = Tester.ICIR(s.LNCAP, s.returns)
