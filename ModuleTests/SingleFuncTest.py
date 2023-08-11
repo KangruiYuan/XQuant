@@ -3,9 +3,12 @@ from XQuant import DataAPI
 from XQuant import SQLAgent
 from XQuant import Tester, Tools
 from XQuant import Size
+from XQuant import BufferManager
 
-s = Size(begin='20220101')
-IC, IR = Tester.ICIR(s.LNCAP, s.returns)
-Tester.plotter(IC, output=True)
+BufferManager.display_file_tree()
+
+# s = Size(begin='20220101')
+# IC, IR = Tester.ICIR(s.LNCAP, s.returns)
+# Tester.plotter(IC, output=True)
 
 # print(Tools.search_keyword("PE", update=False, verbose=False, limit=5))
