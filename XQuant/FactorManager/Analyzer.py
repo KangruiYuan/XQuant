@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Union
+from typing import Union, Sequence
 
 import numpy as np
 import pandas as pd
@@ -11,23 +11,55 @@ from loguru import logger
 
 from .DataReady import DataReady
 from .Processer import Processer
-from ..Utils import Formatter
+from ..Schema import RtnResult
 
 
-class Tester:
-    @staticmethod
-    def cure_data(df: pd.DataFrame | pd.Series, ticker: str = None):
-        if len(df.shape) != 1:
-            if ticker is not None:
-                df = pd.DataFrame(df[Formatter.stock(ticker)])
-                return df
-            elif 1 in df.shape:
-                df = df.T
-                return df
-            else:
-                raise ValueError(
-                    "Data should be one dimensional or you should specify a ticker"
-                )
+class Analyzer:
+    @classmethod
+    def cleanup(
+        cls,
+        arr: Union[list, np.ndarray],
+        inplace: bool = False,
+        fill_value: float = 0.0,
+    ):
+        if inplace:
+            res = arr
+        else:
+            res = arr.copy()
+        res[~np.isfinite(res)] = fill_value
+        return res
+
+    @classmethod
+    def rtns_analysis(cls, rtn: Union[list, np.ndarray]) -> RtnResult:
+        rtn = cls.cleanup(rtn)
+        nav = np.cumprod(rtn + 1) - 1
+        number_of_years = len(rtn) / 250
+        RtnTotal = nav[-1] / nav[0]
+        RtnAnnual = RtnTotal / number_of_years
+        StdTotal = float(np.nanstd(rtn))
+        Vol = StdTotal * np.sqrt(250)
+        Sharpe = RtnAnnual / Vol
+        MaxDown = cls.maximum_draw_down(rtn)
+        return RtnResult(
+            RtnTotal=RtnTotal,
+            RtnAnnual=RtnAnnual,
+            StdTotal=StdTotal,
+            Vol=Vol,
+            Sharpe=Sharpe,
+            MaxDown=MaxDown,
+        )
+
+    @classmethod
+    def maximum_draw_down(cls, rtn: np.ndarray):
+        min_all = 0
+        sum_here = 0
+        for x in rtn:
+            sum_here += x
+            if sum_here < min_all:
+                min_all = sum_here
+            elif sum_here >= 0:
+                sum_here = 0
+        return -min_all
 
     @classmethod
     def ICIR(
@@ -52,9 +84,7 @@ class Tester:
             nan_indices = np.isnan(matrix).any(axis=1)
             filtered_matrix = matrix[~nan_indices]
             res = st.spearmanr(filtered_matrix)
-            if res.pvalue > 0.05:
-                IC.loc[idx_s] = 0
-            else:
+            if res.pvalue <= 0.05:
                 IC.loc[idx_s] = res.statistic
         IC = IC.dropna(axis=0)
         IR = (IC.mean()) / IC.std()
@@ -97,7 +127,7 @@ class Tester:
                 top=y,
                 width=1.5,
                 bottom=0,
-                color='red',
+                color="red",
                 alpha=0.6,
             )
 

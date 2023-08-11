@@ -5,7 +5,7 @@ from typing import Union, Any
 class BufferManager:
     root_folder: Path = Path(__file__).parent / "Temp"
     file_tree: dict = dict()
-    
+
     @classmethod
     def _build_file_tree(cls, folder: Path):
         file_tree = {"name": folder.name, "size": 0, "subfolders": [], "files": []}
@@ -21,7 +21,7 @@ class BufferManager:
                 file_tree["size"] += file_size
 
         return file_tree
-    
+
     @classmethod
     def display_file_tree(cls):
         cls.file_tree = cls._build_file_tree(cls.root_folder)

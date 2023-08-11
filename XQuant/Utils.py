@@ -14,7 +14,9 @@ from typing import Union, Literal, Tuple, Any
 import h5py
 import numpy as np
 import pandas as pd
+import psutil
 from fuzzywuzzy import process
+from psutil._common import bytes2human
 from tqdm import tqdm
 from loguru import logger
 from .Consts import datatables
@@ -663,3 +665,16 @@ class Tools:
             m = re.search(r"\bvarname\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)", line)
             if m:
                 return m.group(1)
+
+    @staticmethod
+    def memory_analysis():
+        pid = os.getpid()
+        # 创建psutil的Process对象
+        _process = psutil.Process(pid)
+        # 获取脚本当前的内存使用量（以字节为单位）
+        memory_info = _process.memory_info()
+        memory_usage = memory_info.rss
+        # 将内存使用量转换为更友好的格式
+        memory_usage_readable = bytes2human(memory_usage)
+
+        print("Memory Usage:", memory_usage_readable)

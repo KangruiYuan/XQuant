@@ -1,7 +1,7 @@
 
 from XQuant import DataAPI
 from XQuant import SQLAgent
-from XQuant import Tester, Tools
+from XQuant import Analyzer, Tools
 from XQuant import Size
 from XQuant import BufferManager
 

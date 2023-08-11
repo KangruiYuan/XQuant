@@ -1,5 +1,5 @@
 
 from .DataReady import *
 from .Processer import *
-from .Tester import *
+from .Analyzer import *
 from .FactorReady import *
