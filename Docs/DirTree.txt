@@ -1,0 +1,76 @@
+E:.
+|   .gitignore
+|   DirTree.txt
+|   README.md
+|   
++---.github
+|   \---ISSUE_TEMPLATE
+|           ISSUE_FOR_BUG.md
+|           ISSUE_FOR_DEMAND.md
+|           
++---.idea
+|   |   .gitignore
+|   |   misc.xml
+|   |   modules.xml
+|   |   vcs.xml
+|   |   workspace.xml
+|   |   XQuant.iml
+|   |   
+|   \---inspectionProfiles
+|           profiles_settings.xml
+|           Project_Default.xml
+|           
++---Demo
++---ModuleTests
+|   |   BaseTest.ipynb
+|   |   Collector_Test.py
+|   |   SingleFuncTest.py
+|   |   Utils_Test.py
+|   |   
+|   \---__pycache__
+|           Collector_Test.cpython-310.pyc
+|           Utils_Test.cpython-310.pyc
+|           
+\---XQuant
+    |   Collector.py
+    |   Consts.py
+    |   FileManager.py
+    |   Schema.py
+    |   SQLAgent.py
+    |   Utils.py
+    |   __init__.py
+    |   
+    +---FactorManager
+    |   |   Analyzer.py
+    |   |   DataReady.py
+    |   |   FactorReady.py
+    |   |   Processer.py
+    |   |   __init__.py
+    |   |   
+    |   \---__pycache__
+    |           Analyzer.cpython-310.pyc
+    |           DataReady.cpython-310.pyc
+    |           FactorReady.cpython-310.pyc
+    |           Processer.cpython-310.pyc
+    |           __init__.cpython-310.pyc
+    |           
+    +---Scripts
+    |       QuantWeb.py
+    |       
+    +---StreamWeb
+    +---TABLES
+    |       dataYes.json
+    |       em.json
+    |       gm_factor.json
+    |       gm_future.json
+    |       gm_stock.json
+    |       info.json
+    |       jq_factor.json
+    |       jq_prepare.json
+    |       sql.json
+    |       
+    +---Temp
+    +---Tokens
+    |       quant.const.ini
+
+            
