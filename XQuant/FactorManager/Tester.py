@@ -1,20 +1,17 @@
+from pathlib import Path
 from typing import Union
 
-import pandas as pd
-from pathlib import Path
-
-from bokeh.models import DatetimeTickFormatter, ColumnDataSource
-
-from .Processer import Processer
-from .DataReady import DataReady
-from ..Utils import Formatter
-from loguru import logger
-import scipy.stats as st
 import numpy as np
-from bokeh.plotting import figure, show
+import pandas as pd
+import scipy.stats as st
 from bokeh.io import output_file
-from bokeh.palettes import Spectral6
-from bokeh.transform import factor_cmap
+from bokeh.models import DatetimeTickFormatter
+from bokeh.plotting import figure, show
+from loguru import logger
+
+from .DataReady import DataReady
+from .Processer import Processer
+from ..Utils import Formatter
 
 
 class Tester:
@@ -76,7 +73,8 @@ class Tester:
             if isinstance(output, (str, Path)):
                 output_file(output)
             elif isinstance(output, bool):
-                output = Path(__file__).parent / "Temp/ICIR.html"
+                output = Path(__file__).parents[1] / "Temp/ICIR.html"
+                output_file(output)
             logger.info("Output to file: %s" % Path(output))
         if isinstance(datas, (pd.DataFrame, pd.Series)):
             x = datas.index
