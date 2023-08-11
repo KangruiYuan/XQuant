@@ -4,6 +4,9 @@ from XQuant import DataAPI
 
 class MyTestCase(unittest.TestCase):
 
+    def test_get_data_sql(self):
+        df = DataAPI.get_data('gmData_history', begin='20230601')
+        self.assertEqual(True, len(df) > 0)
 
     def test_get_data_gm_factor(self):
         df = DataAPI.get_data(name="ACCA_gm", begin='20230101')

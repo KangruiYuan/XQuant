@@ -1,23 +1,11 @@
 
-from XQuant import DataAPI, Tools
+from XQuant import DataAPI
 from XQuant import SQLAgent
+from XQuant import Tester, Tools
+from XQuant import Size
 
-print(len(DataAPI.get_data('gmData_history', begin='20230601')))
+s = Size(begin='20220101')
+IC, IR = Tester.ICIR(s.LNCAP, s.returns)
+Tester.plotter(IC, output=True)
 
-print(len(DataAPI.get_data('gmData_history_adj', begin='20230601')))
-
-# postgres_connection()
-
-# print(Tools.get_newest_file("Price_Volume_Data/main"))
-
-# print(Tools.search_keyword("PE", update=True, verbose=False, limit=5))
-
-# print(get_data("Price_Volume_Data/main", begin='20220101').info())
-
-# print(
-#     get_data(
-#         'ResConSecTarpriScore',
-#         begin='20210501',
-#         ticker='000400',
-#         fields='secCode'
-#     ).info())
+# print(Tools.search_keyword("PE", update=False, verbose=False, limit=5))

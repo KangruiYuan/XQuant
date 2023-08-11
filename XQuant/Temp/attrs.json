@@ -1097,7 +1097,6 @@
         "fundamentals_cashflow",
         "fundamentals_income",
         "share_change",
-        "gmData_history",
         "gmData_bench_price",
         "trading_derivative_indicator",
         "deriv_finance_indicator",
@@ -1381,7 +1380,6 @@
     "pre_close": [
         "bench_price",
         "stock_price",
-        "gmData_history",
         "gmData_bench_price",
         "future_daily",
         "market_financial_sheet",
@@ -1404,7 +1402,6 @@
         "stock_price",
         "Price_Volume_Data/main",
         "Price_Volume_Data/submain",
-        "gmData_history",
         "gmData_bench_price",
         "future_daily"
     ],
@@ -2802,7 +2799,6 @@
         "Market_data_gm",
         "Price_Volume_Data/main",
         "Price_Volume_Data/submain",
-        "gmData_history",
         "market_financial_sheet",
         "market_sheet"
     ],
@@ -2811,7 +2807,6 @@
         "Market_data_gm",
         "Price_Volume_Data/main",
         "Price_Volume_Data/submain",
-        "gmData_history",
         "market_financial_sheet",
         "market_sheet"
     ],
@@ -2820,7 +2815,6 @@
         "Market_data_gm",
         "Price_Volume_Data/main",
         "Price_Volume_Data/submain",
-        "gmData_history",
         "market_financial_sheet",
         "market_sheet"
     ],
@@ -2830,7 +2824,6 @@
         "Broker_Data",
         "Price_Volume_Data/main",
         "Price_Volume_Data/submain",
-        "gmData_history",
         "market_financial_sheet",
         "market_sheet"
     ],
@@ -2839,7 +2832,6 @@
         "Market_data_gm",
         "Price_Volume_Data/main",
         "Price_Volume_Data/submain",
-        "gmData_history",
         "market_financial_sheet",
         "market_sheet"
     ],
@@ -2889,7 +2881,6 @@
         "Market_data_gm",
         "Price_Volume_Data/main",
         "Price_Volume_Data/submain",
-        "gmData_history",
         "market_financial_sheet",
         "market_sheet"
     ],
@@ -3044,13 +3035,11 @@
     ],
     "bob": [
         "Price_Volume_Data/main",
-        "Price_Volume_Data/submain",
-        "gmData_history"
+        "Price_Volume_Data/submain"
     ],
     "eob": [
         "Price_Volume_Data/main",
-        "Price_Volume_Data/submain",
-        "gmData_history"
+        "Price_Volume_Data/submain"
     ],
     "rpt_date": [
         "fundamentals_balance",
@@ -4764,11 +4753,6 @@
     ],
     "share_oth_ltd": [
         "share_change"
-    ],
-    "frequency": [
-        "gmData_history",
-        "market_financial_sheet",
-        "market_sheet"
     ],
     "turn_rate": [
         "gmData_bench_price",
@@ -6554,6 +6538,10 @@
     ],
     "index": [
         "market_financial_sheet"
+    ],
+    "frequency": [
+        "market_financial_sheet",
+        "market_sheet"
     ],
     "pre_index_close": [
         "market_financial_sheet",

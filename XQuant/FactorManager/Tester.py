@@ -1,53 +1,56 @@
 from typing import Union
 
 import pandas as pd
+from pathlib import Path
+
+from bokeh.models import DatetimeTickFormatter, ColumnDataSource
+
 from .Processer import Processer
 from .DataReady import DataReady
 from ..Utils import Formatter
 from loguru import logger
 import scipy.stats as st
 import numpy as np
+from bokeh.plotting import figure, show
+from bokeh.io import output_file
+from bokeh.palettes import Spectral6
+from bokeh.transform import factor_cmap
 
 
 class Tester:
-
     @staticmethod
-    def cure_data(df: pd.DataFrame | pd.Series, ticker: str):
+    def cure_data(df: pd.DataFrame | pd.Series, ticker: str = None):
         if len(df.shape) != 1:
-            try:
-                df = df.T
-                assert len(df.shape) == 1
+            if ticker is not None:
+                df = pd.DataFrame(df[Formatter.stock(ticker)])
                 return df
-            except AssertionError:
-                if ticker is not None:
-                    df = df[Formatter.stock(ticker)]
-                    return df
-                else:
-                    raise ValueError("df can contain only one column of data or you should specify a ticker")
+            elif 1 in df.shape:
+                df = df.T
+                return df
+            else:
+                raise ValueError(
+                    "Data should be one dimensional or you should specify a ticker"
+                )
 
     @classmethod
     def ICIR(
-            cls,
-            score: Union[pd.DataFrame, pd.Series],
-            returns: Union[pd.DataFrame, pd.Series] = None,
-            ticker: str = None,
+        cls,
+        score: pd.DataFrame,
+        returns: pd.DataFrame = None,
     ):
-        score = cls.cure_data(score, ticker)
         min_date = score.index.min()
         max_date = score.index.max()
         if returns is None:
             logger.info("自动获取回报率信息")
             dr = DataReady(begin=min_date, end=max_date)
-            returns_total = dr.returns
-            returns = cls.cure_data(returns_total, ticker)
-        else:
-            returns = cls.cure_data(returns)
+            returns = dr.returns
 
-        score, returns = Processer.align_dataframe(dfs=[score, returns])
-        IC = pd.DataFrame(
-            data=0, index=score.index, columns=['IC']
-        )
-        for idx_s, value_s, idx_r, value_r in zip(score.iterrows(), returns.iterrows()):
+        score, returns = Processer.align_dataframe(dfs=[score, returns], clean=True)
+
+        IC = pd.DataFrame(data=0, index=score.index, columns=["IC"])
+        for (idx_s, value_s), (idx_r, value_r) in zip(
+            score.iterrows(), returns.iterrows()
+        ):
             matrix = np.stack([value_s.values, value_r.values], axis=1)
             nan_indices = np.isnan(matrix).any(axis=1)
             filtered_matrix = matrix[~nan_indices]
@@ -59,3 +62,49 @@ class Tester:
         IC = IC.dropna(axis=0)
         IR = (IC.mean()) / IC.std()
         return IC, IR
+
+    @classmethod
+    def plotter(
+        cls,
+        datas: pd.DataFrame | pd.Series,
+        key: str = "IC",
+        output: Union[str, Path, bool] = None,
+        **kwargs
+    ):
+        if output is not None:
+            # 设置输出文件
+            if isinstance(output, (str, Path)):
+                output_file(output)
+            elif isinstance(output, bool):
+                output = Path(__file__).parent / "Temp/ICIR.html"
+            logger.info("Output to file: %s" % Path(output))
+        if isinstance(datas, (pd.DataFrame, pd.Series)):
+            x = datas.index
+            if isinstance(datas, pd.Series):
+                y = datas.values
+            else:
+                y = datas[key].values
+
+            p = figure(
+                height=500,
+                width=1000,
+                title=kwargs.get("title", "IC"),
+                x_axis_label=kwargs.get("xlabel", "Date"),
+                y_axis_label=kwargs.get("ylabel", key),
+            )
+
+            # 创建柱状图
+            p.vbar(
+                x=x,
+                top=y,
+                width=1.5,
+                bottom=0,
+                color='red',
+                alpha=0.6,
+            )
+
+            # 设置图表属性
+            p.xgrid.grid_line_color = None
+            p.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
+            # 展示图表
+            show(p)

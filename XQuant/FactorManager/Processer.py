@@ -79,7 +79,7 @@ class Processer:
             dfs = []
         dfs = list(chain(dfs, args))
 
-        if clean:
+        if clean and isinstance(dfs[0], pd.DataFrame):
             dfs = [Formatter.dataframe(df) for df in dfs]
 
         dims = 1 if any(len(df.shape) == 1 or 1 in df.shape for df in dfs) else 2

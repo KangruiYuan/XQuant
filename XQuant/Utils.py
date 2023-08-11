@@ -1,3 +1,4 @@
+import inspect
 import json
 import os
 import re
@@ -15,9 +16,8 @@ import numpy as np
 import pandas as pd
 from fuzzywuzzy import process
 from tqdm import tqdm
-
+from loguru import logger
 from .Consts import datatables
-
 
 
 __all__ = ["Formatter", "TradeDate", "Config", "Tools", "TimeType"]
@@ -457,7 +457,7 @@ class Tools:
             start = datetime.now()
             result = func(*args, **kwargs)
             end = datetime.now()
-            print(f"“{func.__name__}” run time: {end - start}.")
+            logger.info(f"“{func.__name__}” run time: {end - start}.")
             return result
 
         return timer
@@ -482,9 +482,11 @@ class Tools:
     @classmethod
     def get_config(
         cls,
-        filename: Union[str, os.PathLike] = Path(__file__).parent / "Tokens" /"quant.const.ini",
+        filename: Union[str, os.PathLike] = Path(__file__).parent
+        / "Tokens"
+        / "quant.const.ini",
         section: str = None,
-        **kwargs
+        **kwargs,
     ) -> dict[str, str | dict[str, str]]:
         """
 
@@ -588,7 +590,7 @@ class Tools:
         fuzzy: bool = True,
         limit: int = 5,
         update: bool = False,
-        initial_path: str = "./attrs.json",
+        initial_path: str = Path(__file__).parent / "Temp/attrs.json",
         **kwargs,
     ):
         """
@@ -600,6 +602,7 @@ class Tools:
         :return:
         """
         initial_path = Path(initial_path)
+        logger.info(f"缓存文件被保存至{initial_path}")
         if not initial_path.exists() or update:
             attrs_map = defaultdict(list)
             with tqdm(datatables.keys()) as t:
@@ -609,7 +612,7 @@ class Tools:
                         path = cls.get_newest_file(name)
                     except (IndexError, KeyError, NotImplementedError) as e:
                         if kwargs.get("verbose", True):
-                            print(e)
+                            logger.error(e)
                         continue
                     # TODO: 该方法无法正常使用时选用get_data
                     if isinstance(path, list):
@@ -622,8 +625,8 @@ class Tools:
                             columns = data["a"]["axis1"][:]
                     except KeyError as e:
                         if kwargs.get("verbose", True):
-                            print(e)
-                            print(path)
+                            logger.error(e)
+                            logger.error(path)
                         continue
                     for c in columns:
                         attrs_map[c.decode("utf-8")].append(name)
@@ -648,3 +651,15 @@ class Tools:
                 if count >= limit:
                     break
         return dic
+
+    @classmethod
+    def varname(cls, p):
+        """
+        将变量转化为变量名（字符串）
+        :param p: 想要搜寻的变量
+        :return: 变量的名字
+        """
+        for line in inspect.getframeinfo(inspect.currentframe().f_back)[3]:
+            m = re.search(r"\bvarname\s*\(\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)", line)
+            if m:
+                return m.group(1)

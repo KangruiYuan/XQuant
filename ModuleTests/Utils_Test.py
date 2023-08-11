@@ -5,6 +5,11 @@ from XQuant import TradeDate, Tools, Config, Formatter
 
 
 class MyTestCase(unittest.TestCase):
+
+    def test_varname(self):
+        name = Tools.varname(Tools)
+        self.assertEqual(name, 'Tools')
+
     def test_TradeDate_table(self):
         self.assertEqual(
             isinstance(TradeDate.trade_date_table, pd.DataFrame), True

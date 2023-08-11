@@ -11,6 +11,20 @@ class DataReady(Processer, DataAPI):
         super().__init__(begin, end, **kwargs)
 
     @cached_property
+    def market_value(self):
+        df = self.get_data(
+            name="MktEqud",
+            ticker=Config.stock_list,
+            begin=self.begin,
+            end=self.end,
+            fields=["ticker", "tradeDate", "marketValue"],
+        )
+        df = df.rename(columns={"marketValue": "market_value", "tradeDate": "date"})
+        df = df.pivot(index="date", values="market_value", columns="ticker")
+        df = Formatter.dataframe(df)
+        return df
+
+    @cached_property
     def returns(self):
         df = self.get_data(
             name="MktEqud",
@@ -19,8 +33,7 @@ class DataReady(Processer, DataAPI):
             end=self.end,
             fields=["ticker", "tradeDate", "chgPct"],
         )
-        df = df.rename(columns={'chgPct':'returns', 'tradeDate':'date'})
-        df = df.pivot(index='date', values='returns', columns='ticker')
+        df = df.rename(columns={"chgPct": "returns", "tradeDate": "date"})
+        df = df.pivot(index="date", values="returns", columns="ticker")
         df = Formatter.dataframe(df)
         return df
-
