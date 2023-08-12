@@ -466,20 +466,15 @@ class Tools:
 
     @classmethod
     def packaging(
-        cls, series: Sequence, pat: int, iterator: bool = False
+        cls, series: Sequence, pat: int,
     ) -> Sequence[Sequence] | Iterator:
         """
         :param series:
         :param pat:
-        :param iterator:
         :return:
         """
         assert pat > 0
-        if iterator:
-            for i in range(0, len(series), pat):
-                yield series[i : i + pat]
-        else:
-            return [series[i : i + pat] for i in range(0, len(series), pat)]
+        return [series[i : i + pat] for i in range(0, len(series), pat)]
 
     @classmethod
     def get_config(
@@ -520,8 +515,11 @@ class Tools:
         assets = datatables[name]["assets"]
         if assets == "gm_factor":
             name = name[:-3]
+        elif assets == "sql":
+            return None
         base_folder = Config.database_dir[assets]
         table_folder = Path(base_folder) / name
+        today = datetime.today()
         newest_file = ""
         if assets in [
             "dataYes",
@@ -543,21 +541,23 @@ class Tools:
             Q_Y_pattern = r"Y(\d+)_Q(\d+)"
             Y_pattern = r"Y(\d+)"
             if re.search(Q_Y_pattern, files[0]):
+                today_num = today.year * 10 + np.ceil(today.month / 3)
                 for file in files:
                     match = re.search(Q_Y_pattern, file)
                     if match:
                         year, month = match.groups()
                         date_num = int(year) * 10 + int(month)
-                        if date_num > newest_date:
+                        if newest_date < date_num <= today_num:
                             newest_file = file
                             newest_date = date_num
             elif re.search(Y_pattern, files[0]):
+                today_num = today.year
                 for file in files:
                     match = re.search(Y_pattern, file)
                     if match:
                         year = match.groups()[0]
                         date_num = int(year)
-                        if date_num > newest_date:
+                        if newest_date < date_num <= today_num:
                             newest_file = file
                             newest_date = date_num
             else:
@@ -612,8 +612,11 @@ class Tools:
                 for name in t:
                     try:
                         path = cls.get_newest_file(name)
+                        if path is None:
+                            continue
                     except (IndexError, KeyError, NotImplementedError) as e:
                         if kwargs.get("verbose", True):
+                            logger.error(f"Name: {name}")
                             logger.error(e)
                         continue
                     # TODO: 该方法无法正常使用时选用get_data

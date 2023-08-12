@@ -43,7 +43,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_packaging(self):
         my_sequence = [1, 2, 3, 4, 5]
-        res = [i for i in Tools.packaging(my_sequence, pat=2, iterator=True)]
+        res = [i for i in Tools.packaging(my_sequence, pat=2)]
         expect_res = [[1, 2], [3, 4], [5]]
         self.assertEqual(res, expect_res)
 

@@ -617,12 +617,6 @@
     "date_column": "pub_date",
     "ticker_column": "symbol"
   },
-  "size": {
-    "assets": "gm_factor",
-    "description": "",
-    "date_column": "pub_date",
-    "ticker_column": "symbol"
-  },
   "super_quick_ratio": {
     "assets": "gm_factor",
     "description": "",

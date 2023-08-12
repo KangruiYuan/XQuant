@@ -8,14 +8,15 @@
 
 ## 使用示例
 
-| 模块名称	         | 模块说明 | 模块示例	 |
-|---------------|:----:|------:|
-| Utils         |  	   |    暂无 |
-| Collector     |      |    暂无 |
-| FileManager   |      |    暂无 |
-| SQLAgent      |      |    暂无 |
-| FactorManager |      |    暂无 |
-| Schema        |  	   |    暂无 |
+| 模块名称	         |    模块说明    | 子类                             |                             模块示例	 |
+|---------------|:----------:|--------------------------------|----------------------------------:|
+| Utils         | 通用变量，常用函数	 | Config, TradeDate, Formatter, Tools | [Utils.ipynb](./Demo/Utils.ipynb) |
+| Collector     |            |                                |                                暂无 |
+| FileManager   |            |                                |                                暂无 |
+| SQLAgent      |            |                                |                                暂无 |
+| FactorManager |            |                                |                                暂无 |
+| Schema        |     	      |                                |                                暂无 |
+| Consts        |     	      |                                |                                暂无 |
 
 
 ## 项目结构
