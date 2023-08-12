@@ -8,15 +8,17 @@
 
 ## 使用示例
 
-| 模块名称	         |    模块说明    | 子类                             |                             模块示例	 |
-|---------------|:----------:|--------------------------------|----------------------------------:|
-| Utils         | 通用变量，常用函数	 | Config, TradeDate, Formatter, Tools | [Utils.ipynb](./Demo/Utils.ipynb) |
-| Collector     |            |                                |                                暂无 |
-| FileManager   |            |                                |                                暂无 |
-| SQLAgent      |            |                                |                                暂无 |
-| FactorManager |            |                                |                                暂无 |
-| Schema        |     	      |                                |                                暂无 |
-| Consts        |     	      |                                |                                暂无 |
+| 模块名称	         |    模块说明 | 子类                                          |                                        模块示例	 |
+|---------------|:-----:|:--------------------------------------------|---------------------------------------------:|
+| Utils         | 通用变量，常用函数	 | Config, TradeDate, Formatter, Tools         |            [Utils.ipynb](./Demo/Utils.ipynb) |
+| Collector     |    取数框架 | DataAPI                                     |    [Collector.ipynb](./Demo/Collector.ipynb) |
+| FileManager   |   文件管理器 | BufferManager                               |[FileManager.ipynb](./Demo/FileManager.ipynb) |
+| FactorManager | 因子计算、检验及回测 | Analyzer, DataReady, FactorReady, Processer |                                           暂无 |
+| SQLAgent      |   SQL交互 |                                             |                                           暂无 |
+| Consts        |  初始化加载信息 |                                             |                                           暂无 |
+| Schema        | 数据范式    	 |                                             |                                           暂无 |
+| Scripts       |       |                                             |                                             暂无 |
+| StreamWeb     |       |                                             |                                             暂无 |
 
 
 ## 项目结构
