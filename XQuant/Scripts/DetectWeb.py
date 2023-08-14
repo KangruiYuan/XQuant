@@ -1,6 +1,6 @@
-import sys
 import requests
-from requests.exceptions import HTTPError, ConnectionError
+from requests.exceptions import ConnectionError
+
 
 def getHttpStatusCode(url):
     try:
@@ -13,7 +13,7 @@ def getHttpStatusCode(url):
 
 
 if __name__ == "__main__":
-    URLS = {"stable_url": "http://localhost:8800", "dev_url": "http://localhost:8787"}
+    URLS = {"XQuant": "http://localhost:9999"}
 
     for name in URLS.keys():
         status = getHttpStatusCode(URLS[name])
