@@ -10,5 +10,11 @@
     "description": "",
     "date_column": "bob",
     "ticker_column": "symbol"
-  }
+  },
+    "uqer_MktIdx" : {
+    "assets": "sql",
+    "description": "",
+    "date_column": "tradedate",
+    "ticker_column": "ticker"
+    }
 }
