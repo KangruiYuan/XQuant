@@ -4,25 +4,20 @@ import streamlit as st
 from streamlit_ace import st_ace, KEYBINDINGS, THEMES
 
 
-def initialize(
-    app_title: str = "XQuant Visual",
-    page_title: str = "📈 :blue[XQuant] :red[Visual]",
-    layout: Literal["centered", "wide"] = "wide",
-    **kwargs
-):
-    st.set_page_config(
-        page_title=app_title,
-        page_icon=kwargs.get("page_icon", "📈"),
-        layout=layout,
-        initial_sidebar_state=kwargs.get("initial_sidebar_state", "auto"),
-        menu_items={
-            "About": "https://github.com/KangruiYuan/XQuant",
-            "Report a bug": "https://github.com/KangruiYuan/XQuant/issues",
-        },
-    )
+def intro():
+    import streamlit as st
 
-    st.title(page_title)
-    st.divider()
+    st.title("📈 :blue[XQuant] :red[Visual]")
+
+    st.markdown(
+        """
+        该项目由西部证券开发
+        <img align="right" src="./pics/ws_logo.png"/>
+        - 项目主页:  [Github pages](https://github.com/KangruiYuan/XQuant)
+        - 报告错误: [Issue]("https://github.com/KangruiYuan/XQuant/issues")
+        """,
+        unsafe_allow_html=True
+    )
 
 
 def code_editor(**kwargs):
