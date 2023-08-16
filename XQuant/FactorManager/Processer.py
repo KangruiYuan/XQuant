@@ -1,4 +1,3 @@
-
 from datetime import date
 from functools import reduce
 from itertools import chain
@@ -6,11 +5,11 @@ from itertools import chain
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
-from typing import Union, Callable, Any, Literal
+from typing import Union, Callable, Any, Literal, Optional
 from dask import dataframe as dd
 from pyfinance.utils import rolling_windows
 from statsmodels.regression.linear_model import WLS
-
+from scipy.stats.mstats import winsorize
 from ..Utils import Formatter, Tools
 
 ArrayType = Union[pd.Series, np.ndarray, list]
@@ -102,6 +101,68 @@ class Processer:
                 res = [df.loc[mut_date_range, mut_codes] for df in dfs]
             elif dims == 1:
                 res = [df.loc[mut_date_range, :] for df in dfs]
+        return res
+
+    @classmethod
+    def winsorize(
+        cls,
+        arr: Union[np.ndarray, pd.Series],
+        scale: Optional[float] = 1.0,
+        limits: Optional[tuple] = (0.1, 0.1),
+        mode: Literal["mad", "percent"] = "mad",
+        inplace: bool = False,
+        inf2nan: bool = True,
+        inclusive: Union[tuple[bool, bool], bool] = (True, True),
+        **kwargs,
+    ):
+        if isinstance(inclusive, bool):
+            loinc, upinc = inclusive, inclusive
+        else:
+            loinc, upinc = inclusive
+        if inplace:
+            res = arr
+        else:
+            res = arr.copy()
+        if inf2nan:
+            res[np.isinf(res)] = np.nan
+        if mode == "mad":
+            med = np.nanmedian(res)
+            distance = np.nanmedian(np.abs(res - med))
+            up = med + scale * distance
+            down = med - scale * distance
+            if any(inclusive):
+                res = np.clip(res, down, up)
+            else:
+                if loinc:
+                    res[res < down] = np.nan
+                if upinc:
+                    res[res > up] = np.nan
+        elif mode == "percent":
+            res = winsorize(a=res, limits=limits, inclusive=(loinc, upinc), **kwargs)
+        return res
+
+    @classmethod
+    def standardlize(
+        cls,
+        arr: Union[np.ndarray, pd.Series],
+        mode: Literal["zscore", "minmax"] = "zscore",
+        inplace: bool = False,
+        inf2nan: bool = True,
+    ):
+        if inplace:
+            res = arr
+        else:
+            res = arr.copy()
+        if inf2nan:
+            res[np.isinf(res)] = np.nan
+
+        temp = res[~np.isinf(res)]
+        if mode == "zscore":
+            mean = np.nanmean(temp)
+            std = np.nanstd(temp, ddof=1)
+            res = (res - mean) / std
+        elif mode == "minmax":
+            res = (res - np.nanmin(temp)) / (np.nanmax(temp) - np.nanmin(temp))
         return res
 
     @classmethod
