@@ -1,3 +1,5 @@
+from typing import Union, Optional
+
 import pandas as pd
 
 from .Processer import Processer
@@ -9,11 +11,40 @@ from functools import cached_property
 
 class DataReady(Processer, DataAPI):
     def __init__(self, begin: TimeType = None, end: TimeType = None, **kwargs):
-        self.sql: bool = kwargs.get('sql', False)
-        self.adj: bool = kwargs.get('adj', False)
-        self.bench_code: str = kwargs.get('bench_code', None)
+        self.sql: bool = kwargs.get("sql", False)
+        self.adj: bool = kwargs.get("adj", False)
+        self.bench_code: str = kwargs.get("bench_code", None)
         end = end if end else date.today().strftime("%Y%m%d")
         super().__init__(begin, end, **kwargs)
+
+    @classmethod
+    def get_pivot_df(
+        cls,
+        key_value: str,
+        name: str,
+        begin: TimeType = None,
+        end: TimeType = None,
+        ticker: Optional[Union[str, int, list]] = None,
+        index: str = "",
+        column: str = "",
+        **kwargs,
+    ):
+        column = Config.datatables[name]["ticker_column"] or column
+        index = Config.datatables[name]["date_column"] or index
+        assert column and index
+        df = cls.get_data(
+            name=name,
+            ticker=ticker,
+            begin=begin,
+            end=end,
+            fields=[column, index, key_value],
+        )
+        index_rename = kwargs.get("index_rename", "date")
+        column_rename = kwargs.get("column_rename", "ticker")
+        df = df.rename(columns={index: index_rename, column: column_rename})
+        df = df.pivot(index=index_rename, values=key_value, columns=column_rename)
+        df = Formatter.dataframe(df)
+        return df
 
     @cached_property
     def market_value(self):
@@ -21,17 +52,9 @@ class DataReady(Processer, DataAPI):
         市值
         :return:
         """
-        df = self.get_data(
-            name="MktEqud",
-            ticker=Config.stock_list,
-            begin=self.begin,
-            end=self.end,
-            fields=["ticker", "tradeDate", "marketValue"],
+        return self.get_pivot_df(
+            key_value="marketValue", name="MktEqud", begin=self.begin, end=self.end
         )
-        df = df.rename(columns={"marketValue": "market_value", "tradeDate": "date"})
-        df = df.pivot(index="date", values="market_value", columns="ticker")
-        df = Formatter.dataframe(df)
-        return df
 
     @cached_property
     def industry(self):
@@ -39,16 +62,12 @@ class DataReady(Processer, DataAPI):
         申万行业分类
         :return:
         """
-        df = self.get_data(
-            "IndustryID_Sw21",
+        return self.get_pivot_df(
+            key_value="industryName1",
+            name="IndustryID_Sw21",
             begin=self.begin,
             end=self.end,
-            fields=["date", "winCode", "industryName1"],
         )
-        df = df.rename(columns={"industryName1": "industry_name", "winCode": "ticker"})
-        df = df.pivot(index="date", values="industry_name", columns="ticker")
-        df = Formatter.dataframe(df)
-        return df
 
     @cached_property
     def returns(self):
@@ -56,17 +75,9 @@ class DataReady(Processer, DataAPI):
         回报率
         :return:
         """
-        df = self.get_data(
-            name="MktEqud",
-            ticker=Config.stock_list,
-            begin=self.begin,
-            end=self.end,
-            fields=["ticker", "tradeDate", "chgPct"],
+        return self.get_pivot_df(
+            key_value="chgPct", name="MktEqud", begin=self.begin, end=self.end
         )
-        df = df.rename(columns={"chgPct": "returns", "tradeDate": "date"})
-        df = df.pivot(index="date", values="returns", columns="ticker")
-        df = Formatter.dataframe(df)
-        return df
 
     @cached_property
     def turnover(self):
@@ -74,17 +85,9 @@ class DataReady(Processer, DataAPI):
         换手率
         :return:
         """
-        df = self.get_data(
-            name="MktEqud",
-            ticker=Config.stock_list,
-            begin=self.begin,
-            end=self.end,
-            fields=["ticker", "tradeDate", "turnoverValue"],
+        return self.get_pivot_df(
+            key_value="turnoverValue", name="MktEqud", begin=self.begin, end=self.end
         )
-        df = df.rename(columns={"turnoverValue": "turnover", "tradeDate": "date"})
-        df = df.pivot(index="date", values="turnover", columns="ticker")
-        df = Formatter.dataframe(df)
-        return df
 
     @cached_property
     def close(self):
@@ -93,29 +96,18 @@ class DataReady(Processer, DataAPI):
         :return:
         """
         if self.sql:
+            key_value = "close"
             if self.adj:
                 name = "gmData_history_adj"
             else:
                 name = "gmData_history"
-            df = self.get_data(
-                name=name,
-                begin=self.begin,
-                end=self.end,
-                fields=["bob", "symbol", "close"],
-            )
-            df = df.rename(columns={"bob": "date", "symbol": "ticker"})
         else:
-            df = self.get_data(
-                name="MktEqud",
-                ticker=Config.stock_list,
-                begin=self.begin,
-                end=self.end,
-                fields=["ticker", "tradeDate", "closePrice"],
-            )
-            df = df.rename(columns={"closePrice": "close", "tradeDate": "date"})
-        df = df.pivot(index="date", columns="ticker", values="close")
-        df = Formatter.dataframe(df)
-        return df
+            key_value = "closePrice"
+            name = "MktEqud"
+
+        return self.get_pivot_df(
+            key_value=key_value, name=name, begin=self.begin, end=self.end
+        )
 
     @cached_property
     def bench(self):
@@ -125,11 +117,9 @@ class DataReady(Processer, DataAPI):
             ticker=self.bench_code,
             begin=self.begin,
             end=self.end,
-            fields=['tradedate', 'chgpct']
+            fields=["tradedate", "chgpct"],
         )
         df = df.rename(columns={"chgpct": "returns", "tradedate": "date"})
         df = df.set_index("date")
         df.index = pd.to_datetime(df.index)
         return df
-
-

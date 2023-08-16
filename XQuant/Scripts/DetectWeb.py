@@ -13,7 +13,7 @@ def getHttpStatusCode(url):
 
 
 if __name__ == "__main__":
-    URLS = {"XQuant": "http://localhost:9999"}
+    URLS = {"XQuant": "http://localhost:9999", "Quant Share": "http://localhost:8787"}
 
     for name in URLS.keys():
         status = getHttpStatusCode(URLS[name])
