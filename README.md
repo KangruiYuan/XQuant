@@ -33,18 +33,6 @@
 |           ISSUE_FOR_BUG.md
 |           ISSUE_FOR_DEMAND.md
 |           
-+---.idea
-|   |   .gitignore
-|   |   encodings.xml
-|   |   misc.xml
-|   |   modules.xml
-|   |   vcs.xml
-|   |   workspace.xml
-|   |   XQuant.iml
-|   |   
-|   \---inspectionProfiles
-|           profiles_settings.xml
-|           Project_Default.xml
 |           
 +---Demo
 |       Collector.ipynb
@@ -60,8 +48,6 @@
 |   |   SingleFuncTest.py
 |   |   Utils_Test.py
 |   |   
-|           Collector_Test.cpython-310.pyc
-|           Utils_Test.cpython-310.pyc
 |           
 +---XQuant
 |   |   Collector.py
@@ -79,12 +65,7 @@
 |   |   |   Processer.py
 |   |   |   __init__.py
 |   |   |   
-|   |           Analyzer.cpython-310.pyc
-|   |           DataReady.cpython-310.pyc
-|   |           FactorReady.cpython-310.pyc
-|   |           Processer.cpython-310.pyc
-|   |           __init__.cpython-310.pyc
-|   |           
+
 |   +---Scripts
 |   |       AutoStart_windows.bat
 |   |       DetectWeb.py
@@ -117,18 +98,9 @@
 |   |   \---web_functions
 |   |       |   function.py
 |   |       |   
-|   |               function.cpython-310.pyc
-|   |               
 |   +---Tokens
 |   |       quant.const.ini
 |   |       
-|           Collector.cpython-310.pyc
-|           Consts.cpython-310.pyc
-|           FileManager.cpython-310.pyc
-|           Schema.cpython-310.pyc
-|           SQLAgent.cpython-310.pyc
-|           Utils.cpython-310.pyc
-|           __init__.cpython-310.pyc
 |           
 \---XQuant.wiki
 
