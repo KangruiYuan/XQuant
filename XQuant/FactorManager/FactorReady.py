@@ -7,18 +7,15 @@ from ..Utils import TimeType
 
 
 class IMPLEMENTED:
-    raw: list[str] = [
-        "market_value",
-        "industry",
-        "returns",
-        "turnover",
-        "close",
-        "bench",
-    ]
-    factor: list[str] = [
-        "LNCAP",
-        "MIDCAP"
-    ]
+    raw: dict[str, str] = {
+        "市值": "market_value",
+        "行业分类": "industry",
+        "涨跌幅": "returns",
+        "换手率": "turnover",
+        "收盘价": "close",
+        "基准": "bench",
+    }
+    factor: dict[str, str] = {"非线性市值": "LNCAP", "中市值": "MIDCAP"}
 
 
 class Size(DataReady):
@@ -35,7 +32,7 @@ class Size(DataReady):
 
     @classmethod
     def _calc_MIDCAP(cls, x: np.ndarray) -> np.ndarray:
-        y = x ** 3
+        y = x**3
         beta, alpha = cls.regress(y, x, verbose=False)
         y_hat = alpha + beta * x
         resid = y - y_hat
@@ -48,6 +45,7 @@ class Size(DataReady):
         df = self.LNCAP
         df = df.apply(self._calc_MIDCAP, axis=1, raw=True)
         return df
+
 
 class BARRA(Size):
     def __init__(self, begin: TimeType = None, end: TimeType = None, **kwargs):
