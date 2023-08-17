@@ -10,7 +10,7 @@ def convert_df(df):
 
 
 def RawDataVisual():
-    st.title("📈 :blue[XQuant] :red[Visual] : Raw Data Visual")
+    st.title("📈 :blue[XQuant] :red[Visual] : Raw Data")
 
     with st.expander("XQuant原生数据"):
         data_df = pd.DataFrame({"表名": Config.datatables.keys()})

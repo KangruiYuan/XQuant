@@ -33,13 +33,13 @@ def BarraFactor():
 
     barra = BARRA(begin=begin, end=end, bench_code=bench_code)
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
 
     st.session_state.barra_factor_df = pd.DataFrame()
 
     if col1.button("获取/显示数据", key="get_barra_button", use_container_width=True):
         with st.spinner("请等待"):
-            st.session_state.barra_factor_df = getattr(barra, IMPLEMENTED.factor[data_name])
+            st.session_state.barra_factor_df = getattr(barra, all_data[data_name])
         if len(st.session_state.barra_factor_df) > 0:
             st.dataframe(st.session_state.barra_factor_df.head())
 
@@ -48,17 +48,18 @@ def BarraFactor():
         st.download_button(
             label="以CSV格式下载数据",
             data=csv,
-            file_name=f"{IMPLEMENTED.factor[data_name]}.csv",
+            file_name=f"{all_data[data_name]}.csv",
             mime="text/csv",
             use_container_width=True,
         )
 
     if col3.button("ICIR", key="cal_ICIR_button", use_container_width=True):
         with st.spinner("请等待"):
-            barra_factor_df = getattr(barra, IMPLEMENTED.factor[data_name])
-            if len(barra_factor_df > 0) and data_name != "bench":
+            if len(st.session_state.barra_factor_df) == 0:
+                st.session_state.barra_factor_df = getattr(barra, all_data[data_name])
+            if len(st.session_state.barra_factor_df > 0) and data_name != "bench":
                 returns = barra.returns
-                IC, IR = Analyzer.ICIR(barra_factor_df, returns)
+                IC, IR = Analyzer.ICIR(st.session_state.barra_factor_df, returns)
                 IC = IC.reset_index()
                 fig = px.bar(
                     IC,
@@ -67,10 +68,13 @@ def BarraFactor():
                     color="IC",
                     orientation='v',
                     labels={"index": "Date"},
+                    title=f"IR={float(IR):.2f}"
                 )
                 st.plotly_chart(fig, use_container_width=True)
             else:
-                st.error(f"因子数据长度为{len(barra_factor_df)}或者您选择的数据为指数基准数据")
+                st.error(f"因子数据长度为{len(st.session_state.barra_factor_df)}或者您选择的数据为指数基准数据")
 
+    if col4.button("因子回测", key="cal_backtest_button", use_container_width=True):
+        pass
 
 BarraFactor()

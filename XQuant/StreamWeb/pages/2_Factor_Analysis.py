@@ -3,6 +3,9 @@ import re
 import sys
 import streamlit as st
 from pathlib import Path
+import pandas as pd
+from XQuant import Formatter, BARRA, Analyzer
+import plotly.express as px
 
 def code_editor(**kwargs):
     code_col, para_col = st.columns([3, 1])
@@ -34,12 +37,64 @@ def code_editor(**kwargs):
 def FactorBackTest():
     st.title("📈 :blue[XQuant] :red[Visual] : Backtest Platform")
 
-    functions_path = Path(__file__).parents[2] / "Temp" / "web_functions"
-    if not functions_path.exists():
-        functions_path.mkdir(exist_ok=True, parents=True)
-    sys.path.append(str(functions_path))
+    st.session_state.functions_path = Path(__file__).parents[2] / "Temp" / "web_functions"
+    if not st.session_state.functions_path.exists():
+        st.session_state.functions_path.mkdir(exist_ok=True, parents=True)
+    sys.path.append(str(st.session_state.functions_path))
+
+    factor_backtest_uploaded = st.file_uploader(
+        "## 上传因子数据（宽表格式）", type=["csv"], key="backtest_factor_uploaded"
+    )
+
+    if factor_backtest_uploaded is not None:
+        # Can be used wherever a "file-like" object is accepted:
+        with st.spinner(f"正在读取：{factor_backtest_uploaded.name}"):
+            if factor_backtest_uploaded.name.endswith("csv"):
+                factor_data = pd.read_csv(factor_backtest_uploaded)
+            else:
+                st.error(f"File type is not supported!")
+
+            col_names = factor_data.columns
+            for col in col_names:
+                sample = factor_data[col].dropna().values[0]
+                if Formatter.is_date(sample):
+                    date_column = col
+                    break
+
+            factor_data = factor_data.set_index(date_column)
+            factor_data = Formatter.dataframe(factor_data)
+            st.dataframe(factor_data.head())
+            st.session_state.date_max = factor_data.index.max()
+            st.session_state.date_min = factor_data.index.min()
+            st.session_state.factor_data = factor_data
+
+    col1, col2 = st.columns(2)
+
+    if col1.button("因子回测", key="cal_backtest_button_in_backtest", use_container_width=True):
+        pass
+
+    if col2.button("ICIR", key="cal_ICIR_button_in_backtest", use_container_width=True):
+        with st.spinner("请等待"):
+            if "factor_data" in st.session_state.keys() and len(st.session_state.factor_data > 0):
+                returns = BARRA(begin=st.session_state.date_min, end=st.session_state.date_max).returns
+                IC, IR = Analyzer.ICIR(st.session_state.factor_data, returns)
+                IC = IC.reset_index()
+                fig = px.bar(
+                    IC,
+                    x="index",
+                    y="IC",
+                    color="IC",
+                    orientation='v',
+                    labels={"index": "Date"},
+                    title=f"IR={float(IR):.2f}"
+                )
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                st.error(f"请准备您的因子数据")
 
     st.subheader("选择模式进行回测")
+
+    backtest_method = st.selectbox("回测方法", ("分组回测", "线性计算仓位", "多空对冲"))
 
     # if st.button("输入自定义因子转换代码", key="input_code_button"):
     st.subheader("自定义代码输入区")
