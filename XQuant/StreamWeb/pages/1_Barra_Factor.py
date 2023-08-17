@@ -1,23 +1,29 @@
 import pandas as pd
 import streamlit as st
-from XQuant import IMPLEMENTED, BARRA, Formatter
+from XQuant import IMPLEMENTED, BARRA, Formatter, Analyzer
+from collections import ChainMap
+import plotly.express as px
 
 @st.cache_data
 def convert_df(df):
     # IMPORTANT: Cache the conversion to prevent computation on every rerun
-    return df.to_csv().encode('utf-8')
+    return df.to_csv().encode("utf-8")
+
 
 def BarraFactor():
     st.title("📈 :blue[XQuant] :red[Visual] : Barra")
 
-    with st.expander("原生数据及Barra因子说明"):
+    with st.expander("Barra因子说明"):
+        st.markdown("原生数据（宽表）")
         st.json(IMPLEMENTED.raw)
+        st.markdown("因子数据（宽表）")
         st.json(IMPLEMENTED.factor)
+
+    all_data = ChainMap(IMPLEMENTED.raw, IMPLEMENTED.factor)
 
     date_col, name_col = st.columns(2)
     with name_col:
-        raw_name = st.selectbox("原生数据", IMPLEMENTED.raw.keys())
-        factor_name = st.selectbox("BARRA因子", IMPLEMENTED.factor.keys())
+        data_name = st.selectbox("数据名", all_data.keys())
         bench_code = st.selectbox("研究标的", ("000852", "000905", "000300"), index=0)
     with date_col:
         begin = st.date_input("起始日期", value=Formatter.date("20200101"))
@@ -25,39 +31,46 @@ def BarraFactor():
 
     st.divider()
 
-    barra = BARRA(begin=begin, end=end)
+    barra = BARRA(begin=begin, end=end, bench_code=bench_code)
 
-    factor_col, raw_col = st.columns(2)
+    col1, col2, col3 = st.columns(3)
 
-    with factor_col:
-        df = pd.DataFrame()
-        if st.button("获取Barra因子数据", key="get_barra_button"):
-            with st.spinner("请等待"):
-                df = getattr(barra, IMPLEMENTED.factor[factor_name])
-        if len(df) > 0:
-            st.dataframe(df.head())
-        csv = convert_df(df)
+    st.session_state.barra_factor_df = pd.DataFrame()
+
+    if col1.button("获取/显示数据", key="get_barra_button", use_container_width=True):
+        with st.spinner("请等待"):
+            st.session_state.barra_factor_df = getattr(barra, IMPLEMENTED.factor[data_name])
+        if len(st.session_state.barra_factor_df) > 0:
+            st.dataframe(st.session_state.barra_factor_df.head())
+
+    with col2:
+        csv = convert_df(st.session_state.barra_factor_df)
         st.download_button(
-            label="以CSV方式下载表格",
+            label="以CSV格式下载数据",
             data=csv,
-            file_name=f'{IMPLEMENTED.factor[factor_name]}.csv',
-            mime='text/csv',
+            file_name=f"{IMPLEMENTED.factor[data_name]}.csv",
+            mime="text/csv",
+            use_container_width=True,
         )
 
-    with raw_col:
-        df = pd.DataFrame()
-        if st.button("获取原生数据", key="get_raw_button"):
-            with st.spinner("请等待"):
-                barra.bench_code = bench_code
-                df = getattr(barra, IMPLEMENTED.raw[raw_name])
-        if len(df) > 0:
-            st.dataframe(df.head())
-        csv = convert_df(df)
-        st.download_button(
-            label="以CSV方式下载表格",
-            data=csv,
-            file_name=f'{IMPLEMENTED.raw[raw_name]}.csv',
-            mime='text/csv',
-        )
+    if col3.button("ICIR", key="cal_ICIR_button", use_container_width=True):
+        with st.spinner("请等待"):
+            barra_factor_df = getattr(barra, IMPLEMENTED.factor[data_name])
+            if len(barra_factor_df > 0) and data_name != "bench":
+                returns = barra.returns
+                IC, IR = Analyzer.ICIR(barra_factor_df, returns)
+                IC = IC.reset_index()
+                fig = px.bar(
+                    IC,
+                    x="index",
+                    y="IC",
+                    color="IC",
+                    orientation='v',
+                    labels={"index": "Date"},
+                )
+                st.plotly_chart(fig, use_container_width=True)
+            else:
+                st.error(f"因子数据长度为{len(barra_factor_df)}或者您选择的数据为指数基准数据")
+
 
 BarraFactor()

@@ -135,4 +135,8 @@ class Analyzer:
             p.xgrid.grid_line_color = None
             p.xaxis.formatter = DatetimeTickFormatter(days="%Y-%m-%d")
             # 展示图表
-            show(p)
+            if kwargs.get("verbose", True):
+                show(p)
+            else:
+                return p
+
