@@ -1,8 +1,10 @@
+from itertools import chain
+
 import streamlit as st
 import pandas as pd
 from matplotlib import pyplot as plt
 
-from XQuant import Config, DataAPI, Formatter
+from XQuant import Config, DataAPI, Formatter, TradeDate
 import talib
 import numpy as np
 import mplfinance as mpf
@@ -33,6 +35,7 @@ def Candle():
         key="ma_period_input",
     )
     st.session_state.ma_period = list(map(int, ma_period.split(",")))
+    st.session_state.shift = max(chain(st.session_state.ma_period, [26]))
 
     st.divider()
 
@@ -40,7 +43,7 @@ def Candle():
         date_column = Config.datatables[st.session_state.table_name]["date_column"]
         df = DataAPI.get_data(
             name=st.session_state.table_name,
-            begin=st.session_state.begin,
+            begin=TradeDate.shift_trade_date(st.session_state.begin, -st.session_state.shift),
             end=st.session_state.end,
             ticker=st.session_state.symbol,
         )
@@ -66,6 +69,8 @@ def Candle():
         )
         df["j"] = 3 * df["k"] - 2 * df["d"]
 
+        df = df.loc[st.session_state.begin:, :]
+
         my_color = mpf.make_marketcolors(
             up="red", down="green", edge="i", wick="i", volume="in", inherit=True
         )
@@ -74,7 +79,7 @@ def Candle():
             gridaxis="both", gridstyle="-.", y_on_right=False, marketcolors=my_color
         )
 
-        custom_cycler = cycler(color=["dodgerblue", "deeppink", "navy", "red", "green", "purple", ""])
+        custom_cycler = cycler(color=["dodgerblue", "deeppink", "navy", "red", "green", "purple", "black"])
 
         fig = mpf.figure(style=my_style, figsize=(12, 8))
         left, width = 0.05, 0.9

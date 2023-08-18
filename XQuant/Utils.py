@@ -20,11 +20,12 @@ from psutil._common import bytes2human
 from tqdm import tqdm
 from loguru import logger
 from .Consts import datatables
+from .Schema import TimeType
 
 
-__all__ = ["Formatter", "TradeDate", "Config", "Tools", "TimeType"]
+__all__ = ["Formatter", "TradeDate", "Config", "Tools"]
 
-TimeType = Union[str, int, datetime, date, pd.Timestamp]
+
 
 
 class Config:

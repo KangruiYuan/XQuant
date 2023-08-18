@@ -9,8 +9,9 @@ import pandas as pd
 from pandas.errors import ParserError
 
 from .Consts import datatables
-from .Utils import Config, TradeDate, TimeType, Formatter
+from .Utils import Config, TradeDate, Formatter
 from .SQLAgent import SQLAgent
+from .Schema import TimeType
 
 __all__ = ["thread_load_file", "DataAPI"]
 

@@ -68,6 +68,11 @@ def FactorBackTest():
             st.session_state.date_min = factor_data.index.min()
             st.session_state.factor_data = factor_data
 
+    st.subheader("选择模式进行回测")
+    back_col, bench_col = st.columns(2)
+    backtest_method = back_col.selectbox("回测方法", ("分组回测", "线性计算仓位", "多空对冲"))
+    bench_code = bench_col.selectbox("研究标的", ("000852", "000905", "000300"), index=0)
+
     col1, col2 = st.columns(2)
 
     if col1.button("因子回测", key="cal_backtest_button_in_backtest", use_container_width=True):
@@ -91,10 +96,6 @@ def FactorBackTest():
                 st.plotly_chart(fig, use_container_width=True)
             else:
                 st.error(f"请准备您的因子数据")
-
-    st.subheader("选择模式进行回测")
-
-    backtest_method = st.selectbox("回测方法", ("分组回测", "线性计算仓位", "多空对冲"))
 
     # if st.button("输入自定义因子转换代码", key="input_code_button"):
     st.subheader("自定义代码输入区")
