@@ -110,6 +110,26 @@ class DataReady(Processer, DataAPI):
         )
 
     @cached_property
+    def preclose(self):
+        """
+        收盘价
+        :return:
+        """
+        if self.sql:
+            key_value = "pre_close"
+            if self.adj:
+                name = "gmData_history_adj"
+            else:
+                name = "gmData_history"
+        else:
+            key_value = "preClosePrice"
+            name = "MktEqud"
+
+        return self.get_pivot_df(
+            key_value=key_value, name=name, begin=self.begin, end=self.end
+        )
+
+    @cached_property
     def bench(self):
         assert self.bench_code is not None
         df = self.get_data(

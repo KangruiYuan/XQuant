@@ -166,7 +166,8 @@ class DataAPI:
             params["end"] = end
             condition = "AND"
         SQL_QUERY = " ".join(SQL_QUERY) + ";"
-        print(SQL_QUERY)
+        if kwargs.get('verbose', False):
+            print(SQL_QUERY)
         return pd.read_sql_query(SQL_QUERY, conn, params=params)
 
     @classmethod
