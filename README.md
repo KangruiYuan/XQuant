@@ -26,15 +26,15 @@
 
 ### 蜡烛图
 
-![Candle]](https://github.com/KangruiYuan/XQuant/blob/master/Docs/Pics/candle.png)
+![Candle](https://github.com/KangruiYuan/XQuant/blob/master/Docs/Pics/candle.png)
 
 ### ICIR
 
-![Candle]](https://github.com/KangruiYuan/XQuant/blob/master/Docs/Pics/ICIR.png)
+![Candle](https://github.com/KangruiYuan/XQuant/blob/master/Docs/Pics/ICIR.png)
 
 ### 回测
 
-![Candle]](https://github.com/KangruiYuan/XQuant/blob/master/Docs/Pics/backtest.png)
+![Candle](https://github.com/KangruiYuan/XQuant/blob/master/Docs/Pics/backtest.png)
 
 ## 项目结构
 ```text
