@@ -10,6 +10,7 @@ def convert_df(df):
 
 
 def RawDataVisual():
+    st.set_page_config(layout="wide")
     st.title("📈 :blue[XQuant] :red[Visual] : Raw Data")
 
     with st.expander("XQuant原生数据"):

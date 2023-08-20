@@ -44,6 +44,7 @@ class DataReady(Processer, DataAPI):
         df = df.rename(columns={index: index_rename, column: column_rename})
         df = df.pivot(index=index_rename, values=key_value, columns=column_rename)
         df = Formatter.dataframe(df)
+        df = df.sort_index()
         return df
 
     @cached_property
@@ -142,4 +143,5 @@ class DataReady(Processer, DataAPI):
         df = df.rename(columns={"chgpct": "returns", "tradedate": "date"})
         df = df.set_index("date")
         df.index = pd.to_datetime(df.index)
+        df = df.sort_index()
         return df

@@ -1,11 +1,15 @@
 from pathlib import Path
+from typing import Any
 
 import pandas as pd
 from shutil import rmtree
-from ..FactorManager.DataReady import DataReady
-from ..Schema import BackTestOptions
+from ..FactorManager import DataReady, Analyzer
+from ..Schema import BackTestOptions, Strategy
 from ..Utils import Formatter, TradeDate
 from .SignalUtils import *
+import plotly.graph_objects as go
+import plotly.express as px
+
 
 class BackTestRunner:
     def __init__(self, signals: pd.DataFrame, options: BackTestOptions):
@@ -18,7 +22,7 @@ class BackTestRunner:
         self.resource_folder = None
         self.work_folder: Path = None
         self.date_range_str: str = None
-        self.cache: dict[str, pd.DataFrame] = {}
+        self.cache: dict[str, Any] = {}
 
     def prepare(self):
         self.prepare_signals()
@@ -77,15 +81,136 @@ class BackTestRunner:
             df.to_csv(price_file, index_label="date")
             self.cache[fea] = df
 
+        returns = np.divide(
+            self.cache["close"] - self.cache["preclose"], self.cache["preclose"]
+        )
+        self.cache["returns"] = returns
+        returns.to_csv(self.resource_folder / "returns.csv")
+
     def adjust_signal(self):
         if self.options.standardize:
-            self.signal = standardize(self.signal)
+            self.signals = standardize(self.signals)
 
         if self.options.demean:
-            self.signal = demean(self.signal)
+            self.signals = demean(self.signals)
 
-        self.signal.to_csv(self.work_folder / "signal.csv", index_label="date")
+        self.signals.to_csv(self.work_folder / "signals.csv", index_label="date")
 
     def run(self):
         self.prepare()
-        pass
+        self.adjust_signal()
+        if self.options.method == Strategy.LONG_ONlY:
+            assert np.all(
+                clean(self.signals.values) >= 0
+            ), f"In mode {Strategy.LONG_ONlY}, ensure that all values are greater than zero"
+            weights = signal_to_weight(self.signals)
+            rtn = pd.DataFrame(
+                data=clean(self.cache["returns"].values) * weights.values,
+                index=weights.index,
+                columns=weights.columns,
+            )
+            weights.to_csv(
+                self.work_folder / "long_only_weight.csv", index_label="date"
+            )
+            rtn.to_csv(self.work_folder / "long_only_rtn.csv", index_label="date")
+            self.cache["long_only"] = {"weights": weights, "rtn": rtn}
+        elif self.options.method == Strategy.TOP_BOTTOM:
+            weights = signal_to_top_bottom_weight(
+                signal=self.signals, quantile=self.options.quantile
+            )
+            rtn = pd.DataFrame(
+                data=clean(self.cache["returns"].values) * weights.values,
+                index=weights.index,
+                columns=weights.columns,
+            )
+            weights.to_csv(
+                self.work_folder / "top_bottom_weight.csv", index_label="date"
+            )
+            rtn.to_csv(self.work_folder / "top_bottom_rtn.csv", index_label="date")
+            self.cache["top_bottom"] = {"weights": weights, "rtn": rtn}
+        elif self.options.method == Strategy.GROUP:
+            self.cache["group"] = {}
+            group_categorize = categorize_signal_by_quantiles(
+                self.signals, group_nums=self.options.group_nums
+            )
+            for group in range(self.options.group_nums):
+                weights = signal_to_weight((group_categorize == group).astype(int))
+                rtn = pd.DataFrame(
+                    data=clean(self.cache["returns"].values) * weights.values,
+                    index=weights.index,
+                    columns=weights.columns,
+                )
+                weights.to_csv(
+                    self.work_folder / f"group_{group}_weight.csv", index_label="date"
+                )
+                rtn.to_csv(
+                    self.work_folder / f"group_{group}_rtn.csv", index_label="date"
+                )
+                self.cache["group"][group] = {"weights": weights, "rtn": rtn}
+        elif self.options.method == "weight":
+            assert np.all(
+                clean(self.signals.values) >= 0
+            ), f"In mode {Strategy.WEIGHT}, ensure that all values are greater than zero"
+            weights = self.signals.copy()
+            rtn = pd.DataFrame(
+                    data=clean(self.cache["returns"].values) * weights.values,
+                    index=weights.index,
+                    columns=weights.columns,
+                )
+            weights.to_csv(
+                self.work_folder / "weight.csv", index_label="date"
+            )
+            rtn.to_csv(self.work_folder / "weight_rtn.csv", index_label="date")
+            self.cache["weight"] = {"weights": weights, "rtn": rtn}
+
+    def plot(self):
+        fig = go.Figure()
+
+        fig.update_layout(
+            title=f"累计回报率（{self.options.method.value}）",
+            xaxis_title="日期",
+            yaxis_title="累计回报率",
+        )
+
+        bench = self.cache["bench"]
+
+        self.cache['bench_result'] = Analyzer.rtns_analysis(bench.values)
+
+        fig.add_trace(
+            go.Scatter(
+                x=bench.index,
+                y=bench.cumsum().values.flatten(),
+                name=f"指数{self.options.bench_code}累计回报率",
+            )
+        )
+
+        if self.options.method == Strategy.GROUP:
+            for group in range(self.options.group_nums):
+                daily_rtn = self.cache["group"][group]["rtn"].sum(axis=1)
+                self.cache["group"][group]["result"] = Analyzer.rtns_analysis(daily_rtn)
+                fig.add_trace(
+                    go.Scatter(
+                        x=daily_rtn.index,
+                        y=daily_rtn.values.flatten().cumsum(),
+                        name=f"Group {group} 累计回报率",
+                    )
+                )
+        else:
+            daily_rtn = self.cache[self.options.method.value]["rtn"].sum(axis=1)
+            daily_rtn = daily_rtn.sort_index()
+            self.cache[self.options.method.value]["result"] = Analyzer.rtns_analysis(
+                daily_rtn
+            )
+
+            fig.add_trace(
+                go.Scatter(
+                    x=daily_rtn.index,
+                    y=daily_rtn.values.flatten().cumsum(),
+                    name=f"{self.options.method.value}累计回报率",
+                )
+            )
+
+        if self.options.verbose:
+            fig.show()
+        else:
+            return fig

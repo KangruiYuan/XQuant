@@ -59,7 +59,7 @@ class Analyzer:
                 min_all = sum_here
             elif sum_here >= 0:
                 sum_here = 0
-        return -min_all
+        return float(-min_all)
 
     @classmethod
     def ICIR(

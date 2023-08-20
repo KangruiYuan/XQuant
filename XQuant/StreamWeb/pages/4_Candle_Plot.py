@@ -12,6 +12,7 @@ from cycler import cycler
 
 
 def Candle():
+    st.set_page_config(layout="wide")
     st.title("📈 :blue[XQuant] :red[Visual] : Candle Visual")
 
     code_full = Config.stock_table["symbol"].values

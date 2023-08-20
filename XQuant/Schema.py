@@ -3,8 +3,17 @@ from datetime import datetime, date
 from pandas import Timestamp
 from pydantic import BaseModel
 from pathlib import Path
+from enum import Enum
 
 TimeType = Union[str, int, datetime, date, Timestamp]
+
+class Strategy(str, Enum):
+
+    LONG_ONlY = 'long_only'
+    GROUP = "group"
+    TOP_BOTTOM = "top_bottom"
+    WEIGHT = "weight"
+    SELF_DEFINED = "self_defined"
 
 
 class BackTestOptions(BaseModel):
@@ -23,9 +32,7 @@ class BackTestOptions(BaseModel):
 
     # 回测属性
     group_nums: int = 5
-    method: Literal[
-        "线性仓位", "多空对冲", "分组回测", "权重持仓", "自定义"
-    ] = "分组回测"
+    method: Strategy = Strategy.GROUP
 
     # 其他属性
     verbose: bool = False

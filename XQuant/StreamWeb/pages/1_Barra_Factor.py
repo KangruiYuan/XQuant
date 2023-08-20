@@ -1,8 +1,10 @@
 import pandas as pd
 import streamlit as st
-from XQuant import IMPLEMENTED, BARRA, Formatter, Analyzer
+from XQuant import IMPLEMENTED, BARRA, Formatter, Analyzer, Strategy, RtnResult
 from collections import ChainMap
 import plotly.express as px
+from XQuant import BackTestOptions, BackTestRunner
+
 
 @st.cache_data
 def convert_df(df):
@@ -11,6 +13,7 @@ def convert_df(df):
 
 
 def BarraFactor():
+    st.set_page_config(layout="wide")
     st.title("📈 :blue[XQuant] :red[Visual] : Barra")
 
     with st.expander("Barra因子说明"):
@@ -20,6 +23,7 @@ def BarraFactor():
         st.json(IMPLEMENTED.factor)
 
     all_data = ChainMap(IMPLEMENTED.raw, IMPLEMENTED.factor)
+    all_method = [s.value for s in Strategy]
 
     date_col, name_col = st.columns(2)
     with name_col:
@@ -28,6 +32,7 @@ def BarraFactor():
     with date_col:
         begin = st.date_input("起始日期", value=Formatter.date("20200101"))
         end = st.date_input("截止日期", value=Formatter.date("20210101"))
+        backtest_method = st.selectbox("回测方法", all_method)
 
     st.divider()
 
@@ -66,15 +71,58 @@ def BarraFactor():
                     x="index",
                     y="IC",
                     color="IC",
-                    orientation='v',
+                    orientation="v",
                     labels={"index": "Date"},
-                    title=f"IR={float(IR):.2f}"
+                    title=f"IR={float(IR):.2f}",
                 )
                 st.plotly_chart(fig, use_container_width=True)
             else:
-                st.error(f"因子数据长度为{len(st.session_state.barra_factor_df)}或者您选择的数据为指数基准数据")
+                st.error(
+                    f"因子数据长度为{len(st.session_state.barra_factor_df)}或者您选择的数据为指数基准数据"
+                )
 
     if col4.button("因子回测", key="cal_backtest_button", use_container_width=True):
-        pass
+        with st.spinner("请等待，计算中..."):
+            opts = BackTestOptions(
+                begin=begin,
+                end=end,
+                bench_code=bench_code,
+                verbose=False,
+                method=backtest_method,
+            )
+            if len(st.session_state.barra_factor_df) == 0:
+                st.session_state.barra_factor_df = getattr(barra, all_data[data_name])
+            bt = BackTestRunner(signals=st.session_state.barra_factor_df, options=opts)
+            bt.prepare()
+            bt.run()
+            fig = bt.plot()
+            st.plotly_chart(fig, use_container_width=True)
+            if bt.options.method == Strategy.GROUP:
+                bench_res = bt.cache["bench_result"]
+
+                for group in range(bt.options.group_nums):
+                    res: RtnResult = bt.cache[bt.options.method.value][group]["result"]
+                    fields = res._fields
+                    st.divider()
+                    st.write(f"### Group {group}")
+                    cols = st.columns(len(fields))
+                    for i in range(len(fields)):
+                        cols[i].metric(
+                            label=fields[i],
+                            value=round(res[i], 2),
+                            delta=round(res[i] - bench_res[i], 2),
+                        )
+            else:
+                res: RtnResult = bt.cache[bt.options.method.value]["result"]
+                bench_res = bt.cache["bench_result"]
+                fields = res._fields
+                cols = st.columns(len(fields))
+                for i in range(len(fields)):
+                    cols[i].metric(
+                        label=fields[i],
+                        value=round(res[i], 2),
+                        delta=round(res[i] - bench_res[i], 2),
+                    )
+
 
 BarraFactor()

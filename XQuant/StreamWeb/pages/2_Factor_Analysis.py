@@ -4,7 +4,7 @@ import sys
 import streamlit as st
 from pathlib import Path
 import pandas as pd
-from XQuant import Formatter, BARRA, Analyzer
+from XQuant import Formatter, BARRA, Analyzer, Strategy, BackTestRunner, BackTestOptions, RtnResult
 import plotly.express as px
 
 def code_editor(**kwargs):
@@ -35,6 +35,7 @@ def code_editor(**kwargs):
 
 
 def FactorBackTest():
+    st.set_page_config(layout="wide")
     st.title("📈 :blue[XQuant] :red[Visual] : Backtest Platform")
 
     st.session_state.functions_path = Path(__file__).parents[2] / "Temp" / "web_functions"
@@ -70,13 +71,54 @@ def FactorBackTest():
 
     st.subheader("选择模式进行回测")
     back_col, bench_col = st.columns(2)
-    backtest_method = back_col.selectbox("回测方法", ("分组回测", "线性计算仓位", "多空对冲"))
+    backtest_method = back_col.selectbox("回测方法", [s.value for s in Strategy])
     bench_code = bench_col.selectbox("研究标的", ("000852", "000905", "000300"), index=0)
 
     col1, col2 = st.columns(2)
 
     if col1.button("因子回测", key="cal_backtest_button_in_backtest", use_container_width=True):
-        pass
+        if backtest_method != Strategy.SELF_DEFINED:
+            with st.spinner("请等待，计算中..."):
+                opts = BackTestOptions(
+                    begin=st.session_state.date_min,
+                    end=st.session_state.date_max,
+                    bench_code=bench_code,
+                    verbose=False,
+                    method=backtest_method,
+                )
+                bt = BackTestRunner(
+                    signals=st.session_state.factor_data,
+                    options=opts
+                )
+                bt.prepare()
+                bt.run()
+                fig = bt.plot()
+                st.plotly_chart(fig, use_container_width=True)
+                if bt.options.method == Strategy.GROUP:
+                    bench_res = bt.cache["bench_result"]
+                    for group in range(bt.options.group_nums):
+                        st.divider()
+                        res: RtnResult = bt.cache[bt.options.method.value][group]["result"]
+                        fields = res._fields
+                        st.write(f"### Group {group}")
+                        cols = st.columns(len(fields))
+                        for i in range(len(fields)):
+                            cols[i].metric(
+                                label=fields[i],
+                                value=round(res[i], 2),
+                                delta=round(res[i] - bench_res[i], 2),
+                            )
+                else:
+                    res: RtnResult = bt.cache[bt.options.method.value]["result"]
+                    bench_res = bt.cache["bench_result"]
+                    fields = res._fields
+                    cols = st.columns(len(fields))
+                    for i in range(len(fields)):
+                        cols[i].metric(
+                            label=fields[i],
+                            value=round(res[i], 2),
+                            delta=round(res[i] - bench_res[i], 2),
+                        )
 
     if col2.button("ICIR", key="cal_ICIR_button_in_backtest", use_container_width=True):
         with st.spinner("请等待"):
@@ -107,7 +149,7 @@ def FactorBackTest():
         if matches:
             function_name = matches[0]
             with st.spinner("执行中"):
-                script_path = functions_path / function_name
+                script_path = st.session_state.functions_path / function_name
                 script_path = script_path.with_suffix(".py")
                 with open(script_path, "w") as script:
                     script.write(content)
