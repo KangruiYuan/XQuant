@@ -8,18 +8,25 @@
 
 ## 使用示例
 
-| 模块名称	         |    模块说明    | 子类                                          |                                         模块示例	 |
-|---------------|:----------:|:--------------------------------------------|----------------------------------------------:|
+| 模块名称	         |    模块说明    | 子类                                          |                                                                                         模块示例	 |
+|---------------|:----------:|:--------------------------------------------|----------------------------------------------------------------------------------------------:|
 | Utils         | 通用变量，常用函数	 | Config, TradeDate, Formatter, Tools         |             [Utils.ipynb](https://github.com/KangruiYuan/XQuant/blob/master/Demo/Utils.ipynb) |
 | Collector     |    取数框架    | DataAPI                                     |     [Collector.ipynb](https://github.com/KangruiYuan/XQuant/blob/master/Demo/Collector.ipynb) |
 | FileManager   |   文件管理器    | BufferManager                               | [FileManager.ipynb](https://github.com/KangruiYuan/XQuant/blob/master/Demo/FileManager.ipynb) |
-| FactorManager | 因子计算、检验及回测 | Analyzer, DataReady, FactorReady, Processer |                                            暂无 |
-| SQLAgent      |   SQL交互    |                                             |                                            暂无 |
-| Consts        |  初始化加载信息   |                                             |                                            暂无 |
-| Schema        | 数据范式    	  |                                             |                                            暂无 |
-| Scripts       | 项目相关的实用脚本  |                                             |                                            暂无 |
+| FactorManager | 因子计算、检验 | Analyzer, DataReady, FactorReady, Processer |                                                                                            暂无 |
+| SQLAgent      |   SQL交互    |                                             |                                                                                            暂无 |
+| Consts        |  初始化加载信息   |                                             |                                                                                            暂无 |
+| Schema        | 数据范式    	  |                                             |                                                                                            暂无 |
+| Scripts       | 项目相关的实用脚本  |                                             |                                                                                            暂无 |
 | StreamWeb     |   可视化网页    |                                             |    请运行[RunWeb.py](https://github.com/KangruiYuan/XQuant/blob/master/XQuant/Scripts/RunWeb.py) |
+| BackTester    |    因子回测    |                                             |    [BackTester.ipynb](https://github.com/KangruiYuan/XQuant/blob/master/Demo/BackTester.ipynb) |
 
+
+## 可视化网页
+
+### 蜡烛图
+
+![Candle]](.\\Docs\\Pics\\candle.png)
 
 ## 项目结构
 ```text
