@@ -1,5 +1,25 @@
 from pathlib import Path
+from io import StringIO
+import sys
 
+
+class RedirectedOutput:
+    def __enter__(self):
+        self.original_stdout = sys.stdout
+        self.new_stdout = StringIO()
+        sys.stdout = self.new_stdout
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        sys.stdout = self.original_stdout
+        self.output = self.new_stdout.getvalue()
+
+def capture_prints(func):
+    def wrapper(*args, **kwargs):
+        with RedirectedOutput() as output:
+            result = func(*args, **kwargs)
+        return result, output.output
+    return wrapper
 
 class BufferManager:
     root_folder: Path = Path(__file__).parent / "Temp"

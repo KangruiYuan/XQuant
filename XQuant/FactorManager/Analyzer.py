@@ -32,9 +32,10 @@ class Analyzer:
     @classmethod
     def rtns_analysis(cls, rtn: Union[list, np.ndarray]) -> RtnResult:
         rtn = cls.cleanup(rtn)
-        nav = np.cumprod(rtn + 1) - 1
+        # nav = np.cumprod(rtn + 1)
+        nav = np.cumsum(rtn) + 1
         number_of_years = len(rtn) / 250
-        RtnTotal = nav[-1] / nav[0]
+        RtnTotal = nav[-1] / nav[0] - 1
         RtnAnnual = RtnTotal / number_of_years
         StdTotal = float(np.nanstd(rtn))
         Vol = StdTotal * np.sqrt(250)

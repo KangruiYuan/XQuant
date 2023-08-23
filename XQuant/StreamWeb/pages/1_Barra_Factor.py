@@ -12,6 +12,11 @@ def convert_df(df):
     return df.to_csv().encode("utf-8")
 
 
+def get_df(barra, factor_name):
+    st.session_state.barra_factor_df = getattr(barra, factor_name)
+    st.session_state.csv = convert_df(st.session_state.barra_factor_df)
+
+
 def BarraFactor():
     st.set_page_config(layout="wide")
     st.title("📈 :blue[XQuant] :red[Visual] : Barra")
@@ -41,6 +46,8 @@ def BarraFactor():
     col1, col2, col3, col4 = st.columns(4)
 
     st.session_state.barra_factor_df = pd.DataFrame()
+    opts = BackTestOptions()
+    bt = BackTestRunner(signals=st.session_state.barra_factor_df, options=opts)
 
     if col1.button("获取/显示数据", key="get_barra_button", use_container_width=True):
         with st.spinner("请等待"):
@@ -49,13 +56,15 @@ def BarraFactor():
             st.dataframe(st.session_state.barra_factor_df.head())
 
     with col2:
-        csv = convert_df(st.session_state.barra_factor_df)
+        # if len(st.session_state.barra_factor_df) > 0:
+        st.session_state.csv = convert_df(st.session_state.barra_factor_df)
         st.download_button(
             label="以CSV格式下载数据",
-            data=csv,
+            data=st.session_state.csv,
             file_name=f"{all_data[data_name]}.csv",
             mime="text/csv",
             use_container_width=True,
+            # on_click=get_df(barra, all_data[data_name])
         )
 
     if col3.button("ICIR", key="cal_ICIR_button", use_container_width=True):
@@ -89,19 +98,23 @@ def BarraFactor():
                 bench_code=bench_code,
                 verbose=False,
                 method=backtest_method,
+                surname=backtest_method,
             )
             if len(st.session_state.barra_factor_df) == 0:
                 st.session_state.barra_factor_df = getattr(barra, all_data[data_name])
-            bt = BackTestRunner(signals=st.session_state.barra_factor_df, options=opts)
+            bt.options = opts
+            bt.signals = st.session_state.barra_factor_df
             bt.prepare()
             bt.run()
+            st.success(f"结果保存在: {bt.work_folder}")
             fig = bt.plot()
             st.plotly_chart(fig, use_container_width=True)
+            bench_res = bt.cache[bt.date_range_str]["bench_result"]
             if bt.options.method == Strategy.GROUP:
-                bench_res = bt.cache["bench_result"]
-
                 for group in range(bt.options.group_nums):
-                    res: RtnResult = bt.cache[bt.options.method.value][group]["result"]
+                    res: RtnResult = bt.cache[bt.date_range_str][
+                        bt.options.method.value
+                    ][group]["result"]
                     fields = res._fields
                     st.divider()
                     st.write(f"### Group {group}")
@@ -113,8 +126,9 @@ def BarraFactor():
                             delta=round(res[i] - bench_res[i], 2),
                         )
             else:
-                res: RtnResult = bt.cache[bt.options.method.value]["result"]
-                bench_res = bt.cache["bench_result"]
+                res: RtnResult = bt.cache[bt.date_range_str][bt.options.method.value][
+                    "result"
+                ]
                 fields = res._fields
                 cols = st.columns(len(fields))
                 for i in range(len(fields)):

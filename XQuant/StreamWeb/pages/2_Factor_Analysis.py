@@ -75,6 +75,11 @@ def FactorBackTest():
     bench_code = bench_col.selectbox("研究标的", ("000852", "000905", "000300"), index=0)
 
     col1, col2 = st.columns(2)
+    opts = BackTestOptions()
+    bt = BackTestRunner(
+        signals=pd.DataFrame(),
+        options=opts
+    )
 
     if col1.button("因子回测", key="cal_backtest_button_in_backtest", use_container_width=True):
         if backtest_method != Strategy.SELF_DEFINED:
@@ -85,20 +90,20 @@ def FactorBackTest():
                     bench_code=bench_code,
                     verbose=False,
                     method=backtest_method,
+                    surname=backtest_method
                 )
-                bt = BackTestRunner(
-                    signals=st.session_state.factor_data,
-                    options=opts
-                )
+                bt.signals = st.session_state.factor_data
+                bt.options = opts
                 bt.prepare()
                 bt.run()
+                st.success(f"结果保存在: {bt.work_folder}")
                 fig = bt.plot()
                 st.plotly_chart(fig, use_container_width=True)
                 if bt.options.method == Strategy.GROUP:
-                    bench_res = bt.cache["bench_result"]
+                    bench_res = bt.cache[bt.date_range_str]["bench_result"]
                     for group in range(bt.options.group_nums):
                         st.divider()
-                        res: RtnResult = bt.cache[bt.options.method.value][group]["result"]
+                        res: RtnResult = bt.cache[bt.date_range_str][bt.options.method.value][group]["result"]
                         fields = res._fields
                         st.write(f"### Group {group}")
                         cols = st.columns(len(fields))
@@ -109,8 +114,8 @@ def FactorBackTest():
                                 delta=round(res[i] - bench_res[i], 2),
                             )
                 else:
-                    res: RtnResult = bt.cache[bt.options.method.value]["result"]
-                    bench_res = bt.cache["bench_result"]
+                    res: RtnResult = bt.cache[bt.date_range_str][bt.options.method.value]["result"]
+                    bench_res = bt.cache[bt.date_range_str]["bench_result"]
                     fields = res._fields
                     cols = st.columns(len(fields))
                     for i in range(len(fields)):
