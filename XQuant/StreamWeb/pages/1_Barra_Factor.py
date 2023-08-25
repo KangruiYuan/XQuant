@@ -83,6 +83,7 @@ def BarraFactor():
                     orientation="v",
                     labels={"index": "Date"},
                     title=f"IR={float(IR):.2f}",
+                    color_continuous_scale="spectral"
                 )
                 st.plotly_chart(fig, use_container_width=True)
             else:

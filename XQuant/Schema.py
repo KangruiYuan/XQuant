@@ -1,4 +1,4 @@
-from typing import NamedTuple, Union, Literal
+from typing import NamedTuple, Union, Literal, Optional, Callable
 from datetime import datetime, date
 from pandas import Timestamp
 from pydantic import BaseModel
@@ -33,6 +33,7 @@ class BackTestOptions(BaseModel):
     # 回测属性
     group_nums: int = 5
     method: Strategy = Strategy.GROUP
+    function: Optional[Callable] = None
 
     # 其他属性
     verbose: bool = False

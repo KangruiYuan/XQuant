@@ -113,6 +113,7 @@ class BackTestRunner:
             Strategy.LONG_ONlY,
             Strategy.WEIGHT,
             Strategy.TOP_BOTTOM,
+            Strategy.SELF_DEFINED
         ]:
             if self.options.method in [Strategy.LONG_ONlY, Strategy.TOP_BOTTOM]:
                 assert np.all(
@@ -137,6 +138,9 @@ class BackTestRunner:
                         )
                     elif self.options.method == Strategy.WEIGHT:
                         weights = self.signals.copy()
+                    elif self.options.method == Strategy.SELF_DEFINED:
+                        assert self.options.function is not None
+                        weights = self.options.function(self.signals)
                     else:
                         raise NotImplemented(f"Method {self.options.method.value}")
                     weights.to_csv(weights_csv, index_label="date")
