@@ -145,3 +145,5 @@ class DataReady(Processer, DataAPI):
         df.index = pd.to_datetime(df.index)
         df = df.sort_index()
         return df
+
+    

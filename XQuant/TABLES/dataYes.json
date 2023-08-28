@@ -154,5 +154,11 @@
         "description": "",
         "date_column": "trade_date",
         "ticker_column": "symbol"
+      },
+    "EquDiv": {
+        "assets": "dataYes",
+        "description": "",
+        "date_column": "publishDate",
+        "ticker_column": "ticker"
       }
 }

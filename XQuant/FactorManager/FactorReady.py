@@ -47,6 +47,13 @@ class Size(DataReady):
         return df
 
 
+class DividendYield(DataReady):
+    def __init__(self, begin: TimeType = None, end: TimeType = None, **kwargs):
+        end = end if end else date.today().strftime("%Y%m%d")
+        super().__init__(begin, end, **kwargs)
+
+
+
 class BARRA(Size):
     def __init__(self, begin: TimeType = None, end: TimeType = None, **kwargs):
         end = end if end else date.today().strftime("%Y%m%d")
