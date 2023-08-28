@@ -41,13 +41,13 @@ def BarraFactor():
 
     st.divider()
 
-    barra = BARRA(begin=begin, end=end, bench_code=bench_code)
+    barra = BARRA(begin=begin, end=end, bench_code=bench_code, parallel=False)
+    opts = BackTestOptions()
+    if "barra_factor_df" not in st.session_state:
+        st.session_state.barra_factor_df = pd.DataFrame()
+    bt = BackTestRunner(signals=st.session_state.barra_factor_df, options=opts)
 
     col1, col2, col3, col4 = st.columns(4)
-
-    st.session_state.barra_factor_df = pd.DataFrame()
-    opts = BackTestOptions()
-    bt = BackTestRunner(signals=st.session_state.barra_factor_df, options=opts)
 
     if col1.button("获取/显示数据", key="get_barra_button", use_container_width=True):
         with st.spinner("请等待"):
@@ -57,6 +57,8 @@ def BarraFactor():
 
     with col2:
         # if len(st.session_state.barra_factor_df) > 0:
+        if "barra_factor_df" not in st.session_state:
+            st.session_state.barra_factor_df = pd.DataFrame()
         st.session_state.csv = convert_df(st.session_state.barra_factor_df)
         st.download_button(
             label="以CSV格式下载数据",

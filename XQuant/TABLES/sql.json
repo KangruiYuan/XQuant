@@ -16,5 +16,11 @@
     "description": "",
     "date_column": "tradedate",
     "ticker_column": "ticker"
+    },
+  "uqer_EquDiv" : {
+    "assets": "sql",
+    "description": "",
+    "date_column": "publishdate",
+    "ticker_column": "ticker"
     }
 }

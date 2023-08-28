@@ -128,6 +128,23 @@ class DataReady(Processer, DataAPI):
 
         return self.get_pivot_df(
             key_value=key_value, name=name, begin=self.begin, end=self.end
+        )@cached_property
+
+    @cached_property
+    def per_cash_div(self):
+        """
+        每股派现(税前)
+        :return:
+        """
+        if self.sql:
+            name = "uqer_EquDiv"
+            key_value = "percashdiv"
+        else:
+            name = "EquDiv"
+            key_value = 'perCashDiv'
+
+        return self.get_pivot_df(
+            key_value=key_value, name=name, begin=self.begin, end=self.end
         )
 
     @cached_property
@@ -146,4 +163,4 @@ class DataReady(Processer, DataAPI):
         df = df.sort_index()
         return df
 
-    
+

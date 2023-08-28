@@ -168,7 +168,9 @@ class DataAPI:
         SQL_QUERY = " ".join(SQL_QUERY) + ";"
         if kwargs.get('verbose', False):
             print(SQL_QUERY)
-        return pd.read_sql_query(SQL_QUERY, conn, params=params)
+        df = pd.read_sql_query(SQL_QUERY, conn, params=params)
+        df = df.drop_duplicates(subset=[ticker_column, date_column])
+        return df
 
     @classmethod
     def get_data_gm_future(
