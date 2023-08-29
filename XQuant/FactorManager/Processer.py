@@ -11,8 +11,8 @@ from pyfinance.utils import rolling_windows
 from statsmodels.regression.linear_model import WLS
 from scipy.stats.mstats import winsorize
 from ..Utils import Formatter, Tools
+from ..Schema import ArrayType
 
-ArrayType = Union[pd.Series, np.ndarray, list]
 
 
 class Processer:

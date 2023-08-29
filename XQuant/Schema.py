@@ -4,8 +4,12 @@ from pandas import Timestamp
 from pydantic import BaseModel
 from pathlib import Path
 from enum import Enum
+from pandas import Series
+from numpy import ndarray
 
 TimeType = Union[str, int, datetime, date, Timestamp]
+
+ArrayType = Union[Series, ndarray, list]
 
 class Strategy(str, Enum):
 
