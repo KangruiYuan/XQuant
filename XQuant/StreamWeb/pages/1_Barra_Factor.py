@@ -22,10 +22,11 @@ def BarraFactor():
     st.title("📈 :blue[XQuant] :red[Visual] : Barra")
 
     with st.expander("Barra因子说明"):
-        st.markdown("原生数据（宽表）")
-        st.json(IMPLEMENTED.raw)
         st.markdown("因子数据（宽表）")
         st.json(IMPLEMENTED.factor)
+        st.markdown("原生数据（宽表）")
+        st.json(IMPLEMENTED.raw)
+
 
     all_data = ChainMap(IMPLEMENTED.raw, IMPLEMENTED.factor)
     all_method = [s.value for s in Strategy]
@@ -35,7 +36,7 @@ def BarraFactor():
         data_name = st.selectbox("数据名", all_data.keys())
         bench_code = st.selectbox("研究标的", ("000852", "000905", "000300"), index=0)
     with date_col:
-        begin = st.date_input("起始日期", value=Formatter.date("20200101"))
+        begin = st.date_input("起始日期", value=Formatter.date("20180101"))
         end = st.date_input("截止日期", value=Formatter.date("20210101"))
         backtest_method = st.selectbox("回测方法", all_method)
 
@@ -50,6 +51,8 @@ def BarraFactor():
     col1, col2, col3, col4 = st.columns(4)
 
     if col1.button("获取/显示数据", key="get_barra_button", use_container_width=True):
+        barra.begin = begin
+        barra.end = end
         with st.spinner("请等待"):
             st.session_state.barra_factor_df = getattr(barra, all_data[data_name])
         if len(st.session_state.barra_factor_df) > 0:

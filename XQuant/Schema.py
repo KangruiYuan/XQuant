@@ -1,5 +1,7 @@
 from typing import NamedTuple, Union, Literal, Optional, Callable
 from datetime import datetime, date
+
+import pandas as pd
 from pandas import Timestamp
 from pydantic import BaseModel
 from pathlib import Path
@@ -9,7 +11,7 @@ from numpy import ndarray
 
 TimeType = Union[str, int, datetime, date, Timestamp]
 
-ArrayType = Union[Series, ndarray, list]
+ArrayType = Union[Series, ndarray, list, pd.DataFrame]
 
 class Strategy(str, Enum):
 

@@ -1,5 +1,6 @@
 from typing import Union, Optional
 
+import numpy as np
 import pandas as pd
 
 from .Processer import Processer
@@ -27,6 +28,7 @@ class DataReady(Processer, DataAPI):
         ticker: Optional[Union[str, int, list]] = None,
         index: str = "",
         column: str = "",
+        drop: bool = True,
         **kwargs,
     ):
         column = Config.datatables[name]["ticker_column"] or column
@@ -39,6 +41,8 @@ class DataReady(Processer, DataAPI):
             end=end,
             fields=[column, index, key_value],
         )
+        if drop:
+            df = df.drop_duplicates(subset=[index, column], keep='last')
         index_rename = kwargs.get("index_rename", "date")
         column_rename = kwargs.get("column_rename", "ticker")
         df = df.rename(columns={index: index_rename, column: column_rename})
@@ -128,7 +132,7 @@ class DataReady(Processer, DataAPI):
 
         return self.get_pivot_df(
             key_value=key_value, name=name, begin=self.begin, end=self.end
-        )@cached_property
+        )
 
     @cached_property
     def per_cash_div(self):

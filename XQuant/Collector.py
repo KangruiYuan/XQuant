@@ -169,7 +169,6 @@ class DataAPI:
         if kwargs.get('verbose', False):
             print(SQL_QUERY)
         df = pd.read_sql_query(SQL_QUERY, conn, params=params)
-        df = df.drop_duplicates(subset=[ticker_column, date_column])
         return df
 
     @classmethod
@@ -395,7 +394,7 @@ class DataAPI:
                 data = data[data[date_column] >= begin]
             if end is not None:
                 data = data[data[date_column] <= end]
-        except TypeError as te:
+        except TypeError:
             if begin is not None:
                 data = data[data[date_column].dt.date >= begin.date()]
             if end is not None:

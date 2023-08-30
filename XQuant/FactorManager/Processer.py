@@ -1,18 +1,18 @@
 from datetime import date
 from functools import reduce
 from itertools import chain
-
-import pandas as pd
-import numpy as np
-import statsmodels.api as sm
 from typing import Union, Callable, Any, Literal, Optional
+
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
 from dask import dataframe as dd
 from pyfinance.utils import rolling_windows
-from statsmodels.regression.linear_model import WLS
 from scipy.stats.mstats import winsorize
-from ..Utils import Formatter, Tools
-from ..Schema import ArrayType
+from statsmodels.regression.linear_model import WLS
 
+from ..Schema import ArrayType
+from ..Utils import Formatter, Tools
 
 
 class Processer:
@@ -31,8 +31,8 @@ class Processer:
         verbose: bool = True,
     ):
         """
-        :param y: 因变量
-        :param X: 自变量
+        :param y: 因变量, endog
+        :param X: 自变量, exog
         :param intercept: 是否有截距
         :param weight: 权重
         :param verbose: 是否返回残差
@@ -50,20 +50,24 @@ class Processer:
             const = np.ones(len(X))
             X = np.insert(X, 0, const, axis=1)
 
-        model: WLS = sm.WLS(y, X, weights=weight, missing="drop")
-        result = model.fit()
-        params = result.params
-        if verbose:
-            resid = y - np.dot(X, params)
-            if intercept:
-                return params[1:], params[0], resid
+        try:
+            model: WLS = sm.WLS(y, X, weights=weight, missing="drop")
+            result = model.fit()
+            params = result.params
+            if verbose:
+                resid = y - np.dot(X, params)
+                if intercept:
+                    return params[1:], params[0], resid
+                else:
+                    return params, None, resid
             else:
-                return params, None, resid
-        else:
-            if intercept:
-                return params[1:], params[0]
-            else:
-                return params
+                if intercept:
+                    return params[1:], params[0]
+                else:
+                    return params
+        except ValueError as e:
+            print(X.shape, y.shape, X.size, y.size)
+            raise e
 
     @staticmethod
     def align_dataframe(dfs: list[pd.DataFrame] = None, clean: bool = True, *args):
@@ -78,7 +82,7 @@ class Processer:
             dfs = []
         dfs = list(chain(dfs, args))
 
-        if clean and isinstance(dfs[0], pd.DataFrame):
+        if clean:
             dfs = [Formatter.dataframe(df) for df in dfs]
 
         dims = 1 if any(len(df.shape) == 1 or 1 in df.shape for df in dfs) else 2
@@ -167,9 +171,11 @@ class Processer:
 
     @classmethod
     def capm_regress(
-        cls, X: pd.DataFrame, Y: pd.DataFrame, window: int = 504, half_life: int = 252
+        cls, Y: pd.DataFrame, X: pd.DataFrame, window: int = 504, half_life: int = 252
     ):
-        X, Y = cls.align_dataframe([X, Y])
+        X = Formatter.dataframe(X, columns=False)
+        Y = Formatter.dataframe(Y).fillna(0)
+        X, Y = cls.align_dataframe([X, Y], clean=False)
         beta, alpha, sigma = cls.rolling_regress(
             Y, X, window=window, half_life=half_life
         )
@@ -273,13 +279,9 @@ class Processer:
         cls,
         y: ArrayType,
         x: ArrayType,
-        window=5,
-        half_life=None,
-        fill_na: str or (int, float) = 0,
+        window: int = 5,
+        half_life: int = None
     ):
-        fill_args = (
-            {"method": fill_na} if isinstance(fill_na, str) else {"value": fill_na}
-        )
 
         stocks = y.columns
         if half_life:
@@ -287,32 +289,25 @@ class Processer:
         else:
             weight = 1
 
-        start_idx = x.index[0]
-        x, y = x.loc[start_idx:], y.loc[start_idx:, :]
-        rolling_ys = rolling_windows(y, window)
-        rolling_xs = rolling_windows(x, window)
+        rolling_ys = rolling_windows(y.values, window)
+        rolling_xs = rolling_windows(x.values, window)
 
         beta = pd.DataFrame(columns=stocks)
         alpha = pd.DataFrame(columns=stocks)
         sigma = pd.DataFrame(columns=stocks)
         for i, (rolling_x, rolling_y) in enumerate(zip(rolling_xs, rolling_ys)):
-            rolling_y = pd.DataFrame(
-                rolling_y, columns=y.columns, index=y.index[i : i + window]
-            )
-            window_sdate, window_edate = rolling_y.index[0], rolling_y.index[-1]
-            rolling_y = rolling_y.fillna(**fill_args)
+            y_window_edate = y.index[i + window - 1]
+            x_window_edate = x.index[i + window - 1]
+            assert y_window_edate == x_window_edate
 
-            rolling_y_val = rolling_y.values
-            b, a, resid = cls.regress(
-                rolling_y_val, rolling_x, intercept=True, weight=weight, verbose=True
-            )
+            b, a, resid = cls.regress(rolling_y, rolling_x, weight=weight)
             vol = np.std(resid, axis=0)
 
             vol = pd.DataFrame(
-                vol.reshape((1, -1)), columns=stocks, index=[window_edate]
+                vol.reshape((1, -1)), columns=stocks, index=[y_window_edate]
             )
-            a = pd.DataFrame(a.reshape((1, -1)), columns=stocks, index=[window_edate])
-            b = pd.DataFrame(b, columns=stocks, index=[window_edate])
+            a = pd.DataFrame(a.reshape((1, -1)), columns=stocks, index=[y_window_edate])
+            b = pd.DataFrame(b, columns=stocks, index=[y_window_edate])
 
             beta = pd.concat([beta, b], axis=0)
             alpha = pd.concat([alpha, a], axis=0)

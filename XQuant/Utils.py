@@ -26,8 +26,6 @@ from .Schema import TimeType
 __all__ = ["Formatter", "TradeDate", "Config", "Tools"]
 
 
-
-
 class Config:
     database_dir = {
         "info": r"E:\Share\Stk_Data\dataFile",
@@ -339,10 +337,28 @@ class Formatter:
             raise TypeError(f"date_repr {type(date_repr)} is not supported")
 
     @classmethod
-    def dataframe(cls, data: pd.DataFrame, **kwargs):
+    def dataframe(
+        cls, data: pd.DataFrame, index: bool = True, columns: bool = True, **kwargs
+    ):
         res = data.copy()
         if not isinstance(res, pd.DataFrame):
             raise TypeError("data must be a DataFrame")
+
+        if index:
+            new_index = cls.format_index(res, **kwargs)
+        else:
+            new_index = res.index
+
+        if columns:
+            new_columns = cls.format_columns(res, **kwargs)
+        else:
+            new_columns = res.columns
+
+        fill_value = kwargs.get("fill", np.nan)
+        return res.reindex(index=new_index, columns=new_columns, fill_value=fill_value)
+
+    @classmethod
+    def format_index(cls, res: pd.DataFrame, **kwargs):
         try:
             res.index = pd.to_datetime(res.index)
         except ValueError:
@@ -351,20 +367,22 @@ class Formatter:
             except TypeError as te:
                 raise te
 
-        res = res.rename(columns=cls.stock)
-        if np.nan in res.columns:
-            res = res.drop(columns=np.nan)
-
         begin = kwargs.get("begin", res.index.min())
         end = kwargs.get("end", res.index.max())
 
         new_index = pd.date_range(begin, end, freq="D").intersection(
             TradeDate.trade_date_list
         )
-        new_columns = list(map(cls.stock, Config.stock_list))
+        return new_index
 
-        fill_value = kwargs.get("fill", np.nan)
-        return res.reindex(index=new_index, columns=new_columns, fill_value=fill_value)
+    @classmethod
+    def format_columns(cls, res: pd.DataFrame, kind: str = "stock", **kwargs):
+        if kind == "stock":
+            res.rename(columns=cls.stock, inplace=True)
+            if np.nan in res.columns:
+                res.drop(columns=np.nan, inplace=True)
+            new_columns = list(map(cls.stock, Config.stock_list))
+            return new_columns
 
     @classmethod
     def stock(cls, code: str | int) -> str:
@@ -467,7 +485,9 @@ class Tools:
 
     @classmethod
     def packaging(
-        cls, series: Sequence, pat: int,
+        cls,
+        series: Sequence,
+        pat: int,
     ) -> Sequence[Sequence] | Iterator:
         """
         :param series:
