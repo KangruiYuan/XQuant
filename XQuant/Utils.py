@@ -337,6 +337,27 @@ class Formatter:
             raise TypeError(f"date_repr {type(date_repr)} is not supported")
 
     @classmethod
+    def expand_dataframe(cls, data: pd.DataFrame,
+                         begin: TimeType = None,
+                         end: TimeType = None,
+                         fill: Union[str, int, float]='ffill'):
+        fill_args = {"method": fill} if isinstance(fill, str) else {'value': fill}
+        if begin is None:
+            begin = data.index.min()
+        if end is None:
+            end = data.index.max()
+        res = pd.DataFrame(
+            data=0,
+            columns=data.columns,
+            index=TradeDate.range_trade_date(begin, end)
+        )
+        inter_index = data.index.intersection(res.index)
+        res.loc[inter_index] = data.loc[inter_index]
+        res = res.fillna(**fill_args)
+        return res
+
+
+    @classmethod
     def dataframe(
         cls, data: pd.DataFrame, index: bool = True, columns: bool = True, **kwargs
     ):

@@ -42,7 +42,7 @@ class DataReady(Processer, DataAPI):
             fields=[column, index, key_value],
         )
         if drop:
-            df = df.drop_duplicates(subset=[index, column], keep='last')
+            df = df.drop_duplicates(subset=[index, column], keep="last")
         index_rename = kwargs.get("index_rename", "date")
         column_rename = kwargs.get("column_rename", "ticker")
         df = df.rename(columns={index: index_rename, column: column_rename})
@@ -145,10 +145,30 @@ class DataReady(Processer, DataAPI):
             key_value = "percashdiv"
         else:
             name = "EquDiv"
-            key_value = 'perCashDiv'
+            key_value = "perCashDiv"
 
         return self.get_pivot_df(
             key_value=key_value, name=name, begin=self.begin, end=self.end
+        )
+
+    @cached_property
+    def neg_market_value(self):
+        """
+        流通市值
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="negMarketValue", name="MktEqud", begin=self.begin, end=self.end
+        )
+
+    @cached_property
+    def EPS(self):
+        """
+        每股盈余
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="EPS", name="FdmtIndiPSPit", begin=self.begin, end=self.end
         )
 
     @cached_property
@@ -166,5 +186,3 @@ class DataReady(Processer, DataAPI):
         df.index = pd.to_datetime(df.index)
         df = df.sort_index()
         return df
-
-

@@ -1,5 +1,6 @@
 from .base_envion import *
 
+
 class DividendYield(DataReady):
     def __init__(self, begin: TimeType = None, end: TimeType = None, **kwargs):
         end = end if end else date.today().strftime("%Y%m%d")
@@ -12,8 +13,7 @@ class DividendYield(DataReady):
         :return:
         """
         df = self.per_cash_div
-        df = df.groupby(pd.Grouper(freq="Q")).sum()
-        df = df.rolling(window=4).sum()
+        df = df.groupby(pd.Grouper(freq="Y")).sum().replace(0, np.nan).ffill()
         annual_div_per_share = df.resample("D").asfreq().fillna(method="ffill")
 
         close_price = self.close
