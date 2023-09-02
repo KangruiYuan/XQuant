@@ -44,6 +44,9 @@ class BackTestOptions(BaseModel):
     # 其他属性
     verbose: bool = False
 
+    class Config:
+        arbitrary_types_allowed = True
+
 
 class RtnResult(NamedTuple):
     RtnTotal: float
