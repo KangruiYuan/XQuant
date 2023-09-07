@@ -1,7 +1,7 @@
 from .base_envion import *
 
 class Liquidity(DataReady):
-    def __init__(self, begin: TimeType = None, end: TimeType = None, **kwargs):
+    def __init__(self, begin: TimeType, end: TimeType = None, **kwargs):
         end = end if end else date.today().strftime("%Y%m%d")
         super().__init__(begin, end, **kwargs)
         self.parallel = kwargs.get('parallel', True)

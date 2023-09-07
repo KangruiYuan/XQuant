@@ -1053,6 +1053,7 @@
     "symbol": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "ACCA_gm",
         "accounts_payable_turnover_days_gm",
         "accounts_payable_turnover_rate_gm",
@@ -1440,23 +1441,27 @@
     ],
     "sec_level": [
         "bench_price",
-        "stock_price"
+        "stock_price",
+        "EquDiv"
     ],
     "multiplier": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],
     "margin_ratio": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],
     "pre_close": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "market_financial_sheet",
@@ -1465,18 +1470,21 @@
     "is_suspended": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],
     "settle_price": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],
     "position": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "Price_Volume_Data/main",
         "Price_Volume_Data/submain",
         "gmData_bench_price",
@@ -1485,44 +1493,52 @@
     "pre_settle": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],
     "upper_limit": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],
     "lower_limit": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],
     "adj_factor": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],
     "conversion_price": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],
     "redemption_record_date": [
         "bench_price",
-        "stock_price"
+        "stock_price",
+        "EquDiv"
     ],
     "sec_type": [
         "bench_price",
-        "stock_price"
+        "stock_price",
+        "EquDiv"
     ],
     "exchange": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1530,6 +1546,7 @@
     "sec_id": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1537,6 +1554,7 @@
     "sec_name": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "symbol_industry",
@@ -1545,6 +1563,7 @@
     "sec_abbr": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1552,6 +1571,7 @@
     "listed_date": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1559,6 +1579,7 @@
     "delisted_date": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1566,17 +1587,20 @@
     "trade_n": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
     "sec_asset": [
         "bench_price",
-        "stock_price"
+        "stock_price",
+        "EquDiv"
     ],
     "price_tick": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1584,6 +1608,7 @@
     "board": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1591,6 +1616,7 @@
     "option_margin_ratio1": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1598,21 +1624,25 @@
     "option_margin_ratio2": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
     "sec_type_ext": [
         "bench_price",
-        "stock_price"
+        "stock_price",
+        "EquDiv"
     ],
     "quote_unit": [
         "bench_price",
-        "stock_price"
+        "stock_price",
+        "EquDiv"
     ],
     "option_type": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1620,6 +1650,7 @@
     "call_or_put": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1627,6 +1658,7 @@
     "underlying_symbol": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1634,12 +1666,14 @@
     "exercise_price": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],
     "conversion_start_date": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily",
         "bench_info"
@@ -1647,6 +1681,7 @@
     "trade_date": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "continuous_contracts",
         "future_daily"
@@ -1654,6 +1689,7 @@
     "is_adjusted": [
         "bench_price",
         "stock_price",
+        "EquDiv",
         "gmData_bench_price",
         "future_daily"
     ],

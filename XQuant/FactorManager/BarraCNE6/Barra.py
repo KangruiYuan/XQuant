@@ -3,9 +3,10 @@ from .Liquidity import Liquidity
 from .Size import Size
 from .Volatility import Volatility
 from .base_envion import *
+from .Value import Value
 
-class BARRA(Size, Liquidity, DividendYield, Volatility):
-    def __init__(self, begin: TimeType = None, end: TimeType = None, **kwargs):
+class BARRA(Size, Liquidity, DividendYield, Volatility, Value):
+    def __init__(self, begin: TimeType, end: TimeType = None, **kwargs):
         end = end if end else date.today().strftime("%Y%m%d")
         super().__init__(begin, end, **kwargs)
 

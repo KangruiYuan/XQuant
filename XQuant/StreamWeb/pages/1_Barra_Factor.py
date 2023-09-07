@@ -23,12 +23,12 @@ def BarraFactor():
 
     with st.expander("Barra因子说明"):
         st.markdown("因子数据（宽表）")
-        st.json(IMPLEMENTED.factor)
+        st.json(IMPLEMENTED.barra)
         st.markdown("原生数据（宽表）")
         st.json(IMPLEMENTED.raw)
 
 
-    all_data = ChainMap(IMPLEMENTED.raw, IMPLEMENTED.factor)
+    all_data = ChainMap(IMPLEMENTED.raw, IMPLEMENTED.barra)
     all_method = [s.value for s in Strategy]
 
     date_col, name_col = st.columns(2)

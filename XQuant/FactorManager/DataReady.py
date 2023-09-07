@@ -135,6 +135,51 @@ class DataReady(Processer, DataAPI):
         )
 
     @cached_property
+    def PB(self):
+        """
+        市净率=总市值/归属于母公司所有者权益合计
+        :return:
+        """
+        if self.sql:
+            name = "uqer_MktEqud"
+        else:
+            name = "MktEqud"
+
+        return self.get_pivot_df(
+            key_value="PB", name=name, begin=self.begin, end=self.end
+        )
+
+    @cached_property
+    def PETTM(self):
+        """
+        滚动市盈率，即市盈率TTM
+        :return:
+        """
+        if self.sql:
+            name = "uqer_MktEqud"
+        else:
+            name = "MktEqud"
+
+        return self.get_pivot_df(
+            key_value="PE", name=name, begin=self.begin, end=self.end
+        )
+
+    @cached_property
+    def PECON(self):
+        """
+        一致预期PE: 当前预测日期总市值 / 当前预测日期一致预期归母净利润。
+        :return:
+        """
+        if self.sql:
+            name = "uqer_ResConSecCorederi"
+        else:
+            name = "ResConSecCorederi"
+
+        return self.get_pivot_df(
+            key_value="conPe", name=name, begin=self.begin, end=self.end
+        )
+
+    @cached_property
     def per_cash_div(self):
         """
         每股派现(税前)
@@ -170,6 +215,46 @@ class DataReady(Processer, DataAPI):
         return self.get_pivot_df(
             key_value="EPS", name="FdmtIndiPSPit", begin=self.begin, end=self.end
         )
+
+    @cached_property
+    def EPSCON(self):
+        """
+        一致预期EPS
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="conEps", name="ResConSecCoredata", begin=self.begin, end=self.end
+        )
+
+    @cached_property
+    def PCF(self):
+        """
+        市现率(经营TTM)=总市值/经营现金净额TTM
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="PCF2", name="MktEqudEval", begin=self.begin, end=self.end
+        )
+
+    @cached_property
+    def current_asset(self):
+        """
+        流动资产
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="ttl_cur_ast", name="fundamentals_balance", begin=self.begin, end=self.end
+        ).ffill()
+
+    @cached_property
+    def current_liability(self):
+        """
+        流动负债
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="ttl_cur_liab", name="fundamentals_balance", begin=self.begin, end=self.end
+        ).ffill()
 
     @cached_property
     def bench(self):

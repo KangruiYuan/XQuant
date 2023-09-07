@@ -22,5 +22,17 @@
     "description": "",
     "date_column": "publishdate",
     "ticker_column": "ticker"
+    },
+  "uqer_MktEqud" : {
+    "assets": "sql",
+    "description": "",
+    "date_column": "tradeDate",
+    "ticker_column": "ticker"
+    },
+  "uqer_ResConSecCorederi" : {
+    "assets": "sql",
+    "description": "",
+    "date_column": "repForeDate",
+    "ticker_column": "secCode"
     }
 }

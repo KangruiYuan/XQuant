@@ -111,8 +111,12 @@ def FactorBackTest():
                 script_path = script_path.with_suffix(".py")
                 with open(script_path, "w") as script:
                     script.write(st.session_state.content)
-                exec(f"from {st.session_state.function_name} import {st.session_state.function_name}")
-                user_defined_function = eval(st.session_state.function_name)
+                exec_code = compile(st.session_state.content, 'temp', "exec")
+                scope = {}
+                exec(exec_code, scope)
+                user_defined_function = scope.get(st.session_state.function_name)
+                # exec(f"from {st.session_state.function_name} import {st.session_state.function_name}")
+                # user_defined_function = eval(st.session_state.function_name)
                 opts = BackTestOptions(
                     begin=st.session_state.date_min,
                     end=st.session_state.date_max,

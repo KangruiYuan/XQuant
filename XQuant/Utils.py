@@ -690,12 +690,12 @@ class Tools:
             for candidate, score in res:
                 dic[candidate] = attrs_map[candidate]
         else:
-            res = list(filter(lambda x: keyword in x or keyword == x, attrs_map.keys()))
+            res = list(filter(lambda x: keyword.lower() in x.lower() or keyword.lower() == x.lower(), attrs_map.keys()))
             count = 0
             for candidate in res:
                 dic[candidate] = attrs_map[candidate]
                 count += 1
-                if count >= limit:
+                if limit is not None and count >= limit:
                     break
         return dic
 
