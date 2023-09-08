@@ -2,7 +2,7 @@ from .Dividend import DividendYield
 from .Liquidity import Liquidity
 from .Size import Size
 from .Volatility import Volatility
-from .base_envion import *
+from .barra_envion import *
 from .Value import Value
 
 class BARRA(Size, Liquidity, DividendYield, Volatility, Value):

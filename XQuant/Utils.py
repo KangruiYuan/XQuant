@@ -22,7 +22,6 @@ from loguru import logger
 from .Consts import datatables
 from .Schema import TimeType
 
-
 __all__ = ["Formatter", "TradeDate", "Config", "Tools"]
 
 
@@ -136,21 +135,21 @@ class TradeDate:
 
     @classmethod
     def is_date(
-        cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
+            cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
     ) -> bool | str:
         return Formatter.is_date(date_repr, pattern_return, **kwargs)
 
     @classmethod
     def format_date(
-        cls,
-        date_repr: Union[TimeType, pd.Series, list, tuple],
-        **kwargs,
+            cls,
+            date_repr: Union[TimeType, pd.Series, list, tuple],
+            **kwargs,
     ) -> pd.Series | pd.Timestamp:
         return Formatter.date(date_repr, **kwargs)
 
     @classmethod
     def extend_date_span(
-        cls, begin: TimeType, end: TimeType, freq: Literal["Q", "q", "Y", "y", "M", "m"]
+            cls, begin: TimeType, end: TimeType, freq: Literal["Q", "q", "Y", "y", "M", "m"]
     ) -> tuple[datetime, datetime]:
         """
         将区间[begin, end] 进行拓宽, 依据freq将拓展至指定位置, 详见下
@@ -197,7 +196,7 @@ class TradeDate:
 
     @classmethod
     def binary_search(
-        cls, arr: Union[pd.Series, list, tuple, np.ndarray], target: TimeType
+            cls, arr: Union[pd.Series, list, tuple, np.ndarray], target: TimeType
     ) -> Tuple[bool, int]:
         """
         :param arr:
@@ -221,9 +220,9 @@ class TradeDate:
 
     @classmethod
     def shift_trade_date(
-        cls,
-        date_repr: TimeType,
-        lag: int,
+            cls,
+            date_repr: TimeType,
+            lag: int,
     ) -> pd.Timestamp:
         """
         :param date_repr:
@@ -249,14 +248,14 @@ class TradeDate:
             res, index_end = cls.binary_search(cls.trade_date_list, end)
             if not res:
                 index_end += 1
-            return cls.trade_date_list[index_begin : index_end + 1]
+            return cls.trade_date_list[index_begin: index_end + 1]
         elif lag is not None:
             if lag < 0:
                 index_end = index_begin
                 index_begin -= lag
             else:
                 index_end = index_begin + lag
-            return cls.trade_date_list[index_begin : index_end + 1]
+            return cls.trade_date_list[index_begin: index_end + 1]
         else:
             raise AttributeError("Pass attribute end or lag to the function!")
 
@@ -264,7 +263,7 @@ class TradeDate:
 class Formatter:
     @classmethod
     def is_date(
-        cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
+            cls, date_repr: TimeType, pattern_return: bool = False, **kwargs
     ) -> bool | str:
         if not isinstance(date_repr, str):
             date_repr = str(date_repr)
@@ -299,13 +298,13 @@ class Formatter:
                 date_str_res += temp
 
         pattern = (
-            "%Y年%m月%d日",
-            "%Y-%m-%d",
-            "%y年%m月%d日",
-            "%y-%m-%d",
-            "%Y/%m/%d",
-            "%Y%m%d",
-        ) + kwargs.get("pattern", ())
+                      "%Y年%m月%d日",
+                      "%Y-%m-%d",
+                      "%y年%m月%d日",
+                      "%y-%m-%d",
+                      "%Y/%m/%d",
+                      "%Y%m%d",
+                  ) + kwargs.get("pattern", ())
         for i in pattern:
             try:
                 ret = strptime(date_str_res, i)
@@ -317,9 +316,9 @@ class Formatter:
 
     @classmethod
     def date(
-        cls,
-        date_repr: Union[TimeType, pd.Series, list, tuple],
-        **kwargs,
+            cls,
+            date_repr: Union[TimeType, pd.Series, list, tuple],
+            **kwargs,
     ) -> pd.Series | pd.Timestamp:
         if isinstance(date_repr, (list, tuple, pd.Series)):
             if isinstance(date_repr[0], (datetime, date)):
@@ -340,14 +339,14 @@ class Formatter:
     def expand_dataframe(cls, data: pd.DataFrame,
                          begin: TimeType = None,
                          end: TimeType = None,
-                         fill: Union[str, int, float]='ffill'):
+                         fill: Union[str, int, float] = 'ffill'):
         fill_args = {"method": fill} if isinstance(fill, str) else {'value': fill}
         if begin is None:
             begin = data.index.min()
         if end is None:
             end = data.index.max()
         res = pd.DataFrame(
-            data=0,
+            data=np.nan,
             columns=data.columns,
             index=TradeDate.range_trade_date(begin, end)
         )
@@ -356,10 +355,9 @@ class Formatter:
         res = res.fillna(**fill_args)
         return res
 
-
     @classmethod
     def dataframe(
-        cls, data: pd.DataFrame, index: bool = True, columns: bool = True, **kwargs
+            cls, data: pd.DataFrame, index: bool = True, columns: bool = True, **kwargs
     ):
         res = data.copy()
         if not isinstance(res, pd.DataFrame):
@@ -506,9 +504,9 @@ class Tools:
 
     @classmethod
     def packaging(
-        cls,
-        series: Sequence,
-        pat: int,
+            cls,
+            series: Sequence,
+            pat: int,
     ) -> Sequence[Sequence] | Iterator:
         """
         :param series:
@@ -516,16 +514,16 @@ class Tools:
         :return:
         """
         assert pat > 0
-        return [series[i : i + pat] for i in range(0, len(series), pat)]
+        return [series[i: i + pat] for i in range(0, len(series), pat)]
 
     @classmethod
     def get_config(
-        cls,
-        filename: Union[str, os.PathLike] = Path(__file__).parent
-        / "Tokens"
-        / "quant.const.ini",
-        section: str = None,
-        **kwargs,
+            cls,
+            filename: Union[str, os.PathLike] = Path(__file__).parent
+                                                / "Tokens"
+                                                / "quant.const.ini",
+            section: str = None,
+            **kwargs,
     ) -> dict[str, str | dict[str, str]]:
         """
 
@@ -612,7 +610,7 @@ class Tools:
             if subfolders:
                 max_year = max([int(i.stem) for i in subfolders])
                 newest_folder = (
-                    table_folder / str(max_year) / kwargs.get("sources", "gm")
+                        table_folder / str(max_year) / kwargs.get("sources", "gm")
                 )
                 newest_file = list(newest_folder.glob("*.h5"))
         elif assets in ["gm_factor"]:
@@ -629,13 +627,13 @@ class Tools:
 
     @classmethod
     def search_keyword(
-        cls,
-        keyword: str,
-        fuzzy: bool = True,
-        limit: int = 5,
-        update: bool = False,
-        initial_path: str = Path(__file__).parent / "Temp/attrs.json",
-        **kwargs,
+            cls,
+            keyword: str,
+            fuzzy: bool = True,
+            limit: int = 5,
+            update: bool = False,
+            initial_path: str = Path(__file__).parent / "Temp/attrs.json",
+            **kwargs,
     ):
         """
         :param initial_path: The initialization path of the log file

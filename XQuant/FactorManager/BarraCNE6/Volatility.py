@@ -1,6 +1,6 @@
 import numpy as np
 
-from .base_envion import *
+from .barra_envion import *
 
 
 class Volatility(DataReady):

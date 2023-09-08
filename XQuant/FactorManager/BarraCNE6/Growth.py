@@ -1,4 +1,4 @@
-from .base_envion import *
+from .barra_envion import *
 from ...Utils import TradeDate
 
 class Growth(DataReady):
