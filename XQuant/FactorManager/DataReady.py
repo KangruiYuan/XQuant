@@ -277,6 +277,16 @@ class DataReady(Processer, DataAPI):
         ).groupby(pd.Grouper(freq='Q')).mean()
 
     @cached_property
+    def inc_oper(self):
+        """
+        营业收入
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="inc_oper", name="fundamentals_income", begin=self.begin, end=self.end
+        ).groupby(pd.Grouper(freq='Q')).mean()
+
+    @cached_property
     def bench(self):
         assert self.bench_code is not None
         df = self.get_data(

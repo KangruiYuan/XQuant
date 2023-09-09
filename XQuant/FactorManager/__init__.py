@@ -25,11 +25,20 @@ class IMPLEMENTED:
         "EP比": "ETOP",
         "分析师预测EP比": "ETOPF",
         "盈利率": "EarningYield",
+        "营业总收入": "ttl_inc_oper",
+        "营业利润": "oper_prof",
+        "营业收入": "inc_oper",
     }
 
     others: dict[str, str] = {"增强红利因子": "EnhancingDividend"}
 
-    joint_quant: dict[str, str] = {"净运营资本": "net_working_capital"}
+    joint_quant: dict[str, str] = {
+        "净运营资本": "net_working_capital",
+        "营业总收入TTM": "total_operating_revenue_ttm",
+        "营业利润TTM": "operating_profit_ttm",
+        "无息流动负债": "interest_free_current_liability",
+        "带息流动负债": "interest_carry_current_liability"
+    }
 
     raw: dict[str, str] = {
         "市值": "market_value",

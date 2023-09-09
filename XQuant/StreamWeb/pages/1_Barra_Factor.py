@@ -27,7 +27,6 @@ def BarraFactor():
         st.markdown("原生数据（宽表）")
         st.json(IMPLEMENTED.raw)
 
-
     all_data = ChainMap(IMPLEMENTED.raw, IMPLEMENTED.barra)
     all_method = [s.value for s in Strategy]
 
@@ -88,7 +87,7 @@ def BarraFactor():
                     orientation="v",
                     labels={"index": "Date"},
                     title=f"IR={float(IR):.2f}",
-                    color_continuous_scale="spectral"
+                    color_continuous_scale="spectral",
                 )
                 st.plotly_chart(fig, use_container_width=True)
             else:
