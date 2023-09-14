@@ -25,9 +25,10 @@ class IMPLEMENTED:
         "EP比": "ETOP",
         "分析师预测EP比": "ETOPF",
         "盈利率": "EarningYield",
-        "营业总收入": "ttl_inc_oper",
-        "营业利润": "oper_prof",
-        "营业收入": "inc_oper",
+        "Relative Strength 12-month": "RSTR",
+        "STREV":"STREV",
+        "SEASON":"SEASON"
+
     }
 
     others: dict[str, str] = {"增强红利因子": "EnhancingDividend"}
@@ -37,7 +38,12 @@ class IMPLEMENTED:
         "营业总收入TTM": "total_operating_revenue_ttm",
         "营业利润TTM": "operating_profit_ttm",
         "无息流动负债": "interest_free_current_liability",
-        "带息流动负债": "interest_carry_current_liability"
+        "带息流动负债": "interest_carry_current_liability",
+        "留存收益": "retained_earnings",
+        "毛利TTM": "gross_profit_ttm",
+        "销售费用TTM": "sale_expense_ttm",
+        "营业总成本TTM": "total_operating_cost_ttm",
+        "营业外收支净额TTM": "non_operating_net_profit_ttm"
     }
 
     raw: dict[str, str] = {
@@ -54,4 +60,11 @@ class IMPLEMENTED:
         "市盈率TTM": "PETTM",
         "一致预期PE": "PECON",
         "市现率(经营TTM)": "PCF",
+        "营业总收入": "ttl_inc_oper",
+        "营业利润": "oper_prof",
+        "营业收入": "inc_oper",
+        "销售费用": "exp_sell",
+        "营业成本": "cost_oper",
+        "营业外支出": "exp_noper",
+        "营业外收入": "inc_noper"
     }

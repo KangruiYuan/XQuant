@@ -14,7 +14,7 @@ class DataReady(Processer, DataAPI):
     def __init__(self, begin: TimeType = None, end: TimeType = None, **kwargs):
         self.sql: bool = kwargs.get("sql", False)
         self.adj: bool = kwargs.get("adj", False)
-        self.bench_code: str = kwargs.get("bench_code", None)
+        self.bench_code: str = kwargs.get("bench_code", '000300')
         end = end if end else date.today().strftime("%Y%m%d")
         super().__init__(begin, end, **kwargs)
 
@@ -243,7 +243,10 @@ class DataReady(Processer, DataAPI):
         :return:
         """
         return self.get_pivot_df(
-            key_value="ttl_cur_ast", name="fundamentals_balance", begin=self.begin, end=self.end
+            key_value="ttl_cur_ast",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
         ).ffill()
 
     @cached_property
@@ -253,7 +256,10 @@ class DataReady(Processer, DataAPI):
         :return:
         """
         return self.get_pivot_df(
-            key_value="ttl_cur_liab", name="fundamentals_balance", begin=self.begin, end=self.end
+            key_value="ttl_cur_liab",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
         ).ffill()
 
     @cached_property
@@ -262,9 +268,102 @@ class DataReady(Processer, DataAPI):
         营业总收入
         :return:
         """
-        return self.get_pivot_df(
-            key_value="ttl_inc_oper", name="fundamentals_income", begin=self.begin, end=self.end
-        ).groupby(pd.Grouper(freq='Q')).mean()
+        return (
+            self.get_pivot_df(
+                key_value="ttl_inc_oper",
+                name="fundamentals_income",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
+    def ttl_inc_oper(self):
+        """
+        营业总收入
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="ttl_cost_oper",
+                name="fundamentals_income",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+
+    @cached_property
+    def net_cf_inv(self):
+        """
+        投资活动现金流量净额
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="net_cf_inv",
+                name="fundamentals_cashflow",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
+    def fin_exp(self):
+        """
+        财务费用
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="fin_exp",
+                name="fundamentals_cashflow",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
+    def inc_noper(self):
+        """
+        营业外收入
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="inc_noper",
+                name="fundamentals_income",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
+    def exp_noper(self):
+        """
+        营业外支出
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="exp_noper",
+                name="fundamentals_income",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
 
     @cached_property
     def oper_prof(self):
@@ -272,9 +371,16 @@ class DataReady(Processer, DataAPI):
         营业利润
         :return:
         """
-        return self.get_pivot_df(
-            key_value="oper_prof", name="fundamentals_income", begin=self.begin, end=self.end
-        ).groupby(pd.Grouper(freq='Q')).mean()
+        return (
+            self.get_pivot_df(
+                key_value="oper_prof",
+                name="fundamentals_income",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
 
     @cached_property
     def inc_oper(self):
@@ -282,9 +388,80 @@ class DataReady(Processer, DataAPI):
         营业收入
         :return:
         """
-        return self.get_pivot_df(
-            key_value="inc_oper", name="fundamentals_income", begin=self.begin, end=self.end
-        ).groupby(pd.Grouper(freq='Q')).mean()
+        return (
+            self.get_pivot_df(
+                key_value="inc_oper",
+                name="fundamentals_income",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
+    def cost_oper(self):
+        """
+        营业成本
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="cost_oper",
+                name="fundamentals_income",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
+    def exp_sell(self):
+        """
+        销售费用
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="exp_sell",
+                name="fundamentals_income",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
+    def sur_rsv(self):
+        """
+        盈余公积金
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="sur_rsv",
+                name="fundamentals_balance",
+                begin=self.begin,
+                end=self.end,
+            ).ffill()
+        )
+
+    @cached_property
+    def ret_prof(self):
+        """
+        未分配利润
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="ret_prof",
+                name="fundamentals_balance",
+                begin=self.begin,
+                end=self.end,
+            ).ffill()
+        )
 
     @cached_property
     def bench(self):

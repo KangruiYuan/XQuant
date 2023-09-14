@@ -83,7 +83,9 @@ class Processer:
         dfs = list(chain(dfs, args))
 
         if clean:
-            dfs = [Formatter.dataframe(df) for df in dfs]
+            for i in range(len(dfs)):
+                if 1 not in dfs[i].shape:
+                    dfs[i] = Formatter.dataframe(dfs[i])
 
         dims = 1 if any(len(df.shape) == 1 or 1 in df.shape for df in dfs) else 2
         res = []
@@ -243,7 +245,7 @@ class Processer:
             cores = len(df) // window
         else:
             cores = 6
-        print(f"Try with npartitions={cores}")
+        print(f"Calculating with npartitions={cores}")
         res = dd.from_pandas(df, npartitions=cores)
         if window:
             res = res.rolling(window=window, axis=0)
@@ -276,13 +278,8 @@ class Processer:
 
     @classmethod
     def rolling_regress(
-        cls,
-        y: ArrayType,
-        x: ArrayType,
-        window: int = 5,
-        half_life: int = None
+        cls, y: ArrayType, x: ArrayType, window: int = 5, half_life: int = None
     ):
-
         stocks = y.columns
         if half_life:
             weight = cls.get_exp_weight(window, half_life)
