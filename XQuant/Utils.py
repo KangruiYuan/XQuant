@@ -320,14 +320,14 @@ class Formatter:
             date_repr: Union[TimeType, pd.Series, list, tuple],
             **kwargs,
     ) -> pd.Series | pd.Timestamp:
-        if isinstance(date_repr, (list, tuple, pd.Series)):
-            if isinstance(date_repr[0], (datetime, date)):
+        if isinstance(date_repr, (list, tuple, pd.Series, pd.DatetimeIndex)):
+            if isinstance(date_repr[0], (datetime, date, pd.DatetimeIndex, pd.Timestamp)):
                 return pd.to_datetime(date_repr)
             elif isinstance(date_repr[0], (int, str)):
                 pattern = cls.is_date(date_repr[0], pattern_return=True, **kwargs)
                 return pd.to_datetime(date_repr, format=pattern)
         elif isinstance(date_repr, TimeType):
-            if isinstance(date_repr, (datetime, date, pd.Timestamp)):
+            if isinstance(date_repr, (datetime, date, pd.Timestamp, pd.DatetimeIndex)):
                 return pd.to_datetime(date_repr)
             elif isinstance(date_repr, (int, str)):
                 pattern = cls.is_date(date_repr, pattern_return=True, **kwargs)
@@ -379,12 +379,9 @@ class Formatter:
     @classmethod
     def format_index(cls, res: pd.DataFrame, **kwargs):
         try:
-            res.index = pd.to_datetime(res.index)
-        except ValueError:
-            try:
-                res.index = list(map(TradeDate.format_date, res.index))
-            except TypeError as te:
-                raise te
+            res.index = pd.to_datetime(TradeDate.format_date(res.index).strftime("%Y-%m-%d"))
+        except ValueError as ve:
+            raise ve
 
         begin = kwargs.get("begin", res.index.min())
         end = kwargs.get("end", res.index.max())

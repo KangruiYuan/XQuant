@@ -26,9 +26,8 @@ class IMPLEMENTED:
         "分析师预测EP比": "ETOPF",
         "盈利率": "EarningYield",
         "Relative Strength 12-month": "RSTR",
-        "STREV":"STREV",
-        "SEASON":"SEASON"
-
+        "STREV": "STREV",
+        "SEASON": "SEASON",
     }
 
     others: dict[str, str] = {"增强红利因子": "EnhancingDividend"}
@@ -43,7 +42,16 @@ class IMPLEMENTED:
         "毛利TTM": "gross_profit_ttm",
         "销售费用TTM": "sale_expense_ttm",
         "营业总成本TTM": "total_operating_cost_ttm",
-        "营业外收支净额TTM": "non_operating_net_profit_ttm"
+        "营业外收支净额TTM": "non_operating_net_profit_ttm",
+        "财务费用TTM": "financial_expense_ttm",
+        "投资活动现金流量净额TTM": "net_invest_cash_flow_ttm",
+        "管理费用TTM": "administration_expense_ttm",
+        "价值变动净收益TTM": "value_change_profit_ttm",
+        "利润总额TTM": "total_profit_ttm",
+        "筹资活动现金流量净额TTM": "net_finance_cash_flow_ttm",
+        "息税前利润": "EBIT",
+        "净利润TTM": "net_profit_ttm",
+        "息税折旧摊销前利润": "EBITDA",
     }
 
     raw: dict[str, str] = {
@@ -66,5 +74,20 @@ class IMPLEMENTED:
         "销售费用": "exp_sell",
         "营业成本": "cost_oper",
         "营业外支出": "exp_noper",
-        "营业外收入": "inc_noper"
+        "营业外收入": "inc_noper",
+        "财务费用": "fin_exp",
+        "投资活动现金流量净额": "net_cf_inv",
+        "价值变动净收益": "NVALCHGIT",
+        "利息收入": "inc_int",
+        "利息支出": "exp_int",
+        "管理费用": "exp_adm",
+        "利润总额": "ttl_prof",
+        "筹资活动现金流量净额": "net_cf_fin",
+        "所得税": "inc_tax",
+        "净利润": "net_prof",
+        "营业税金及附加": "biz_tax_sur",
+        "手续费及佣金支出": "exp_fee_comm",
+        "资产减值损失": "depr_oga_cba",
+        "长期待摊费用摊销": "amort_lt_exp_ppay",
+        "无形资产摊销": "amort_intg_ast",
     }

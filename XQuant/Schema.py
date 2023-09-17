@@ -2,14 +2,16 @@ from typing import NamedTuple, Union, Literal, Optional, Callable
 from datetime import datetime, date
 
 import pandas as pd
-from pandas import Timestamp
+from pandas import Timestamp, DatetimeIndex, Series
 from pydantic import BaseModel
 from pathlib import Path
 from enum import Enum
 from pandas import Series
 from numpy import ndarray
 
-TimeType = Union[str, int, datetime, date, Timestamp]
+TimeArrays = Union[Series, Timestamp, DatetimeIndex, list, tuple, ndarray]
+TimeType = Union[str, int, datetime, date, Timestamp, DatetimeIndex]
+
 
 ArrayType = Union[Series, ndarray, list, pd.DataFrame]
 
