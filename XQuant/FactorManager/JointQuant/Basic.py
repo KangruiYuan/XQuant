@@ -339,3 +339,58 @@ class Basic(DataReady):
         )
 
         return Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+
+    @cached_property
+    def asset_impairment_loss_ttm(self):
+        """
+        资产减值损失TTM
+        :return:
+        """
+        return self.roll_and_expand_dataframe("ast_impr_loss")
+
+    @cached_property
+    def np_parent_company_owners_ttm(self):
+        """
+        归属于母公司股东的净利润TTM
+        :return:
+        """
+        return self.roll_and_expand_dataframe("net_prof_pcom")
+
+    @cached_property
+    def operating_cost_ttm(self):
+        """
+        营业成本TTM
+        :return:
+        """
+        return self.roll_and_expand_dataframe("cost_oper")
+
+    @cached_property
+    def net_debt(self):
+        """
+        净债务=总债务(TDEBT)-期末现金及现金等价物余额 cash_cash_eq_end
+        :return:
+        """
+        TDEBT = self.TDEBT.ffill()
+        cash_cash_eq_end = self.cash_cash_eq_end.ffill()
+        TDEBT, cash_cash_eq_end = self.align_dataframe(
+            [TDEBT, cash_cash_eq_end], clean=False
+        )
+        return Formatter.expand_dataframe(
+            TDEBT - cash_cash_eq_end, begin=self.begin, end=self.end
+        )
+
+    @cached_property
+    def non_recurring_gain_loss(self):
+        """
+        非经常性损益=归属于母公司股东的净利润(net_prof_pcom)-扣除非经常损益后的净利润 NPCUT(元)
+        :return:
+        """
+        net_prof_pcom = self.net_prof_pcom.ffill()
+        NPCUT = self.NPCUT.ffill()
+        net_prof_pcom, NPCUT = self.align_dataframe(
+            [net_prof_pcom, NPCUT], clean=False
+        )
+        return Formatter.expand_dataframe(
+            net_prof_pcom - NPCUT, begin=self.begin, end=self.end
+        )
+

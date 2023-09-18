@@ -14,7 +14,7 @@ class DataReady(Processer, DataAPI):
     def __init__(self, begin: TimeType = None, end: TimeType = None, **kwargs):
         self.sql: bool = kwargs.get("sql", False)
         self.adj: bool = kwargs.get("adj", False)
-        self.bench_code: str = kwargs.get("bench_code", '000300')
+        self.bench_code: str = kwargs.get("bench_code", "000300")
         end = end if end else date.today().strftime("%Y%m%d")
         super().__init__(begin, end, **kwargs)
 
@@ -348,6 +348,23 @@ class DataReady(Processer, DataAPI):
         )
 
     @cached_property
+    def net_prof_pcom(self):
+        """
+        归属于母公司股东的净利润
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="net_prof_pcom",
+                name="fundamentals_income",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
     def depr_oga_cba(self):
         """
         资产减值损失
@@ -380,6 +397,7 @@ class DataReady(Processer, DataAPI):
             .groupby(pd.Grouper(freq="Q"))
             .mean()
         )
+
     @cached_property
     def amort_lt_exp_ppay(self):
         """
@@ -397,7 +415,6 @@ class DataReady(Processer, DataAPI):
             .mean()
         )
 
-
     @cached_property
     def biz_tax_sur(self):
         """
@@ -414,7 +431,6 @@ class DataReady(Processer, DataAPI):
             .groupby(pd.Grouper(freq="Q"))
             .mean()
         )
-
 
     @cached_property
     def net_cf_inv(self):
@@ -535,7 +551,6 @@ class DataReady(Processer, DataAPI):
             .mean()
         )
 
-
     @cached_property
     def exp_int(self):
         """
@@ -569,6 +584,7 @@ class DataReady(Processer, DataAPI):
             .groupby(pd.Grouper(freq="Q"))
             .mean()
         )
+
     @cached_property
     def ttl_prof(self):
         """
@@ -604,6 +620,23 @@ class DataReady(Processer, DataAPI):
         )
 
     @cached_property
+    def cash_cash_eq_end(self):
+        """
+        期末现金及现金等价物余额
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="cash_cash_eq_end",
+                name="fundamentals_cashflow",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
     def NVALCHGIT(self):
         """
         价值变动净收益(NVALCHGIT)
@@ -612,6 +645,23 @@ class DataReady(Processer, DataAPI):
         return (
             self.get_pivot_df(
                 key_value="NVALCHGIT",
+                name="deriv_finance_indicator",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
+    def NPCUT(self):
+        """
+        扣除非经常损益后的净利润
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="NPCUT",
                 name="deriv_finance_indicator",
                 begin=self.begin,
                 end=self.end,
@@ -672,6 +722,23 @@ class DataReady(Processer, DataAPI):
         )
 
     @cached_property
+    def TDEBT(self):
+        """
+        总债务
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="TDEBT",
+                name="deriv_finance_indicator",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
     def exp_sell(self):
         """
         销售费用
@@ -694,14 +761,12 @@ class DataReady(Processer, DataAPI):
         盈余公积金
         :return:
         """
-        return (
-            self.get_pivot_df(
-                key_value="sur_rsv",
-                name="fundamentals_balance",
-                begin=self.begin,
-                end=self.end,
-            ).ffill()
-        )
+        return self.get_pivot_df(
+            key_value="sur_rsv",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
 
     @cached_property
     def ret_prof(self):
@@ -709,14 +774,12 @@ class DataReady(Processer, DataAPI):
         未分配利润
         :return:
         """
-        return (
-            self.get_pivot_df(
-                key_value="ret_prof",
-                name="fundamentals_balance",
-                begin=self.begin,
-                end=self.end,
-            ).ffill()
-        )
+        return self.get_pivot_df(
+            key_value="ret_prof",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
 
     @cached_property
     def bench(self):

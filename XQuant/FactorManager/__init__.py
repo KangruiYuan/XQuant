@@ -52,6 +52,8 @@ class IMPLEMENTED:
         "息税前利润": "EBIT",
         "净利润TTM": "net_profit_ttm",
         "息税折旧摊销前利润": "EBITDA",
+        "资产减值损失TTM": "asset_impairment_loss_ttm",
+        "营业成本TTM": "operating_cost_ttm",
     }
 
     raw: dict[str, str] = {
@@ -90,4 +92,6 @@ class IMPLEMENTED:
         "资产减值损失": "depr_oga_cba",
         "长期待摊费用摊销": "amort_lt_exp_ppay",
         "无形资产摊销": "amort_intg_ast",
+        "归属于母公司股东的净利润": "net_prof_pcom",
+        "总债务": "TDEBT",
     }
