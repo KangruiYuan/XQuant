@@ -339,7 +339,8 @@ class Formatter:
     def expand_dataframe(cls, data: pd.DataFrame,
                          begin: TimeType = None,
                          end: TimeType = None,
-                         fill: Union[str, int, float] = 'ffill'):
+                         fill: Union[str, int, float] = 'ffill',
+                         **kwargs):
         fill_args = {"method": fill} if isinstance(fill, str) else {'value': fill}
         if begin is None:
             begin = data.index.min()

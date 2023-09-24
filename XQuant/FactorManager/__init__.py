@@ -28,6 +28,10 @@ class IMPLEMENTED:
         "Relative Strength 12-month": "RSTR",
         "STREV": "STREV",
         "SEASON": "SEASON",
+        "杠杆因子": "Leverage",
+        "市场杠杆": "MLEV",
+        "账面杠杆": "BLEV",
+        "资产负债比": "DTOA",
     }
 
     others: dict[str, str] = {"增强红利因子": "EnhancingDividend"}
@@ -54,6 +58,8 @@ class IMPLEMENTED:
         "息税折旧摊销前利润": "EBITDA",
         "资产减值损失TTM": "asset_impairment_loss_ttm",
         "营业成本TTM": "operating_cost_ttm",
+        "销售商品提供劳务收到的现金TTM": "goods_sale_and_service_render_cash_ttm",
+        "现金流市值比": "cash_flow_to_price_ratio",
     }
 
     raw: dict[str, str] = {
@@ -94,4 +100,7 @@ class IMPLEMENTED:
         "无形资产摊销": "amort_intg_ast",
         "归属于母公司股东的净利润": "net_prof_pcom",
         "总债务": "TDEBT",
+        "销售商品提供劳务收到的现金": "cash_rcv_sale",
+        "非流动负债": "ttl_ncur_liab",
+        "总负债": "ttl_liab",
     }

@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Union
 
 from ...Collector import DataAPI
 
@@ -9,6 +9,40 @@ class Basic(DataReady):
     def __init__(self, begin: TimeType, end: TimeType = None, **kwargs):
         end = end if end else date.today().strftime("%Y%m%d")
         super().__init__(begin, end, **kwargs)
+
+    def expand(self, df: pd.DataFrame, **kwargs):
+        return Formatter.expand_dataframe(df, begin=self.begin, end=self.end, **kwargs)
+
+    def roll_and_expand_dataframe(
+        self,
+        name: Optional[str] = None,
+        df: Optional[pd.DataFrame] = None,
+        window: int = 4,
+    ):
+        if df is None:
+            assert name is not None
+            df = getattr(self, name)
+        df = df.ffill()
+        df = df.rolling(window=window).sum()
+        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        return df
+
+    def get_dataframes(
+        self,
+        names: Union[str, list[str]],
+        fill: Optional[Union[str, int, float]] = None,
+        align: bool = False,
+        **kwargs
+    ):
+        if isinstance(names, str):
+            names = [names]
+        dfs = [getattr(self, name) for name in names]
+        if fill is not None:
+            fill_args = {"method": fill} if isinstance(fill, str) else {"value": fill}
+            dfs = [df.fillna(**fill_args) for df in dfs]
+        if align:
+            dfs = self.align_dataframe(dfs, **kwargs)
+        return dfs
 
     @cached_property
     def net_working_capital(self):
@@ -205,20 +239,6 @@ class Basic(DataReady):
         df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
-    def roll_and_expand_dataframe(
-        self,
-        name: Optional[str] = None,
-        df: Optional[pd.DataFrame] = None,
-        window: int = 4,
-    ):
-        if df is None:
-            assert name is not None
-            df = getattr(self, name)
-        df = df.ffill()
-        df = df.rolling(window=4).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
-        return df
-
     @cached_property
     def total_profit_ttm(self):
         """
@@ -387,10 +407,61 @@ class Basic(DataReady):
         """
         net_prof_pcom = self.net_prof_pcom.ffill()
         NPCUT = self.NPCUT.ffill()
-        net_prof_pcom, NPCUT = self.align_dataframe(
-            [net_prof_pcom, NPCUT], clean=False
-        )
+        net_prof_pcom, NPCUT = self.align_dataframe([net_prof_pcom, NPCUT], clean=False)
         return Formatter.expand_dataframe(
             net_prof_pcom - NPCUT, begin=self.begin, end=self.end
         )
 
+    @cached_property
+    def goods_sale_and_service_render_cash_ttm(self):
+        """
+        销售商品提供劳务收到的现金TTM
+        :return:
+        """
+        return self.roll_and_expand_dataframe("cash_rcv_sale")
+
+    @cached_property
+    def cash_flow_to_price_ratio(self):
+        """
+        现金流市值比=1 / pcf_ratio (ttm)
+        pcf_ratio (ttm)=PCTTM（当日收盘价＊当日公司总股本／经营活动产生的现金流，其中经营活动产生的现金流取最近四个季度的）
+        :return:
+        """
+        PCTTM = self.PCTTM.ffill()
+        return self.expand(1 / PCTTM)
+
+    @cached_property
+    def sales_to_price_ratio(self):
+        """
+        营收市值比=1 / ps_ratio (ttm)
+        ps_ratio (ttm)=PSTTM（当日收盘价＊当日公司总股本／营业收入，其中营业收入取最近四个季度的）
+        :return:
+        """
+        PSTTM = self.PSTTM.ffill()
+        return self.expand(1 / PSTTM)
+
+    @cached_property
+    def operating_assets(self):
+        """
+        经营性资产=
+        总资产(ttl_ast) - 金融资产(货币资金(mny_cptl)+交易性金融资产(trd_fin_ast)
+        +应收票据(note_rcv) +应收利息(int_rcv)+应收股利(dvd_rcv)
+        +可供出售金融资产(aval_sale_fin) +持有至到期投资(htm_inv))
+        :return:
+        """
+        dfs = self.get_dataframes(
+            names=[
+                "ttl_ast",
+                "mny_cptl",
+                "trd_fin_ast",
+                "note_rcv",
+                "int_rcv",
+                "dvd_rcv",
+                "aval_sale_fin",
+                "htm_inv",
+            ],
+            align=True,
+            clean=True,
+        )
+        df = dfs[0] - sum(dfs[1:])
+        return df

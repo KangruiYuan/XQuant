@@ -5,8 +5,9 @@ from .Volatility import Volatility
 from .barra_envion import *
 from .Value import Value
 from .Momentum import Momentum
+from .Quality import Quality
 
-class BARRA(Size, Liquidity, DividendYield, Volatility, Value, Momentum):
+class BARRA(Quality, Size, Liquidity, DividendYield, Volatility, Value, Momentum):
     def __init__(self, begin: TimeType, end: TimeType = None, **kwargs):
         end = end if end else date.today().strftime("%Y%m%d")
         super().__init__(begin, end, **kwargs)

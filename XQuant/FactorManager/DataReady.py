@@ -262,6 +262,153 @@ class DataReady(Processer, DataAPI):
             end=self.end,
         ).ffill()
 
+
+    @cached_property
+    def ttl_ncur_liab(self):
+        """
+        非流动负债(day)
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="ttl_ncur_liab",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
+    @cached_property
+    def ttl_eqy(self):
+        """
+        账面价值(day)
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="ttl_eqy",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
+
+    @cached_property
+    def ttl_liab(self):
+        """
+        总负债
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="ttl_liab",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
+    @cached_property
+    def ttl_ast(self):
+        """
+        总资产
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="ttl_ast",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
+
+
+    @cached_property
+    def mny_cptl(self):
+        """
+        货币资金
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="mny_cptl",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
+    @cached_property
+    def trd_fin_ast(self):
+        """
+        交易性金融资产
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="trd_fin_ast",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
+    @cached_property
+    def note_rcv(self):
+        """
+        应收票据
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="note_rcv",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
+    @cached_property
+    def int_rcv(self):
+        """
+        应收利息
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="int_rcv",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
+    @cached_property
+    def dvd_rcv(self):
+        """
+        应收股利
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="dvd_rcv",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
+    @cached_property
+    def aval_sale_fin(self):
+        """
+        可供出售金融资产
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="aval_sale_fin",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
+    @cached_property
+    def htm_inv(self):
+        """
+        持有至到期投资
+        :return:
+        """
+        return self.get_pivot_df(
+            key_value="htm_inv",
+            name="fundamentals_balance",
+            begin=self.begin,
+            end=self.end,
+        ).ffill()
+
     @cached_property
     def ttl_inc_oper(self):
         """
@@ -637,6 +784,23 @@ class DataReady(Processer, DataAPI):
         )
 
     @cached_property
+    def cash_rcv_sale(self):
+        """
+        销售商品提供劳务收到的现金
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="cash_rcv_sale",
+                name="fundamentals_cashflow",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
     def NVALCHGIT(self):
         """
         价值变动净收益(NVALCHGIT)
@@ -645,6 +809,40 @@ class DataReady(Processer, DataAPI):
         return (
             self.get_pivot_df(
                 key_value="NVALCHGIT",
+                name="deriv_finance_indicator",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
+    def PCTTM(self):
+        """
+        pcf_ratio (ttm)=PCTTM
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="PCTTM",
+                name="deriv_finance_indicator",
+                begin=self.begin,
+                end=self.end,
+            )
+            .groupby(pd.Grouper(freq="Q"))
+            .mean()
+        )
+
+    @cached_property
+    def PSTTM(self):
+        """
+        ps_ratio (ttm)=PSTTM
+        :return:
+        """
+        return (
+            self.get_pivot_df(
+                key_value="PSTTM",
                 name="deriv_finance_indicator",
                 begin=self.begin,
                 end=self.end,
