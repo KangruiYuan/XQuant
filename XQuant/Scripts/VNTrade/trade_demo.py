@@ -3,9 +3,12 @@ from vnpy_da import DaGateway
 from vn_schema import setting
 from time import sleep
 from vnpy.trader.object import OrderRequest
-from orders import orders
+from orders import long_market_orders, short_market_orders
 from tqdm import tqdm
 from copy import deepcopy
+from loguru import logger
+
+logger.add(sink="trade_log.log")
 
 da_engine = init_cli_trading([DaGateway])
 da_engine.connect_gateway(setting, gateway_name="DA")
@@ -26,9 +29,13 @@ def to_standard_order(order: dict):
     return res
 
 
-for order in orders:
+for order in short_market_orders:
     standard_order = to_standard_order(order)
-    print(f"order: {standard_order}")
+    logger.info(f"order: {standard_order}")
     order_id = da_engine.send_order(**standard_order)
-    sleep(1)
-    print(f"order id: {order_id}")
+    logger.info(f"order id: {order_id}")
+    sleep(3)
+    position = da_engine.get_all_positions()
+    logger.info(f"position: {position}")
+
+    # break
