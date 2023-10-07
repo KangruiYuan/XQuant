@@ -1,7 +1,4 @@
 import datetime
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.orm import scoped_session
-from XQuant.Utils import Tools
 
 from sqlalchemy import (
     create_engine,
@@ -9,15 +6,19 @@ from sqlalchemy import (
     Integer,
     String,
     Enum,
-    DECIMAL,
     DateTime,
     Boolean,
     UniqueConstraint,
     Index,
+    ForeignKey,
 )
 
 # 通过其构造一个基类，这个基类和它的子类，可以将Python类和数据库表关联映射起来
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import scoped_session, relationship, backref
+from sqlalchemy.orm import sessionmaker
+
+from XQuant.Utils import Tools
 
 Base = declarative_base()
 
@@ -71,16 +72,27 @@ class InternshipMember(Base):
     delete_status = Column(Boolean(), default=False, comment="是否删除")
 
     __table__args__ = (
-        UniqueConstraint("name", "age", "phone"),  # 联合唯一约束
+        UniqueConstraint("name", "age"),  # 联合唯一约束
         Index("name", "addr", unique=True),  # 联合唯一索引
     )
+
+    addresses = relationship("Address", order_by="Address.id", backref="user")
 
     def __str__(self):
         return f"object : <id:{self.id} name:{self.name}>"
 
 
+class Address(Base):
+    __tablename__ = "addresses"
+    id = Column(Integer, primary_key=True)
+    email_address = Column(String(32), nullable=False)
+    user_id = Column(Integer, ForeignKey("InternshipMember.id"))
+
+    # user = relationship("InternshipMember", backref=backref("addresses", order_by=id))
+
+
 if __name__ == "__main__":
     # # 删除表
-    # Base.metadata.drop_all(engine)
+    Base.metadata.drop_all(engine)
     # 创建表
     Base.metadata.create_all(engine)
