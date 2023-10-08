@@ -53,8 +53,8 @@ class DataAPI:
         name: str,
         begin: TimeType = None,
         end: TimeType = None,
-        fields: Union[str, list] = None,
-        ticker: Union[str, int, list] = None,
+        fields: Union[str, Sequence] = None,
+        ticker: Union[str, int, Sequence] = None,
         engine: Literal["py", "sql"] = "py",
         **kwargs,
     ):
