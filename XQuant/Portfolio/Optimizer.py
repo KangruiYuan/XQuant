@@ -5,8 +5,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.optimize as sco
 
-from XQuant import DataAPI, datatables, Formatter
-from XQuant import TimeType
+from ..Collector import DataAPI
+from ..Consts import datatables
+from ..Utils import Formatter
+from ..Schema import TimeType, OptimizeResult
 
 
 class Portfolio:
@@ -130,6 +132,11 @@ class Portfolio:
         plt.ylabel("expected return")
         plt.colorbar(label="Sharpe ratio")
         plt.show()
+
+        return {
+            "optv": OptimizeResult(name=self.ticker, **optv),
+            "opts": OptimizeResult(name=self.ticker, **opts),
+        }
 
     def statistics(self, weights: Sequence[float]):
         weights = np.array(weights)

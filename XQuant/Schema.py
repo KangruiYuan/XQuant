@@ -1,19 +1,38 @@
-from typing import NamedTuple, Union, Literal, Optional, Callable
 from datetime import datetime, date
+from enum import Enum
+from pathlib import Path
+from typing import NamedTuple, Union, Optional, Callable, Sequence
 
 import pandas as pd
-from pandas import Timestamp, DatetimeIndex, Series
-from pydantic import BaseModel
-from pathlib import Path
-from enum import Enum
-from pandas import Series
 from numpy import ndarray
+from pandas import Series, Timestamp, DatetimeIndex
 
-TimeArrays = Union[Series, Timestamp, DatetimeIndex, list, tuple, ndarray]
+from pydantic import BaseModel, Field
+
 TimeType = Union[str, int, datetime, date, Timestamp, DatetimeIndex]
-
-
+TimeArrays = Union[Series, Timestamp, DatetimeIndex, Sequence[TimeType]]
 ArrayType = Union[Series, ndarray, list, pd.DataFrame]
+
+class ModifiedModel(BaseModel):
+    class Config:
+        arbitrary_types_allowed = True
+
+class OptimizeResult(ModifiedModel):
+    weight: ndarray = Field(alias='x')
+    target: float = Field(alias='fun')
+    message: str
+    success: bool
+    status: int
+    njev: int
+    nfev: int
+    nit: int
+    jac: ndarray
+    name: Sequence
+
+    @property
+    def portfolio(self):
+        return dict(zip(self.name, self.weight))
+
 
 class Strategy(str, Enum):
 
@@ -24,7 +43,7 @@ class Strategy(str, Enum):
     SELF_DEFINED = "self_defined"
 
 
-class BackTestOptions(BaseModel):
+class BackTestOptions(ModifiedModel):
     # 基本属性
     begin: TimeType = None
     end: TimeType = None
@@ -46,8 +65,7 @@ class BackTestOptions(BaseModel):
     # 其他属性
     verbose: bool = False
 
-    class Config:
-        arbitrary_types_allowed = True
+
 
 
 class RtnResult(NamedTuple):
