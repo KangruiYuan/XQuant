@@ -1,17 +1,10 @@
-from datetime import datetime, date
-from enum import Enum
 from pathlib import Path
-from typing import NamedTuple, Union, Optional, Callable, Sequence
-
-import pandas as pd
+from typing import NamedTuple, Optional, Callable, Sequence
 from numpy import ndarray
-from pandas import Series, Timestamp, DatetimeIndex
-
 from pydantic import BaseModel, Field
+from .Types import TimeType
+from .Enums import Strategy
 
-TimeType = Union[str, int, datetime, date, Timestamp, DatetimeIndex]
-TimeArrays = Union[Series, Timestamp, DatetimeIndex, Sequence[TimeType]]
-ArrayType = Union[Series, ndarray, list, pd.DataFrame]
 
 class ModifiedModel(BaseModel):
     class Config:
@@ -32,16 +25,6 @@ class OptimizeResult(ModifiedModel):
     @property
     def portfolio(self):
         return dict(zip(self.name, self.weight))
-
-
-class Strategy(str, Enum):
-
-    LONG_ONlY = 'long_only'
-    GROUP = "group"
-    TOP_BOTTOM = "top_bottom"
-    WEIGHT = "weight"
-    SELF_DEFINED = "self_defined"
-
 
 class BackTestOptions(ModifiedModel):
     # 基本属性
@@ -64,9 +47,6 @@ class BackTestOptions(ModifiedModel):
 
     # 其他属性
     verbose: bool = False
-
-
-
 
 class RtnResult(NamedTuple):
     RtnTotal: float

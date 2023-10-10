@@ -22,16 +22,26 @@ class Portfolio:
         self.returns = None
 
     def get_close_and_returns(
-        self, name: str = "MktEqud", value: str = "closePrice", **kwargs
+        self, name: str = "MktEqud", **kwargs
     ):
-        df = DataAPI.get_data(
-            name=name, ticker=self.ticker, begin=self.begin, end=self.end, **kwargs
-        )
+        if name in ["MktEqud", "uqer_MktEqud"]:
+            close_value = "closePrice"
+            return_value = "chgPct"
+        else:
+            raise ValueError(f"Unknown Tablename: %s" % name)
         ticker_column = datatables[name]["ticker_column"]
         date_column = datatables[name]["date_column"]
-        df = df.pivot(columns=ticker_column, index=date_column, values=value)
-        closes = Formatter.dataframe(df, columns=False)
-        returns = np.log(closes / closes.shift(1))
+        df = DataAPI.get_data(
+            name=name, ticker=self.ticker, begin=self.begin, end=self.end,
+            fields=[ticker_column, date_column, close_value, return_value] ,**kwargs
+        )
+
+        closes = df.pivot(columns=ticker_column, index=date_column, values=close_value)
+        closes = Formatter.dataframe(closes, columns=False)
+
+        returns = df.pivot(columns=ticker_column, index=date_column, values=return_value)
+        returns = Formatter.dataframe(returns, columns=False)
+
         self.closes = closes
         self.returns = returns
         return closes, returns
