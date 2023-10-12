@@ -29,10 +29,22 @@
     "date_column": "tradeDate",
     "ticker_column": "ticker"
     },
+  "uqer_mkt_equd_adj" : {
+    "assets": "sql",
+    "description": "",
+    "date_column": "tradedate",
+    "ticker_column": "ticker"
+    },
   "uqer_ResConSecCorederi" : {
     "assets": "sql",
     "description": "",
     "date_column": "repForeDate",
     "ticker_column": "secCode"
+    },
+  "uqer_FdmtIndiPSPit" : {
+    "assets": "sql",
+    "description": "",
+    "date_column": "endDate",
+    "ticker_column": "ticker"
     }
 }

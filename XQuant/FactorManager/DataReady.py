@@ -80,8 +80,14 @@ class DataReady(Processer, DataAPI):
         回报率
         :return:
         """
+        if self.sql:
+            name = "uqer_MktEqud"
+            # name = "uqer_mkt_equd_adj"
+        else:
+            name = "MktEqud"
+        value = "chgPct"
         return self.get_pivot_df(
-            key_value="chgPct", name="MktEqud", begin=self.begin, end=self.end
+            key_value=value, name=name, begin=self.begin, end=self.end
         )
 
     @cached_property
@@ -90,8 +96,16 @@ class DataReady(Processer, DataAPI):
         换手率
         :return:
         """
+        if self.sql:
+            # name = "uqer_MktEqud"
+            name = "uqer_mkt_equd_adj"
+            value = "turnovervalue"
+        else:
+            name = "MktEqud"
+            value ="turnoverValue"
+
         return self.get_pivot_df(
-            key_value="turnoverValue", name="MktEqud", begin=self.begin, end=self.end
+            key_value=value, name=name, begin=self.begin, end=self.end
         )
 
     @cached_property
@@ -202,8 +216,16 @@ class DataReady(Processer, DataAPI):
         流通市值
         :return:
         """
+        if self.sql:
+            # name = "uqer_MktEqud"
+            name = "uqer_mkt_equd_adj"
+            value = "negmarketvalue"
+        else:
+            name = "MktEqud"
+            value = "negMarketValue"
+
         return self.get_pivot_df(
-            key_value="negMarketValue", name="MktEqud", begin=self.begin, end=self.end
+            key_value=value, name=name, begin=self.begin, end=self.end
         )
 
     @cached_property
@@ -212,8 +234,12 @@ class DataReady(Processer, DataAPI):
         每股盈余
         :return:
         """
+        if self.sql:
+            name = "uqer_FdmtIndiPSPit"
+        else:
+            name = "FdmtIndiPSPit"
         return self.get_pivot_df(
-            key_value="EPS", name="FdmtIndiPSPit", begin=self.begin, end=self.end
+            key_value="EPS", name=name, begin=self.begin, end=self.end
         )
 
     @cached_property

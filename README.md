@@ -20,7 +20,7 @@
 | Scripts       | 项目相关的实用脚本  |                                             |                                                                                            暂无 |
 | StreamWeb     |   可视化网页    |                                             |    请运行[RunWeb.py](https://github.com/KangruiYuan/XQuant/blob/master/XQuant/Scripts/RunWeb.py) |
 | BackTester    |    因子回测    |                                             |   [BackTester.ipynb](https://github.com/KangruiYuan/XQuant/blob/master/Demo/BackTester.ipynb) |
-| Portfolio     |   资产组合优化   |                                             |    [BackTester.ipynb](https://github.com/KangruiYuan/XQuant/blob/master/Demo/Portfolio.ipynb) |
+| Portfolio     |   资产组合优化   |                                             |    [Portfolio.ipynb](https://github.com/KangruiYuan/XQuant/blob/master/Demo/Portfolio.ipynb) |
 | ORMdev        |    ORM     |                                             |                                                                                            暂无 |
 
 

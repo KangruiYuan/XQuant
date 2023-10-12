@@ -231,7 +231,12 @@ class TradeDate:
         """
         date_repr = cls.format_date(date_repr)
         res, index = cls.binary_search(cls.trade_date_list, date_repr)
-        return cls.trade_date_list[index + lag]
+        res_index = index + lag
+        if res_index < 0:
+            res_index = 0
+        elif res_index >= len(cls.trade_date_list):
+            res_index = -1
+        return cls.trade_date_list[res_index]
 
     @classmethod
     def range_trade_date(cls, begin: TimeType, end: TimeType = None, lag: int = None):
@@ -320,7 +325,7 @@ class Formatter:
             date_repr: Union[TimeType, pd.Series, list, tuple],
             **kwargs,
     ) -> pd.Series | pd.Timestamp:
-        if isinstance(date_repr, (list, tuple, pd.Series, pd.DatetimeIndex)):
+        if isinstance(date_repr, (list, tuple, pd.Series, pd.DatetimeIndex, pd.Index)):
             if isinstance(date_repr[0], (datetime, date, pd.DatetimeIndex, pd.Timestamp)):
                 return pd.to_datetime(date_repr)
             elif isinstance(date_repr[0], (int, str)):

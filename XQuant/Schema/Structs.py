@@ -30,7 +30,7 @@ class BackTestOptions(ModifiedModel):
     # 基本属性
     begin: TimeType = None
     end: TimeType = None
-    cache: Path = Path(__file__).parent / "Temp" / "BackTestCache"
+    cache: Path = Path(__file__).parents[1] / "Temp" / "BackTestCache"
     surname: str = "Default"
     bench_code: str = "000300"
     clean_cache: bool = False
@@ -39,6 +39,7 @@ class BackTestOptions(ModifiedModel):
     standardize: bool = False
     demean: bool = False
     quantile: float = 0.1
+    direction: int = 0
 
     # 回测属性
     group_nums: int = 5

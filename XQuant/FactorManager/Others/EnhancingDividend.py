@@ -2,7 +2,7 @@ from datetime import date
 
 import numpy as np
 import pandas as pd
-from XQuant import Formatter, TradeDate
+from ...Utils import Formatter, TradeDate
 
 from ..BarraCNE6 import BARRA
 from functools import cached_property
@@ -35,16 +35,16 @@ class EnhancingDividend(BARRA):
 
     @cached_property
     def _bool_neg_market_value(self):
-        df = self.neg_market_value
+        df = self.neg_market_value.ffill()
         df = df.apply(lambda x: x > 1e10)
         df = df.fillna(0)
         return df
 
     @cached_property
     def _bool_turnover(self):
-        df = self.turnover
+        df = self.turnover.ffill()
         df = self.pandas_parallelcal(
-            df, myfunc=lambda x: np.nanmean(x) > 1e7, window=6 * 21
+            df, func=lambda x: np.nanmean(x) > 1e7, window=6 * 21
         )
         df = df.fillna(0)
         return df
@@ -60,7 +60,7 @@ class EnhancingDividend(BARRA):
     @cached_property
     def _bool_EPS(self):
         df = self.EPS
-        df = df.resample("Q").mean()
+        df = df.resample("Q").mean().ffill()
         # 计算最近一年的增长率
         df = (df - df.shift(4)) / df.shift(4)
         # 取三年增长率之和
@@ -91,4 +91,9 @@ class EnhancingDividend(BARRA):
             ]
         )
         D_t = _bool_neg_market_value & _bool_turnover & _bool_per_cash_div & _bool_EPS
-        return DTOP * D_t
+        DTOP = DTOP.ffill()
+        res = (DTOP * D_t).ffill()
+        half_year_res = res.resample("6M").mean()
+        half_year_res.index = list(map(lambda x: TradeDate.shift_trade_date(x, -1), half_year_res.index))
+        expand_res = Formatter.expand_dataframe(half_year_res, begin=self.begin, end=self.end)
+        return expand_res

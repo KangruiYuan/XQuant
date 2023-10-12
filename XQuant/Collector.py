@@ -144,7 +144,8 @@ class DataAPI:
         if fields is None:
             fields = "*"
         else:
-            fields = ",".join(fields)
+
+            fields = ",".join(['"' + f + '"' for f in fields])
         SQL_QUERY = [f'SELECT {fields} FROM "{name}"']
         params = {}
         condition = "WHERE"
@@ -152,17 +153,17 @@ class DataAPI:
         date_column = datatables[name]["date_column"]
 
         if ticker is not None and ticker_column:
-            SQL_QUERY.append(f"{condition} {ticker_column} IN %(ticker)s")
+            SQL_QUERY.append(f'{condition} "{ticker_column}" IN %(ticker)s')
             params["ticker"] = tuple(ticker)
             condition = "AND"
 
         if begin is not None and date_column:
-            SQL_QUERY.append(f"{condition} {date_column} >= %(begin)s")
+            SQL_QUERY.append(f'{condition} "{date_column}" >= %(begin)s')
             params["begin"] = begin
             condition = "AND"
 
         if end is not None and date_column:
-            SQL_QUERY.append(f"{condition} {date_column} <= %(end)s")
+            SQL_QUERY.append(f'{condition} "{date_column}" <= %(end)s')
             params["end"] = end
             condition = "AND"
         SQL_QUERY = " ".join(SQL_QUERY) + ";"

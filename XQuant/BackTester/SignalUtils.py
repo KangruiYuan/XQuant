@@ -63,12 +63,16 @@ def categorize_signal_by_quantiles(
     return pd.DataFrame(data=result_mtx, index=signal.index, columns=signal.columns)
 
 
-def signal_to_top_bottom_weight(signal: pd.DataFrame, quantile: float = 0.1):
+def signal_to_top_bottom_weight(signal: pd.DataFrame, quantile: float = 0.1, direction: int = 0):
     """
     对信号逐行(即对每天的个股因子)进行多空对冲的权重计算
     - quantile为top和bottom的比例, 默认为10%
     - 输入为NaN和Inf, 返回权重为0
     - top和bottom内进行等权重划分
+    - direction:
+        0: for both
+        1: top only
+        2: bottom only
     """
     signal_arr = signal.values.copy()
     ranks = (signal_arr.argsort().argsort() + 1).astype(float)
@@ -80,10 +84,17 @@ def signal_to_top_bottom_weight(signal: pd.DataFrame, quantile: float = 0.1):
     ceil_bottom_quantile = count * quantile
 
     # equal size for both top group and bottom group (ceil for top,floor for bottom)
-    weight_arr = weights * (
-        (ranks > np.ceil(floor_top_quantile)).astype(float)
-        - (ranks <= np.floor(ceil_bottom_quantile)).astype(float)
-    )
+    if direction == 0:
+        weight_arr = weights * (
+            (ranks > np.ceil(floor_top_quantile)).astype(float)
+            - (ranks <= np.floor(ceil_bottom_quantile)).astype(float)
+        )
+    elif direction == 1:
+        weight_arr = weights * (ranks > np.ceil(floor_top_quantile)).astype(float)
+    elif direction == 2:
+        weight_arr = - weights * (ranks <= np.floor(ceil_bottom_quantile)).astype(float)
+    else:
+        raise NotImplementedError("direction must be one of [0,1,2]")
 
     weight_arr[~np.isfinite(weight_arr)] = 0.0
     return pd.DataFrame(data=weight_arr, index=signal.index, columns=signal.columns)

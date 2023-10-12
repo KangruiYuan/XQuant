@@ -8,6 +8,7 @@ from ..Schema import BackTestOptions, Strategy
 from ..Utils import Formatter, TradeDate
 from .SignalUtils import *
 import plotly.graph_objects as go
+from datetime import datetime
 import plotly.express as px
 
 
@@ -24,6 +25,9 @@ class BackTestRunner:
         self.work_folder: Path = None
         self.date_range_str: str = None
         self.cache: dict[str, Any] = {}
+
+        if self.options.end is None:
+            self.options.end = datetime.today()
 
     def prepare(self):
         self.prepare_signals()
@@ -60,6 +64,7 @@ class BackTestRunner:
         self.date_range_str = f"{self.options.begin.strftime('%Y%m%d')}-{self.options.end.strftime('%Y%m%d')}-{self._hash_mark}"
 
         self.global_folder = self.options.cache / self.date_range_str
+        print("Cache: {}".format(self.global_folder))
         self.resource_folder = self.global_folder / "resource"
         self.work_folder = self.global_folder / self.options.surname
 
@@ -81,8 +86,11 @@ class BackTestRunner:
             price_file = self.resource_folder / f"{fea}.csv"
             if fea not in self.cache[self.date_range_str]:
                 if price_file.exists():
+                    print(f"Loading {fea} from cache ...")
                     df = pd.read_csv(price_file, index_col=["date"], parse_dates=True)
                 else:
+                    print(f"Loading {fea} from database ...")
+                    # print(self.data_manager.begin, self.data_manager.end)
                     df = getattr(self.data_manager, fea)
                     df.to_csv(price_file, index_label="date")
                 self.cache[self.date_range_str][fea] = df
@@ -107,13 +115,11 @@ class BackTestRunner:
         self.signals.to_csv(self.work_folder / "signals.csv", index_label="date")
 
     def run(self):
-        self.prepare()
-        self.adjust_signal()
         if self.options.method in [
             Strategy.LONG_ONlY,
             Strategy.WEIGHT,
             Strategy.TOP_BOTTOM,
-            Strategy.SELF_DEFINED
+            Strategy.SELF_DEFINED,
         ]:
             if self.options.method in [Strategy.LONG_ONlY, Strategy.TOP_BOTTOM]:
                 assert np.all(
@@ -143,23 +149,35 @@ class BackTestRunner:
                         weights = self.options.function(self.signals)
                     else:
                         raise NotImplemented(f"Method {self.options.method.value}")
-                    weights.to_csv(weights_csv, index_label="date")
+                    save_weight_flag = True
                 else:
                     print(f"Loading weight from existing file ...")
                     weights = pd.read_csv(
                         weights_csv, index_col=["date"], parse_dates=True
                     )
+                    save_weight_flag = False
+
                 if not rtn_csv.exists():
+                    raw_returns = self.cache[self.date_range_str]["returns"]
+                    raw_returns, weights = self.data_manager.align_dataframe(
+                        [raw_returns, weights]
+                    )
                     rtn = pd.DataFrame(
-                        data=clean(self.cache[self.date_range_str]["returns"].values)
-                        * weights.values,
+                        data=clean(raw_returns.values) * weights.values,
                         index=weights.index,
                         columns=weights.columns,
                     )
-                    rtn.to_csv(rtn_csv, index_label="date")
+                    save_rtn_flag = True
+                    save_weight_flag = True
                 else:
                     print(f"Loading rtn from existing file ...")
                     rtn = pd.read_csv(rtn_csv, index_col=["date"], parse_dates=True)
+                    save_rtn_flag = False
+
+                if save_rtn_flag:
+                    rtn.to_csv(rtn_csv, index_label="date")
+                if save_weight_flag:
+                    weights.to_csv(weights_csv, index_label="date")
 
                 self.cache[self.date_range_str][self.options.method.value] = {
                     "weights": weights,
@@ -175,6 +193,8 @@ class BackTestRunner:
                 for group in range(self.options.group_nums):
                     weights_csv = self.work_folder / f"group_{group}_weight.csv"
                     rtn_csv = self.work_folder / f"group_{group}_rtn.csv"
+                    save_weight_flag = True
+                    save_rtn_flag = True
                     if (
                         group in self.cache[self.date_range_str]
                         and "weights"
@@ -189,12 +209,12 @@ class BackTestRunner:
                         weights = pd.read_csv(
                             weights_csv, index_col=["date"], parse_dates=True
                         )
+                        save_weight_flag = False
                     else:
                         weights = signal_to_weight(
                             (group_categorize == group).astype(int)
                         )
-
-                        weights.to_csv(weights_csv, index_label="date")
+                        save_weight_flag = True
 
                     if (
                         group in self.cache[self.date_range_str]
@@ -208,17 +228,24 @@ class BackTestRunner:
                         ][group]["rtn"]
                     elif rtn_csv.exists():
                         rtn = pd.read_csv(rtn_csv, index_col=["date"], parse_dates=True)
+                        save_rtn_flag = False
                     else:
+                        raw_returns = self.cache[self.date_range_str]["returns"]
+                        raw_returns, weights = self.data_manager.align_dataframe(
+                            [raw_returns, weights]
+                        )
                         rtn = pd.DataFrame(
-                            data=clean(
-                                self.cache[self.date_range_str]["returns"].values
-                            )
-                            * weights.values,
+                            data=clean(raw_returns.values) * weights.values,
                             index=weights.index,
                             columns=weights.columns,
                         )
+                        save_rtn_flag = True
+                        save_weight_flag = True
 
+                    if save_rtn_flag:
                         rtn.to_csv(rtn_csv, index_label="date")
+                    if save_weight_flag:
+                        weights.to_csv(weights_csv, index_label="date")
 
                     self.cache[self.date_range_str][self.options.method.value][
                         group
