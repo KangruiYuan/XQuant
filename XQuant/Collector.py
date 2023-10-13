@@ -145,12 +145,12 @@ class DataAPI:
             fields = "*"
         else:
 
-            fields = ",".join(['"' + f + '"' for f in fields])
+            fields = ",".join([f.lower() for f in fields])
         SQL_QUERY = [f'SELECT {fields} FROM "{name}"']
         params = {}
         condition = "WHERE"
-        ticker_column = datatables[name]["ticker_column"]
-        date_column = datatables[name]["date_column"]
+        ticker_column = datatables[name]["ticker_column"].lower()
+        date_column = datatables[name]["date_column"].lower()
 
         if ticker is not None and ticker_column:
             SQL_QUERY.append(f'{condition} "{ticker_column}" IN %(ticker)s')

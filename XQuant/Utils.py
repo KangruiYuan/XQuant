@@ -370,9 +370,13 @@ class Formatter:
             raise TypeError("data must be a DataFrame")
 
         if index:
-            new_index = cls.format_index(res, **kwargs)
+            new_index, full_index = cls.format_index(res, **kwargs)
         else:
-            new_index = res.index
+            new_index, full_index = res.index, res.index
+
+        # if len(set(new_index)) < len(new_index):
+        #     res = res.reset_index(names="index")
+        #     res = res.groupby("index").apply(lambda x: x[~np.isfinite(x)])
 
         if columns:
             new_columns = cls.format_columns(res, **kwargs)
@@ -380,22 +384,41 @@ class Formatter:
             new_columns = res.columns
 
         fill_value = kwargs.get("fill", np.nan)
-        return res.reindex(index=new_index, columns=new_columns, fill_value=fill_value)
+        res = res.reindex(index=full_index, columns=new_columns, fill_value=fill_value).ffill()
+        res = res.loc[new_index]
+        return res
 
     @classmethod
     def format_index(cls, res: pd.DataFrame, **kwargs):
         try:
-            res.index = pd.to_datetime(TradeDate.format_date(res.index).strftime("%Y-%m-%d"))
+            index = TradeDate.format_date(res.index).strftime("%Y-%m-%d")
+            # index = list(index)
         except ValueError as ve:
             raise ve
 
+        # print(res.index.min(), res.index.max())
+        # index = list(index)
+        # for i in range(len(index)):
+        #     index[i] = index[i] if TradeDate.is_trade_date(index[i]) else TradeDate.shift_trade_date(index[i], -1)
+        # print(res.index.min(), res.index.max())
+
+        res.index = pd.to_datetime(index)
         begin = kwargs.get("begin", res.index.min())
         end = kwargs.get("end", res.index.max())
 
         new_index = pd.date_range(begin, end, freq="D").intersection(
             TradeDate.trade_date_list
         )
-        return new_index
+        full_index = new_index.union(res.index)
+        # print(len(new_index))
+        return new_index, full_index
+
+    @classmethod
+    def transform_index(cls, df: pd.DataFrame):
+        index = list(df.index)
+        for i in range(len(index)):
+            index[i] = index[i] if TradeDate.is_trade_date(index[i]) else TradeDate.shift_trade_date(index[i], -1)
+        df.index = pd.to_datetime(index)
 
     @classmethod
     def format_columns(cls, res: pd.DataFrame, kind: str = "stock", **kwargs):

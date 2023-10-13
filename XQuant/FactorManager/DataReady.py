@@ -45,9 +45,11 @@ class DataReady(Processer, DataAPI):
             df = df.drop_duplicates(subset=[index, column], keep="last")
         index_rename = kwargs.get("index_rename", "date")
         column_rename = kwargs.get("column_rename", "ticker")
+
         df = df.rename(columns={index: index_rename, column: column_rename})
         df = df.pivot(index=index_rename, values=key_value, columns=column_rename)
-        df = Formatter.dataframe(df)
+
+        df = Formatter.dataframe(df, **kwargs)
         df = df.sort_index()
         return df
 
@@ -236,10 +238,12 @@ class DataReady(Processer, DataAPI):
         """
         if self.sql:
             name = "uqer_FdmtIndiPSPit"
+            value = "eps"
         else:
             name = "FdmtIndiPSPit"
+            value = "EPS"
         return self.get_pivot_df(
-            key_value="EPS", name=name, begin=self.begin, end=self.end
+            key_value=value, name=name, begin=self.begin, end=self.end
         )
 
     @cached_property

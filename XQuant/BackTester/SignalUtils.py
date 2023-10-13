@@ -1,5 +1,8 @@
 import numpy as np
 import pandas as pd
+import warnings
+
+warnings.filterwarnings("ignore")
 
 
 def clean(arr: np.ndarray, inplace=False, fill_value=0.0) -> np.ndarray:

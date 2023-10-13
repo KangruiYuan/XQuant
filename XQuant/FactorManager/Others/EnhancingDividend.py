@@ -29,14 +29,14 @@ class EnhancingDividend(BARRA):
     """
 
     def __init__(self, begin: TimeType, end: TimeType = None, **kwargs):
-        begin = TradeDate.shift_trade_date(begin, lag=-504)
+        begin = TradeDate.shift_trade_date(begin, lag=-252*3)
         end = end if end else date.today().strftime("%Y%m%d")
         super().__init__(begin, end, **kwargs)
 
     @cached_property
     def _bool_neg_market_value(self):
         df = self.neg_market_value.ffill()
-        df = df.apply(lambda x: x > 1e10)
+        df = df.apply(lambda x: x > 1e9)
         df = df.fillna(0)
         return df
 
@@ -44,7 +44,7 @@ class EnhancingDividend(BARRA):
     def _bool_turnover(self):
         df = self.turnover.ffill()
         df = self.pandas_parallelcal(
-            df, func=lambda x: np.nanmean(x) > 1e7, window=6 * 21
+            df, func=lambda x: np.nanmean(x) >= 1e7, window=6 * 21
         )
         df = df.fillna(0)
         return df
@@ -52,8 +52,12 @@ class EnhancingDividend(BARRA):
     @cached_property
     def _bool_per_cash_div(self):
         df = self.per_cash_div
-        df = df.groupby(pd.Grouper(freq="Y")).sum().replace(0, np.nan).ffill()
-        df = df.rolling(window=3).apply(lambda x: np.nanmean(x) >= 0.05, raw=True)
+        df = df.groupby(pd.Grouper(freq="Y")).mean().ffill()
+        df = ((df - df.shift(1)) / df.shift(1)).ffill()
+        df = df.rolling(window=3).apply(lambda x: np.nanmean(x) >= 0.05, raw=True).ffill()
+        # df = df.rolling(window=3).apply(lambda x: np.nanmean(x) >= 0.05, raw=True).ffill()
+        # df.index = list(map(lambda x: TradeDate.shift_trade_date(x, -1), df.index))
+        Formatter.transform_index(df)
         df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
@@ -63,13 +67,14 @@ class EnhancingDividend(BARRA):
         df = df.resample("Q").mean().ffill()
         # 计算最近一年的增长率
         df = (df - df.shift(4)) / df.shift(4)
-        # 取三年增长率之和
+        # 取三年增长率平均
         df = (
             df.rolling(window=9)
-            .apply(lambda x: np.nansum(x[[-1, -5, 0]]), raw=True)
-            .fillna(0)
+            .apply(lambda x: np.nanmean(x[[-1, -5, 0]]), raw=True).ffill()
         )
-        df = df.rolling(window=2).apply(lambda x: any(x > 0)).fillna(0)
+        df = df.rolling(window=2).apply(lambda x: any(x > 0)).ffill()
+        # df.index = list(map(lambda x: TradeDate.shift_trade_date(x, -1), df.index))
+        Formatter.transform_index(df)
         df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
@@ -93,7 +98,7 @@ class EnhancingDividend(BARRA):
         D_t = _bool_neg_market_value & _bool_turnover & _bool_per_cash_div & _bool_EPS
         DTOP = DTOP.ffill()
         res = (DTOP * D_t).ffill()
-        half_year_res = res.resample("6M").mean()
+        half_year_res = res.resample("6M").last()
         half_year_res.index = list(map(lambda x: TradeDate.shift_trade_date(x, -1), half_year_res.index))
         expand_res = Formatter.expand_dataframe(half_year_res, begin=self.begin, end=self.end)
         return expand_res

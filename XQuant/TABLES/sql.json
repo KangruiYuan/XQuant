@@ -44,7 +44,7 @@
   "uqer_FdmtIndiPSPit" : {
     "assets": "sql",
     "description": "",
-    "date_column": "endDate",
+    "date_column": "enddate",
     "ticker_column": "ticker"
     }
 }
