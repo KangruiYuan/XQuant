@@ -18,5 +18,5 @@ logger.add(
     enqueue=True,
     rotation="12:00",
     compression="zip",
-    retention="5 days",
+    # retention="5 days",
 )
