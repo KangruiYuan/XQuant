@@ -50,3 +50,15 @@ short_market_orders = [
         "order_type": OrderType.MARKET,
     },
 ]
+
+short_limit_orders = [
+    {
+        "symbol": "6A2312",
+        "exchange": Exchange.CME,
+        "price": 5.5,
+        "volume": 1,
+        "direction": Direction.SHORT,
+        "offset": Offset.CLOSETODAY,
+        "order_type": OrderType.LIMIT,
+    },
+]

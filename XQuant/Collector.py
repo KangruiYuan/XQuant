@@ -7,6 +7,7 @@ from typing import Union, Literal, Callable, Sequence
 import numpy as np
 import pandas as pd
 from pandas.errors import ParserError
+from sqlalchemy import text
 
 from .Consts import datatables
 from .Utils import Config, TradeDate, Formatter
@@ -147,29 +148,30 @@ class DataAPI:
 
             fields = ",".join([f.lower() for f in fields])
         SQL_QUERY = [f'SELECT {fields} FROM "{name}"']
-        params = {}
+        # params = {}
         condition = "WHERE"
         ticker_column = datatables[name]["ticker_column"].lower()
         date_column = datatables[name]["date_column"].lower()
 
         if ticker is not None and ticker_column:
-            SQL_QUERY.append(f'{condition} "{ticker_column}" IN %(ticker)s')
-            params["ticker"] = tuple(ticker)
+            _tmp = ",".join(["'" + t + "'" for t in ticker])
+            SQL_QUERY.append(f'{condition} "{ticker_column}" IN ({_tmp})')
+            # params["ticker"] = tuple(ticker)
             condition = "AND"
 
         if begin is not None and date_column:
-            SQL_QUERY.append(f'{condition} "{date_column}" >= %(begin)s')
-            params["begin"] = begin
+            SQL_QUERY.append(f'{condition} "{date_column}" >= \'{begin.strftime("%Y-%m-%d")}\'')
+            # params["begin"] = begin
             condition = "AND"
 
         if end is not None and date_column:
-            SQL_QUERY.append(f'{condition} "{date_column}" <= %(end)s')
-            params["end"] = end
+            SQL_QUERY.append(f'{condition} "{date_column}" <= \'{end.strftime("%Y-%m-%d")}\'')
+            # params["end"] = end
             condition = "AND"
         SQL_QUERY = " ".join(SQL_QUERY) + ";"
         if kwargs.get('verbose', False):
             print(SQL_QUERY)
-        df = pd.read_sql_query(SQL_QUERY, conn, params=params)
+        df = pd.read_sql_query(text(SQL_QUERY), conn.connect())
         return df
 
     @classmethod

@@ -45,6 +45,7 @@ class BackTestOptions(ModifiedModel):
     group_nums: int = 5
     method: Strategy = Strategy.GROUP
     function: Optional[Callable] = None
+    shift: int = 1
 
     # 其他属性
     verbose: bool = False

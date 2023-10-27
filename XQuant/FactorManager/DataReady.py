@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 from .Processer import Processer
-from ..Utils import TimeType, Config, Formatter
+from ..Utils import TimeType, Config, Formatter, TradeDate
 from ..Collector import DataAPI
 from datetime import date
 from functools import cached_property
@@ -1012,15 +1012,32 @@ class DataReady(Processer, DataAPI):
     @cached_property
     def bench(self):
         assert self.bench_code is not None
+        # df = self.get_data(
+        #     name="uqer_MktIdx",
+        #     ticker=self.bench_code,
+        #     begin=self.begin,
+        #     end=self.end,
+        #     fields=["tradedate", "chgpct"],
+        # )
+        # df = df.rename(columns={"chgpct": "returns", "tradedate": "date"})
+        # df = df.set_index("date")
+        # df.index = pd.to_datetime(df.index)
+        # df = df.sort_index()
+        # return df
         df = self.get_data(
-            name="uqer_MktIdx",
+            name="gmData_bench_price",
             ticker=self.bench_code,
-            begin=self.begin,
-            end=self.end,
-            fields=["tradedate", "chgpct"],
+            begin=TradeDate.shift_trade_date(self.begin, -1),
+            end=TradeDate.shift_trade_date(self.end, 1),
+            fields=["trade_date", "pre_close"],
         )
-        df = df.rename(columns={"chgpct": "returns", "tradedate": "date"})
+        df = df.rename(columns={"trade_date": "date"})
         df = df.set_index("date")
         df.index = pd.to_datetime(df.index)
         df = df.sort_index()
+        df = Formatter.expand_dataframe(df, self.begin, self.end)
+        pre_close = df['pre_close']
+        df["returns"] = (pre_close.shift(-1) - pre_close) / pre_close
+        df = df.drop("pre_close", axis=1)
+        df = df.ffill()
         return df

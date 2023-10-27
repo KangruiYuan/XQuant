@@ -11,6 +11,12 @@
     "date_column": "bob",
     "ticker_column": "symbol"
   },
+  "gmData_bench_price": {
+    "assets": "sql",
+    "description": "",
+    "date_column": "trade_date",
+    "ticker_column": "sec_id"
+  },
     "uqer_MktIdx" : {
     "assets": "sql",
     "description": "",

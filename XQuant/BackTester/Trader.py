@@ -29,7 +29,7 @@ class BackTestRunner:
         if self.options.end is None:
             self.options.end = datetime.today()
 
-    def prepare(self):
+    def prepare(self, **kwargs):
         self.prepare_signals()
         self.data_manager = DataReady(
             begin=self.options.begin,
@@ -39,7 +39,7 @@ class BackTestRunner:
             bench_code=self.options.bench_code,
         )
         self.prepare_path()
-        self.prepare_resource()
+        self.prepare_resource(**kwargs)
 
     def prepare_signals(self):
         signals = Formatter.dataframe(self.signals)
@@ -81,17 +81,18 @@ class BackTestRunner:
 
         self.cache[self.date_range_str] = {}
 
-    def prepare_resource(self):
+    def prepare_resource(self, **kwargs):
         for fea in ["close", "preclose", "bench"]:
             price_file = self.resource_folder / f"{fea}.csv"
             if fea not in self.cache[self.date_range_str]:
                 if price_file.exists():
                     print(f"Loading {fea} from cache ...")
                     df = pd.read_csv(price_file, index_col=["date"], parse_dates=True)
+                    df = df.sort_index()
                 else:
                     print(f"Loading {fea} from database ...")
                     # print(self.data_manager.begin, self.data_manager.end)
-                    df = getattr(self.data_manager, fea)
+                    df = kwargs.get(fea, getattr(self.data_manager, fea))
                     df.to_csv(price_file, index_label="date")
                 self.cache[self.date_range_str][fea] = df
 
@@ -106,11 +107,19 @@ class BackTestRunner:
                 returns.to_csv(self.resource_folder / "returns.csv", index_label="date")
 
     def adjust_signal(self):
+        if self.options.shift != 0:
+            self.signals = self.signals.shift(self.options.shift)
+
         if self.options.standardize:
             self.signals = standardize(self.signals)
 
         if self.options.demean:
             self.signals = demean(self.signals)
+
+        for key in self.cache[self.date_range_str]:
+            df = self.cache[self.date_range_str][key]
+            df = df[(df.index >= self.options.begin) & (df.index < self.options.end)]
+            self.cache[self.date_range_str][key] = df
 
         self.signals.to_csv(self.work_folder / "signals.csv", index_label="date")
 
