@@ -163,3 +163,4 @@ cython_debug/
 /XQuant/Temp/BackTestCache/
 /XQuant/Scripts/VNTrade/setting.json
 /XQuant/Scripts/VNTrade/vn_schema/setting.json
+/Demo/test.ipynb

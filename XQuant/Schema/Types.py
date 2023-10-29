@@ -1,10 +1,12 @@
 from datetime import datetime, date
 from typing import Union, Sequence
 
-import pandas as pd
 from numpy import ndarray
-from pandas import Series, Timestamp, DatetimeIndex
+from pandas import Series, Timestamp, DatetimeIndex, Index
 
-TimeType = Union[str, int, datetime, date, Timestamp, DatetimeIndex]
-TimeArrays = Union[Series, Timestamp, DatetimeIndex, Sequence[TimeType]]
-ArrayType = Union[Series, ndarray, list, pd.DataFrame]
+TimeRaw = Union[str, int]
+TimeReady = Union[datetime, date, Timestamp]
+TimeType = Union[TimeRaw, TimeReady]
+TimeArrays = Union[Series, DatetimeIndex, Sequence, ndarray, Index]
+
+NormalArrays = Union[Series, Sequence, ndarray]
