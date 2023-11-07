@@ -1,4 +1,6 @@
-from XQuant import DataAPI, TimeType, datatables, Formatter, RiskMethod
+from ..Utils import Config, format_dataframe
+from ..Schema import TimeType, RiskMethod
+from ..Collector import DataAPI
 from typing import Sequence, Union, Optional
 from datetime import datetime
 from scipy.stats import norm
@@ -21,8 +23,8 @@ class Risk:
             return_value = "chgPct"
         else:
             raise ValueError(f"Unknown Tablename: %s" % name)
-        ticker_column = datatables[name]["ticker_column"]
-        date_column = datatables[name]["date_column"]
+        ticker_column = Config.datatables[name]["ticker_column"]
+        date_column = Config.datatables[name]["date_column"]
         df = DataAPI.get_data(
             name=name,
             ticker=self.ticker,
@@ -34,7 +36,7 @@ class Risk:
         returns = df.pivot(
             columns=ticker_column, index=date_column, values=return_value
         )
-        returns = Formatter.dataframe(returns, columns=False)
+        returns = format_dataframe(returns, columns=False)
         cumsum_returns = returns.cumsum() + 1
         self.returns = returns
         self.cumsum_returns = cumsum_returns

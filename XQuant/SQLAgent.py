@@ -1,5 +1,5 @@
 from sqlalchemy import create_engine
-from .Utils import Tools
+from .Utils import get_config
 import psycopg2
 
 
@@ -23,7 +23,7 @@ class SQLAgent:
         """
         if config is None:
             try:
-                config = Tools.get_config(section=kwargs.get("section", "postgresql"))
+                config = get_config(section=kwargs.get("section", "postgresql"))
             except KeyError as ke:
                 raise ke
         try:
@@ -49,7 +49,7 @@ class SQLAgent:
         """
         if config is None:
             try:
-                config = Tools.get_config(section=kwargs.get("section", "postgresql"))
+                config = get_config(section=kwargs.get("section", "postgresql"))
             except KeyError as ke:
                 raise ke
         engine = create_engine(

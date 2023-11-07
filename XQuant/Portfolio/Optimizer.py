@@ -6,8 +6,7 @@ import numpy as np
 import scipy.optimize as sco
 
 from ..Collector import DataAPI
-from ..Consts import datatables
-from ..Utils import Formatter
+from ..Utils import Config, format_dataframe
 from ..Schema import TimeType, OptimizeResult
 
 
@@ -21,26 +20,30 @@ class Portfolio:
         self.closes = None
         self.returns = None
 
-    def get_close_and_returns(
-        self, name: str = "MktEqud", **kwargs
-    ):
+    def get_close_and_returns(self, name: str = "MktEqud", **kwargs):
         if name in ["MktEqud", "uqer_MktEqud"]:
             close_value = "closePrice"
             return_value = "chgPct"
         else:
             raise ValueError(f"Unknown Tablename: %s" % name)
-        ticker_column = datatables[name]["ticker_column"]
-        date_column = datatables[name]["date_column"]
+        ticker_column = Config.datatables[name]["ticker_column"]
+        date_column = Config.datatables[name]["date_column"]
         df = DataAPI.get_data(
-            name=name, ticker=self.ticker, begin=self.begin, end=self.end,
-            fields=[ticker_column, date_column, close_value, return_value] ,**kwargs
+            name=name,
+            ticker=self.ticker,
+            begin=self.begin,
+            end=self.end,
+            fields=[ticker_column, date_column, close_value, return_value],
+            **kwargs,
         )
 
         closes = df.pivot(columns=ticker_column, index=date_column, values=close_value)
-        closes = Formatter.dataframe(closes, columns=False)
+        closes = format_dataframe(closes, columns=False)
 
-        returns = df.pivot(columns=ticker_column, index=date_column, values=return_value)
-        returns = Formatter.dataframe(returns, columns=False)
+        returns = df.pivot(
+            columns=ticker_column, index=date_column, values=return_value
+        )
+        returns = format_dataframe(returns, columns=False)
 
         self.closes = closes
         self.returns = returns

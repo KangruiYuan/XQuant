@@ -1,9 +1,11 @@
 {
     "tradeCD": [
-        "HKshszHold"
+        "HKshszHold",
+        "MktEqud"
     ],
     "endDate": [
         "HKshszHold",
+        "MktEqud",
         "FdmtDerPit",
         "FdmtIndiRtnPit",
         "EquDiv_info"
@@ -12,7 +14,7 @@
         "HKshszHold",
         "MktEqud",
         "mIdxCloseWeight",
-        "MktLimit",
+        "MktIdx",
         "SecST",
         "SecHalt",
         "FdmtDerPit",
@@ -29,7 +31,6 @@
         "MktEqud",
         "mIdxCloseWeight",
         "MktIdx",
-        "MktLimit",
         "SecST",
         "SecHalt",
         "FdmtDerPit",
@@ -42,19 +43,24 @@
         "EquDiv_info"
     ],
     "ticketCode": [
-        "HKshszHold"
+        "HKshszHold",
+        "MktEqud"
     ],
     "partyName": [
-        "HKshszHold"
+        "HKshszHold",
+        "MktEqud"
     ],
     "partyVol": [
-        "HKshszHold"
+        "HKshszHold",
+        "MktEqud"
     ],
     "partyPct": [
-        "HKshszHold"
+        "HKshszHold",
+        "MktEqud"
     ],
     "updateTime": [
         "HKshszHold",
+        "MktEqud",
         "ResConIndex",
         "ResConIndexFy12",
         "ResConIndustryCitic",
@@ -75,7 +81,6 @@
         "MktEqud",
         "mIdxCloseWeight",
         "MktIdx",
-        "MktLimit",
         "SecHalt",
         "FdmtDerPit",
         "RMExposureDay",
@@ -86,26 +91,55 @@
         "SecID_IDX_info",
         "EquDiv_info"
     ],
-    "exchangeCD": [
-        "MktEqud",
-        "MktIdx",
-        "MktLimit",
-        "SecST",
-        "SecHalt",
-        "FdmtDerPit",
-        "RMExposureDay",
-        "FdmtIndiRtnPit",
-        "MktEqudEval",
-        "FdmtIndiPSPit",
-        "SecID_E_info",
-        "SecID_IDX_info",
-        "EquDiv_info",
-        "TradeCal"
+    "effDate": [
+        "mIdxCloseWeight",
+        "MktIdx"
+    ],
+    "consID": [
+        "mIdxCloseWeight",
+        "MktIdx"
+    ],
+    "consShortName": [
+        "mIdxCloseWeight",
+        "MktIdx"
+    ],
+    "consTickerSymbol": [
+        "mIdxCloseWeight",
+        "MktIdx"
+    ],
+    "consExchangeCD": [
+        "mIdxCloseWeight",
+        "MktIdx"
+    ],
+    "weight": [
+        "mIdxCloseWeight",
+        "MktIdx"
+    ],
+    "date": [
+        "IndustryID_Sw21",
+        "MktLimit"
+    ],
+    "winCode": [
+        "IndustryID_Sw21",
+        "MktLimit"
+    ],
+    "industryID1": [
+        "IndustryID_Sw21",
+        "MktLimit"
+    ],
+    "industryVersionCD": [
+        "IndustryID_Sw21",
+        "MktLimit"
+    ],
+    "industryName1": [
+        "IndustryID_Sw21",
+        "MktLimit"
+    ],
+    "industry": [
+        "IndustryID_Sw21",
+        "MktLimit"
     ],
     "tradeDate": [
-        "MktEqud",
-        "MktIdx",
-        "MktLimit",
         "SecST",
         "RMExposureDay",
         "MktEqudEval",
@@ -131,161 +165,18 @@
         "SW_primary_industry_index_daily",
         "SW_primary_industry_index_financial"
     ],
-    "preClosePrice": [
-        "MktEqud"
-    ],
-    "actPreClosePrice": [
-        "MktEqud"
-    ],
-    "openPrice": [
-        "MktEqud"
-    ],
-    "highestPrice": [
-        "MktEqud"
-    ],
-    "lowestPrice": [
-        "MktEqud"
-    ],
-    "closePrice": [
-        "MktEqud",
-        "ResConSecTarpriScore"
-    ],
-    "turnoverVol": [
-        "MktEqud",
-        "MktIdx"
-    ],
-    "turnoverValue": [
-        "MktEqud",
-        "MktIdx"
-    ],
-    "dealAmount": [
-        "MktEqud"
-    ],
-    "turnoverRate": [
-        "MktEqud"
-    ],
-    "accumAdjFactor": [
-        "MktEqud"
-    ],
-    "negMarketValue": [
-        "MktEqud",
-        "MktEqudEval",
-        "FdmtIndiPSPit"
-    ],
-    "marketValue": [
-        "MktEqud",
-        "MktEqudEval",
-        "FdmtIndiPSPit"
-    ],
-    "chgPct": [
-        "MktEqud"
-    ],
-    "PE": [
-        "MktEqud",
-        "MktEqudEval",
-        "FdmtIndiPSPit"
-    ],
-    "PE1": [
-        "MktEqud",
-        "MktEqudEval",
-        "FdmtIndiPSPit"
-    ],
-    "PB": [
-        "MktEqud",
+    "exchangeCD": [
+        "SecST",
+        "SecHalt",
+        "FdmtDerPit",
+        "RMExposureDay",
+        "FdmtIndiRtnPit",
         "MktEqudEval",
         "FdmtIndiPSPit",
-        "trading_derivative_indicator"
-    ],
-    "isOpen": [
-        "MktEqud",
+        "SecID_E_info",
+        "SecID_IDX_info",
+        "EquDiv_info",
         "TradeCal"
-    ],
-    "vwap": [
-        "MktEqud"
-    ],
-    "effDate": [
-        "mIdxCloseWeight"
-    ],
-    "consID": [
-        "mIdxCloseWeight"
-    ],
-    "consShortName": [
-        "mIdxCloseWeight"
-    ],
-    "consTickerSymbol": [
-        "mIdxCloseWeight"
-    ],
-    "consExchangeCD": [
-        "mIdxCloseWeight"
-    ],
-    "weight": [
-        "mIdxCloseWeight"
-    ],
-    "indexID": [
-        "MktIdx",
-        "ResConIndex",
-        "ResConIndexFy12",
-        "ResConIndustryCitic",
-        "ResConIndustryCiticFy12",
-        "ResConIndustrySw",
-        "ResConIndustrySwFy12"
-    ],
-    "porgFullName": [
-        "MktIdx"
-    ],
-    "preCloseIndex": [
-        "MktIdx"
-    ],
-    "openIndex": [
-        "MktIdx"
-    ],
-    "lowestIndex": [
-        "MktIdx"
-    ],
-    "highestIndex": [
-        "MktIdx"
-    ],
-    "closeIndex": [
-        "MktIdx"
-    ],
-    "CHG": [
-        "MktIdx"
-    ],
-    "CHGPct": [
-        "MktIdx"
-    ],
-    "date": [
-        "IndustryID_Sw21"
-    ],
-    "winCode": [
-        "IndustryID_Sw21"
-    ],
-    "industryID1": [
-        "IndustryID_Sw21"
-    ],
-    "industryVersionCD": [
-        "IndustryID_Sw21"
-    ],
-    "industryName1": [
-        "IndustryID_Sw21"
-    ],
-    "industry": [
-        "IndustryID_Sw21"
-    ],
-    "secShortNameEn": [
-        "MktLimit"
-    ],
-    "limitUpPrice": [
-        "MktLimit"
-    ],
-    "limitDownPrice": [
-        "MktLimit"
-    ],
-    "upLimitReachedTimes": [
-        "MktLimit"
-    ],
-    "downLimitReachedTimes": [
-        "MktLimit"
     ],
     "tradeAbbrName": [
         "SecST"
@@ -313,6 +204,14 @@
         "SecHalt",
         "SecID_E_info",
         "SecID_IDX_info"
+    ],
+    "indexID": [
+        "ResConIndex",
+        "ResConIndexFy12",
+        "ResConIndustryCitic",
+        "ResConIndustryCiticFy12",
+        "ResConIndustrySw",
+        "ResConIndustrySwFy12"
     ],
     "indexCode": [
         "ResConIndex",
@@ -727,6 +626,9 @@
     "scoreLastDate": [
         "ResConSecTarpriScore"
     ],
+    "closePrice": [
+        "ResConSecTarpriScore"
+    ],
     "conTarReturn": [
         "ResConSecTarpriScore"
     ],
@@ -1008,9 +910,30 @@
         "FdmtIndiRtnPit",
         "deriv_finance_indicator"
     ],
+    "marketValue": [
+        "MktEqudEval",
+        "FdmtIndiPSPit"
+    ],
+    "negMarketValue": [
+        "MktEqudEval",
+        "FdmtIndiPSPit"
+    ],
+    "PE": [
+        "MktEqudEval",
+        "FdmtIndiPSPit"
+    ],
+    "PE1": [
+        "MktEqudEval",
+        "FdmtIndiPSPit"
+    ],
     "PE2": [
         "MktEqudEval",
         "FdmtIndiPSPit"
+    ],
+    "PB": [
+        "MktEqudEval",
+        "FdmtIndiPSPit",
+        "trading_derivative_indicator"
     ],
     "PS": [
         "MktEqudEval",
@@ -1175,7 +1098,6 @@
         "fundamentals_cashflow",
         "fundamentals_income",
         "share_change",
-        "gmData_bench_price",
         "trading_derivative_indicator",
         "deriv_finance_indicator",
         "balance_sheet",
@@ -1448,21 +1370,18 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "margin_ratio": [
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "pre_close": [
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "market_financial_sheet",
         "market_sheet"
@@ -1471,14 +1390,12 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "settle_price": [
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "position": [
@@ -1487,42 +1404,36 @@
         "EquDiv",
         "Price_Volume_Data/main",
         "Price_Volume_Data/submain",
-        "gmData_bench_price",
         "future_daily"
     ],
     "pre_settle": [
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "upper_limit": [
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "lower_limit": [
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "adj_factor": [
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "conversion_price": [
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "redemption_record_date": [
@@ -1539,7 +1450,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1547,7 +1457,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1555,7 +1464,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "symbol_industry",
         "bench_info"
@@ -1564,7 +1472,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1572,7 +1479,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1580,7 +1486,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1588,7 +1493,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1601,7 +1505,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1609,7 +1512,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1617,7 +1519,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1625,7 +1526,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1643,7 +1543,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1651,7 +1550,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1659,7 +1557,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1667,14 +1564,12 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "conversion_start_date": [
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily",
         "bench_info"
     ],
@@ -1682,7 +1577,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "continuous_contracts",
         "future_daily"
     ],
@@ -1690,7 +1584,6 @@
         "bench_price",
         "stock_price",
         "EquDiv",
-        "gmData_bench_price",
         "future_daily"
     ],
     "codes": [
@@ -4867,24 +4760,6 @@
     "share_oth_ltd": [
         "share_change"
     ],
-    "turn_rate": [
-        "gmData_bench_price",
-        "future_daily"
-    ],
-    "is_st": [
-        "gmData_bench_price",
-        "future_daily"
-    ],
-    "sec_type1": [
-        "gmData_bench_price",
-        "future_daily",
-        "bench_info"
-    ],
-    "sec_type2": [
-        "gmData_bench_price",
-        "future_daily",
-        "bench_info"
-    ],
     "PSLFY": [
         "trading_derivative_indicator"
     ],
@@ -5691,6 +5566,20 @@
     "SHORTTERMBDSPAYA": [
         "balance_sheet"
     ],
+    "turn_rate": [
+        "future_daily"
+    ],
+    "is_st": [
+        "future_daily"
+    ],
+    "sec_type1": [
+        "future_daily",
+        "bench_info"
+    ],
+    "sec_type2": [
+        "future_daily",
+        "bench_info"
+    ],
     "industry_code": [
         "symbol_industry"
     ],
@@ -5870,6 +5759,9 @@
         "EquDiv_info"
     ],
     "calendarDate": [
+        "TradeCal"
+    ],
+    "isOpen": [
         "TradeCal"
     ],
     "prevTradeDate": [

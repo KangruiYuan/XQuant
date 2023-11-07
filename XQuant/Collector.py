@@ -9,8 +9,14 @@ import pandas as pd
 from pandas.errors import ParserError
 from sqlalchemy import text
 
-from .Consts import datatables
-from .Utils import Config, TradeDate, Formatter
+from .Utils import (
+    Config,
+    is_date,
+    format_future,
+    format_code,
+    format_date,
+    extend_date_span,
+)
 from .SQLAgent import SQLAgent
 from .Schema import TimeType
 
@@ -23,7 +29,12 @@ def run_thread_pool_sub(target: Callable, args: Sequence, max_work_count: int):
         return res
 
 
-def read_from_h5(filepath: str | Path, key="a"):
+def read_from_h5(filepath: str | Path, key: str = "a"):
+    """
+    :param filepath:
+    :param key:
+    :return:
+    """
     return pd.read_hdf(filepath, key=key)
 
 
@@ -37,9 +48,7 @@ def thread_load_file(load_list: list[str], **kwargs):
         if len(res) > 0:
             # 拼接数据
             try:
-                if isinstance(res.index[0], datetime) or TradeDate.is_date(
-                    res.index[0]
-                ):
+                if isinstance(res.index[0], datetime) or is_date(res.index[0]):
                     res = res.reset_index()
             except ParserError:
                 res = res.reset_index(drop=True)
@@ -59,19 +68,19 @@ class DataAPI:
         engine: Literal["py", "sql"] = "py",
         **kwargs,
     ):
-        if name not in datatables:
+        if name not in Config.datatables:
             raise KeyError("{} is not ready for use with .h5 file!".format(name))
 
-        assets = datatables[name]["assets"]
+        assets = Config.datatables[name]["assets"]
         if assets == "sql":
             engine = "sql"
 
         if end is None:
             end = datetime.today().strftime("%Y%m%d")
-        end = TradeDate.format_date(end)
+        end = format_date(end)
 
         if begin:
-            begin = TradeDate.format_date(begin)
+            begin = format_date(begin)
 
         if isinstance(fields, str):
             fields = [fields]
@@ -119,7 +128,7 @@ class DataAPI:
                 )
 
         elif engine == "sql":
-            assert datatables[name]["assets"] == "sql"
+            assert Config.datatables[name]["assets"] == "sql"
             return cls.get_data_from_sql(
                 name=name,
                 begin=begin,
@@ -145,13 +154,12 @@ class DataAPI:
         if fields is None:
             fields = "*"
         else:
-
             fields = ",".join([f.lower() for f in fields])
         SQL_QUERY = [f'SELECT {fields} FROM "{name}"']
         # params = {}
         condition = "WHERE"
-        ticker_column = datatables[name]["ticker_column"].lower()
-        date_column = datatables[name]["date_column"].lower()
+        ticker_column = Config.datatables[name]["ticker_column"].lower()
+        date_column = Config.datatables[name]["date_column"].lower()
 
         if ticker is not None and ticker_column:
             _tmp = ",".join(["'" + t + "'" for t in ticker])
@@ -160,16 +168,20 @@ class DataAPI:
             condition = "AND"
 
         if begin is not None and date_column:
-            SQL_QUERY.append(f'{condition} "{date_column}" >= \'{begin.strftime("%Y-%m-%d")}\'')
+            SQL_QUERY.append(
+                f'{condition} "{date_column}" >= \'{begin.strftime("%Y-%m-%d")}\''
+            )
             # params["begin"] = begin
             condition = "AND"
 
         if end is not None and date_column:
-            SQL_QUERY.append(f'{condition} "{date_column}" <= \'{end.strftime("%Y-%m-%d")}\'')
+            SQL_QUERY.append(
+                f'{condition} "{date_column}" <= \'{end.strftime("%Y-%m-%d")}\''
+            )
             # params["end"] = end
             condition = "AND"
         SQL_QUERY = " ".join(SQL_QUERY) + ";"
-        if kwargs.get('verbose', False):
+        if kwargs.get("verbose", False):
             print(SQL_QUERY)
         df = pd.read_sql_query(text(SQL_QUERY), conn.connect())
         return df
@@ -198,9 +210,7 @@ class DataAPI:
                 continue
             tmp_file_list = [str(j) for j in tmp_folder.glob("*.h5")]
             if ticker is not None:
-                target_ticker = [
-                    j for j in tmp_file_list if Formatter.future(j) in ticker
-                ]
+                target_ticker = [j for j in tmp_file_list if format_future(j) in ticker]
             else:
                 target_ticker = tmp_file_list
             if target_ticker:
@@ -283,7 +293,7 @@ class DataAPI:
             Y_pattern = r"Y(\d+)"
             if begin:
                 if re.search(Q_Y_pattern, h5_file_name_list[0]):
-                    load_begin, load_end = TradeDate.extend_date_span(begin, end, "Q")
+                    load_begin, load_end = extend_date_span(begin, end, "Q")
                     begin_num = load_begin.year * 10 + load_begin.month // 3
                     end_num = load_end.year * 10 + load_end.month // 3
                     pattern = r"Y(\d+)_Q(\d+).h5"
@@ -295,7 +305,7 @@ class DataAPI:
                             if begin_num <= filename_int <= end_num:
                                 load_list.append(filename)
                 elif re.search(Y_pattern, h5_file_name_list[0]):
-                    load_begin, load_end = TradeDate.extend_date_span(begin, end, "Y")
+                    load_begin, load_end = extend_date_span(begin, end, "Y")
                     begin_num = load_begin.year
                     end_num = load_end.year
                     pattern = r"Y(\d+).h5"
@@ -355,7 +365,7 @@ class DataAPI:
         if kwargs.get("gm_factor", False):
             name += "_gm"
         try:
-            date_column = datatables[name]["date_column"]
+            date_column = Config.datatables[name]["date_column"]
             if not date_column:
                 date_column = None
         except KeyError:
@@ -363,7 +373,7 @@ class DataAPI:
             print("{} 不支持ticker筛选".format(name))
 
         try:
-            ticker_column = datatables[name]["ticker_column"]
+            ticker_column = Config.datatables[name]["ticker_column"]
             if not ticker_column:
                 ticker_column = None
         except KeyError:
@@ -390,7 +400,7 @@ class DataAPI:
         data: pd.DataFrame, begin: TimeType, end: TimeType, date_column: str
     ):
         data = data.reset_index(drop=True)
-        data[date_column] = TradeDate.format_date(data[date_column])
+        data[date_column] = format_date(data[date_column])
 
         try:
             if begin is not None:
@@ -407,8 +417,8 @@ class DataAPI:
     @staticmethod
     def select_ticker(data: pd.DataFrame, ticker: list[str, int], ticker_column: str):
         data = data.reset_index(drop=True)
-        ticker_formatted = pd.Series(Formatter.format_code(data[ticker_column]))
-        return data[ticker_formatted.isin(Formatter.format_code(ticker))]
+        ticker_formatted = pd.Series(format_code(data[ticker_column]))
+        return data[ticker_formatted.isin(format_code(ticker))]
 
     @staticmethod
     def select_fields(data: pd.DataFrame, fields: list[str]):
