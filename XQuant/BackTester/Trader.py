@@ -1,15 +1,14 @@
+from datetime import datetime
 from pathlib import Path
+from shutil import rmtree
 from typing import Any
 
-import pandas as pd
-from shutil import rmtree
+import plotly.graph_objects as go
+
+from .SignalUtils import *
 from ..FactorManager import DataReady, Analyzer
 from ..Schema import BackTestOptions, Strategy
-from ..Utils import Formatter, TradeDate
-from .SignalUtils import *
-import plotly.graph_objects as go
-from datetime import datetime
-import plotly.express as px
+from ..Utils import shift_trade_date, format_dataframe
 
 
 class BackTestRunner:
@@ -42,12 +41,12 @@ class BackTestRunner:
         self.prepare_resource(**kwargs)
 
     def prepare_signals(self):
-        signals = Formatter.dataframe(self.signals)
+        signals = format_dataframe(self.signals)
         signal_date_min = signals.index.min()
         signal_date_max = signals.index.max()
 
-        options_date_min = TradeDate.shift_trade_date(self.options.begin, -1)
-        options_date_max = TradeDate.shift_trade_date(self.options.end, 1)
+        options_date_min = shift_trade_date(self.options.begin, -1)
+        options_date_max = shift_trade_date(self.options.end, 1)
 
         global_date_min = max(options_date_min, signal_date_min)
         global_date_max = min(options_date_max, signal_date_max)
@@ -61,7 +60,10 @@ class BackTestRunner:
 
     def prepare_path(self):
         self._hash_mark = hash(tuple(self.signals.values.tostring()))
-        self.date_range_str = f"{self.options.begin.strftime('%Y%m%d')}-{self.options.end.strftime('%Y%m%d')}-{self._hash_mark}"
+        self.date_range_str = (
+            f"{self.options.begin.strftime('%Y%m%d')}-"
+            f"{self.options.end.strftime('%Y%m%d')}-{self._hash_mark}"
+        )
 
         self.global_folder = self.options.cache / self.date_range_str
         print("Cache: {}".format(self.global_folder))

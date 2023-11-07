@@ -2,7 +2,7 @@ from datetime import date
 
 import numpy as np
 import pandas as pd
-from ...Utils import Formatter, TradeDate
+from ...Utils import shift_trade_date, transform_index, expand_dataframe
 
 from ..BarraCNE6 import BARRA
 from functools import cached_property
@@ -29,7 +29,7 @@ class EnhancingDividend(BARRA):
     """
 
     def __init__(self, begin: TimeType, end: TimeType = None, **kwargs):
-        begin = TradeDate.shift_trade_date(begin, lag=-252*3)
+        begin = shift_trade_date(begin, lag=-252*3)
         end = end if end else date.today().strftime("%Y%m%d")
         super().__init__(begin, end, **kwargs)
 
@@ -57,8 +57,8 @@ class EnhancingDividend(BARRA):
         df = df.rolling(window=3).apply(lambda x: np.nanmean(x) >= 0.05, raw=True).ffill()
         # df = df.rolling(window=3).apply(lambda x: np.nanmean(x) >= 0.05, raw=True).ffill()
         # df.index = list(map(lambda x: TradeDate.shift_trade_date(x, -1), df.index))
-        Formatter.transform_index(df)
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        transform_index(df)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -74,8 +74,8 @@ class EnhancingDividend(BARRA):
         )
         df = df.rolling(window=2).apply(lambda x: any(x > 0)).ffill()
         # df.index = list(map(lambda x: TradeDate.shift_trade_date(x, -1), df.index))
-        Formatter.transform_index(df)
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        transform_index(df)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -99,6 +99,6 @@ class EnhancingDividend(BARRA):
         DTOP = DTOP.ffill()
         res = (DTOP * D_t).ffill()
         half_year_res = res.resample("6M").last()
-        half_year_res.index = list(map(lambda x: TradeDate.shift_trade_date(x, -1), half_year_res.index))
-        expand_res = Formatter.expand_dataframe(half_year_res, begin=self.begin, end=self.end)
+        half_year_res.index = list(map(lambda x: shift_trade_date(x, -1), half_year_res.index))
+        expand_res = expand_dataframe(half_year_res, begin=self.begin, end=self.end)
         return expand_res

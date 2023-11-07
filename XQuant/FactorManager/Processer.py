@@ -11,8 +11,8 @@ from pyfinance.utils import rolling_windows
 from scipy.stats.mstats import winsorize
 from statsmodels.regression.linear_model import WLS
 
-from ..Schema import ArrayType
-from ..Utils import Formatter, Tools
+from ..Schema import NormalArrays
+from ..Utils import format_dataframe, watcher
 
 
 class Processer:
@@ -24,8 +24,8 @@ class Processer:
 
     @staticmethod
     def regress(
-        y: ArrayType,
-        X: ArrayType,
+        y: NormalArrays,
+        X: NormalArrays,
         intercept: bool = True,
         weight: int = 1,
         verbose: bool = True,
@@ -85,7 +85,7 @@ class Processer:
         if clean:
             for i in range(len(dfs)):
                 if 1 not in dfs[i].shape:
-                    dfs[i] = Formatter.dataframe(dfs[i])
+                    dfs[i] = format_dataframe(dfs[i])
 
         dims = 1 if any(len(df.shape) == 1 or 1 in df.shape for df in dfs) else 2
         res = []
@@ -175,8 +175,8 @@ class Processer:
     def capm_regress(
         cls, Y: pd.DataFrame, X: pd.DataFrame, window: int = 504, half_life: int = 252
     ):
-        X = Formatter.dataframe(X, columns=False)
-        Y = Formatter.dataframe(Y).fillna(0)
+        X = format_dataframe(X, columns=False)
+        Y = format_dataframe(Y).fillna(0)
         X, Y = cls.align_dataframe([X, Y], clean=False)
         beta, alpha, sigma = cls.rolling_regress(
             Y, X, window=window, half_life=half_life
@@ -190,7 +190,7 @@ class Processer:
         window: int,
         half_life: int = None,
         func_name: str = "nansum",
-        weights: ArrayType = None,
+        weights: NormalArrays = None,
     ):
         func = getattr(np, func_name)
         if func is None:
@@ -225,7 +225,7 @@ class Processer:
         return int(np.ceil(num / 100) * 100)
 
     @staticmethod
-    @Tools.watcher
+    @watcher
     def pandas_parallelcal(
         df: pd.DataFrame, func: Callable, args: Any = None, window: int = None, **kwargs
     ):
@@ -258,14 +258,16 @@ class Processer:
         return res.compute(scheduler=kwargs.get("scheduler", "processes"))
 
     @classmethod
-    def nan_func(cls, series: ArrayType, func: Callable, weights: ArrayType = None):
+    def nan_func(
+        cls, series: NormalArrays, func: Callable, weights: NormalArrays = None
+    ):
         if weights is not None:
             return cls.weighted_func(func, series, weights=weights)
         else:
             return func(series)
 
     @classmethod
-    def weighted_func(cls, func: Callable, series: ArrayType, weights: ArrayType):
+    def weighted_func(cls, func: Callable, series: NormalArrays, weights: NormalArrays):
         weights /= np.nansum(weights)
         if "std" in func.__name__:
             return cls.weighted_std(series, weights)
@@ -278,7 +280,7 @@ class Processer:
 
     @classmethod
     def rolling_regress(
-        cls, y: ArrayType, x: ArrayType, window: int = 5, half_life: int = None
+        cls, y: NormalArrays, x: NormalArrays, window: int = 5, half_life: int = None
     ):
         stocks = y.columns
         if half_life:

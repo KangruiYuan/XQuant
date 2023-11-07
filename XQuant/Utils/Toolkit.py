@@ -33,17 +33,20 @@ def binary_search(arr: NormalArrays, target: TimeType) -> tuple[bool, int]:
     if isinstance(arr[0], TimeReady):
         target = format_date(target)
 
-    low: int = 0
-    high: int = len(arr) - 1
-    while low <= high:
-        mid = (low + high) >> 1
-        if arr[mid] == target:
-            return True, mid
-        elif arr[mid] < target:
-            low = mid + 1
+    left: int = 0
+    right: int = len(arr) - 1
+
+    while left < right:
+        mid = (left + right) >> 1
+        if arr[mid] >= target:
+            right = mid
         else:
-            high = mid
-    return False, low
+            left = mid + 1
+
+    if arr[right] == target:
+        return True, right
+    else:
+        return False, right
 
 
 def is_date(date_repr: TimeType, pattern_return: bool = False, **kwargs) -> bool | str:
@@ -215,7 +218,7 @@ def range_trade_date(begin: TimeType, end: TimeType = None, lag: int = None):
     if end is not None:
         res, index_end = binary_search(Config.trade_date_list, end)
         if not res:
-            index_end += 1
+            index_end -= 1
         return Config.trade_date_list[index_begin : index_end + 1]
     elif lag is not None:
         if lag < 0:
@@ -336,7 +339,9 @@ def packaging(
 
 
 def get_config(
-    filename: Union[str, os.PathLike],
+    filename: Union[str, os.PathLike, Path] = Path(__file__).parents[1]
+    / "Tokens"
+    / "quant.const.ini",
     section: str = None,
     **kwargs,
 ) -> dict[str, str | dict[str, str]]:
@@ -444,7 +449,7 @@ def search_keyword(
     fuzzy: bool = True,
     limit: int = 5,
     update: bool = False,
-    initial_path: str = Path(__file__).parent[1] / "Temp/attrs.json",
+    initial_path: str = Path(__file__).parents[1] / "Temp/attrs.json",
     **kwargs,
 ):
     """

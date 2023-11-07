@@ -11,7 +11,7 @@ class Basic(DataReady):
         super().__init__(begin, end, **kwargs)
 
     def expand(self, df: pd.DataFrame, **kwargs):
-        return Formatter.expand_dataframe(df, begin=self.begin, end=self.end, **kwargs)
+        return expand_dataframe(df, begin=self.begin, end=self.end, **kwargs)
 
     def roll_and_expand_dataframe(
         self,
@@ -24,7 +24,7 @@ class Basic(DataReady):
             df = getattr(self, name)
         df = df.ffill()
         df = df.rolling(window=window).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     def get_dataframes(
@@ -61,7 +61,7 @@ class Basic(DataReady):
         """
         ttl_inc_oper = self.ttl_inc_oper.ffill()
         df = ttl_inc_oper.rolling(window=4, axis=0).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -72,7 +72,7 @@ class Basic(DataReady):
         """
         oper_prof = self.oper_prof.ffill()
         df = oper_prof.rolling(window=4, axis=0).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -83,7 +83,7 @@ class Basic(DataReady):
         """
         inc_oper = self.inc_oper.ffill()
         df = inc_oper.rolling(window=4, axis=0).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -106,7 +106,7 @@ class Basic(DataReady):
         df = df.pivot(
             index="pub_date", columns="symbol", values="interest_free_current_liability"
         )
-        return Formatter.dataframe(df).ffill()
+        return format_dataframe(df).ffill()
 
     @cached_property
     def interest_carry_current_liability(self):
@@ -129,7 +129,7 @@ class Basic(DataReady):
         """
         exp_sell = self.exp_sell.ffill()
         df = exp_sell.rolling(window=4, axis=0).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -144,7 +144,7 @@ class Basic(DataReady):
         inc_oper, cost_oper = self.align_dataframe([inc_oper, cost_oper], clean=False)
         gross = inc_oper - cost_oper
         df = gross.rolling(window=4, axis=0).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -157,7 +157,7 @@ class Basic(DataReady):
         ret_prof = self.ret_prof
         sur_rsv, ret_prof = self.align_dataframe([sur_rsv, ret_prof])
         df = sur_rsv.ffill() + ret_prof.ffill()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -180,7 +180,7 @@ class Basic(DataReady):
         inc_noper_ttm = inc_noper.rolling(window=4).sum()
         exp_noper_ttm = exp_noper.rolling(window=4).sum()
         df = inc_noper_ttm - exp_noper_ttm
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -191,7 +191,7 @@ class Basic(DataReady):
         """
         net_cf_inv = self.net_cf_inv.ffill()
         df = net_cf_inv.rolling(window=4).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -202,7 +202,7 @@ class Basic(DataReady):
         """
         fin_exp = self.fin_exp.ffill()
         df = fin_exp.rolling(window=4).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -213,7 +213,7 @@ class Basic(DataReady):
         """
         exp_adm = self.exp_adm.ffill()
         df = exp_adm.rolling(window=4).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -225,7 +225,7 @@ class Basic(DataReady):
         exp_int, inc_int = self.exp_int, self.inc_int
         exp_int, inc_int = self.align_dataframe([exp_int, inc_int], clean=False)
         df = exp_int - inc_int
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -236,7 +236,7 @@ class Basic(DataReady):
         """
         NVALCHGIT = self.NVALCHGIT.ffill()
         df = NVALCHGIT.rolling(window=4).sum()
-        df = Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        df = expand_dataframe(df, begin=self.begin, end=self.end)
         return df
 
     @cached_property
@@ -265,7 +265,7 @@ class Basic(DataReady):
             [self.fin_exp, self.net_prof, self.inc_tax]
         )
         df = sum([fin_exp.ffill(), net_prof.ffill(), inc_tax.ffill()])
-        return Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        return expand_dataframe(df, begin=self.begin, end=self.end)
 
     @cached_property
     def net_profit_ttm(self):
@@ -288,7 +288,7 @@ class Basic(DataReady):
         ttl_cost_oper, ttl_inc_oper = self.align_dataframe(
             [ttl_cost_oper, ttl_inc_oper], clean=False
         )
-        return Formatter.expand_dataframe(
+        return expand_dataframe(
             ttl_inc_oper - ttl_cost_oper, begin=self.begin, end=self.end
         )
 
@@ -358,7 +358,7 @@ class Basic(DataReady):
             + amort_lt_exp_ppay
         )
 
-        return Formatter.expand_dataframe(df, begin=self.begin, end=self.end)
+        return expand_dataframe(df, begin=self.begin, end=self.end)
 
     @cached_property
     def asset_impairment_loss_ttm(self):
@@ -395,7 +395,7 @@ class Basic(DataReady):
         TDEBT, cash_cash_eq_end = self.align_dataframe(
             [TDEBT, cash_cash_eq_end], clean=False
         )
-        return Formatter.expand_dataframe(
+        return expand_dataframe(
             TDEBT - cash_cash_eq_end, begin=self.begin, end=self.end
         )
 
@@ -408,9 +408,7 @@ class Basic(DataReady):
         net_prof_pcom = self.net_prof_pcom.ffill()
         NPCUT = self.NPCUT.ffill()
         net_prof_pcom, NPCUT = self.align_dataframe([net_prof_pcom, NPCUT], clean=False)
-        return Formatter.expand_dataframe(
-            net_prof_pcom - NPCUT, begin=self.begin, end=self.end
-        )
+        return expand_dataframe(net_prof_pcom - NPCUT, begin=self.begin, end=self.end)
 
     @cached_property
     def goods_sale_and_service_render_cash_ttm(self):

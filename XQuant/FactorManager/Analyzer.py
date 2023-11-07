@@ -4,7 +4,7 @@ from typing import Union, Sequence
 import numpy as np
 import pandas as pd
 import scipy.stats as st
-from XQuant import Tools
+
 from bokeh.io import output_file
 from bokeh.models import DatetimeTickFormatter
 from bokeh.plotting import figure, show
@@ -76,8 +76,7 @@ class Analyzer:
             dr = DataReady(begin=min_date, end=max_date)
             returns = dr.returns
 
-        score = Tools.info_lag(score, n_lag=1)
-        score = score.dropna(axis=0, how='all')
+        score = score.shift().dropna(axis=0, how='all')
 
         score, returns = Processer.align_dataframe(dfs=[score, returns], clean=True)
 
