@@ -1,5 +1,6 @@
-from XQuant import BufferManager, capture_prints
 import streamlit as st
+
+from XQuant import BufferManager
 
 
 def Cache():

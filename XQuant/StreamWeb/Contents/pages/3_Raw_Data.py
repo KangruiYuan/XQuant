@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
-from XQuant import IMPLEMENTED, Formatter, Config, DataAPI
+
+from XQuant import Config, DataAPI, is_date
 
 
 @st.cache_data
@@ -35,8 +36,8 @@ def RawDataVisual():
         data_name = st.selectbox("原生数据", Config.datatables.keys())
         show_all = st.checkbox("展示所有数据", key="show_all_check", value=False)
     with date_col:
-        begin = st.date_input("起始日期", value=Formatter.date("20200101"))
-        end = st.date_input("截止日期", value=Formatter.date("20210101"))
+        begin = st.date_input("起始日期", value=is_date("20200101"))
+        end = st.date_input("截止日期", value=is_date("20210101"))
 
     if st.button("获取数据", key="get_raw_button"):
         with st.spinner("请等待"):

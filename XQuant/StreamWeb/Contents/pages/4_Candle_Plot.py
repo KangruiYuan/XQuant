@@ -4,7 +4,7 @@ import streamlit as st
 import pandas as pd
 from matplotlib import pyplot as plt
 
-from XQuant import Config, DataAPI, Formatter, TradeDate
+from XQuant import Config, DataAPI, shift_trade_date, format_date
 import talib
 import numpy as np
 import mplfinance as mpf
@@ -20,10 +20,10 @@ def Candle():
     col1, col2 = st.columns(2)
 
     st.session_state.symbol = col1.selectbox("选择股票代码", options=code_full, index=0)
-    st.session_state.begin = col1.date_input("起始日期", value=Formatter.date("20200101"))
+    st.session_state.begin = col1.date_input("起始日期", value=format_date("20200101"))
 
     st.session_state.freq = col2.selectbox("选择数据频率", options=("日线",))
-    st.session_state.end = col2.date_input("截止日期", value=Formatter.date("20210101"))
+    st.session_state.end = col2.date_input("截止日期", value=format_date("20210101"))
 
     if st.session_state.freq == "日线":
         st.session_state.table_name = "gmData_history_adj"
@@ -44,7 +44,7 @@ def Candle():
         date_column = Config.datatables[st.session_state.table_name]["date_column"]
         df = DataAPI.get_data(
             name=st.session_state.table_name,
-            begin=TradeDate.shift_trade_date(st.session_state.begin, -st.session_state.shift),
+            begin=shift_trade_date(st.session_state.begin, -st.session_state.shift),
             end=st.session_state.end,
             ticker=st.session_state.symbol,
         )

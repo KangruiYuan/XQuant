@@ -1,13 +1,14 @@
-from time import sleep
-
-from streamlit_ace import st_ace, KEYBINDINGS, THEMES
 import re
 import sys
-import streamlit as st
 from pathlib import Path
+
 import pandas as pd
-from XQuant import Formatter, BARRA, Analyzer, Strategy, BackTestRunner, BackTestOptions, RtnResult
 import plotly.express as px
+import streamlit as st
+from streamlit_ace import st_ace, KEYBINDINGS, THEMES
+
+from XQuant import BARRA, Analyzer, Strategy, BackTestRunner, BackTestOptions, RtnResult, is_date, format_dataframe
+
 
 def code_editor(**kwargs):
     code_col, para_col = st.columns([3, 1])
@@ -63,12 +64,12 @@ def FactorBackTest():
             col_names = factor_data.columns
             for col in col_names:
                 sample = factor_data[col].dropna().values[0]
-                if Formatter.is_date(sample):
+                if is_date(sample):
                     date_column = col
                     break
 
             factor_data = factor_data.set_index(date_column)
-            factor_data = Formatter.dataframe(factor_data)
+            factor_data = format_dataframe(factor_data)
             st.dataframe(factor_data.head())
             st.session_state.date_max = factor_data.index.max()
             st.session_state.date_min = factor_data.index.min()

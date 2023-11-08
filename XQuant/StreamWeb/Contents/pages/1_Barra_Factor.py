@@ -1,6 +1,6 @@
 import pandas as pd
 import streamlit as st
-from XQuant import IMPLEMENTED, BARRA, Formatter, Analyzer, Strategy, RtnResult
+from XQuant import IMPLEMENTED, BARRA, Analyzer, Strategy, RtnResult, format_date
 from collections import ChainMap
 import plotly.express as px
 from XQuant import BackTestOptions, BackTestRunner
@@ -35,8 +35,8 @@ def BarraFactor():
         data_name = st.selectbox("数据名", all_data.keys())
         bench_code = st.selectbox("研究标的", ("000852", "000905", "000300"), index=0)
     with date_col:
-        begin = st.date_input("起始日期", value=Formatter.date("20180101"))
-        end = st.date_input("截止日期", value=Formatter.date("20210101"))
+        begin = st.date_input("起始日期", value=format_date("20180101"))
+        end = st.date_input("截止日期", value=format_date("20210101"))
         backtest_method = st.selectbox("回测方法", all_method)
 
     st.divider()
