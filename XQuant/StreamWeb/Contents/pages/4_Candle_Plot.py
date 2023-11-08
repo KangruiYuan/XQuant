@@ -70,7 +70,7 @@ def Candle():
         )
         df["j"] = 3 * df["k"] - 2 * df["d"]
 
-        df = df.loc[st.session_state.begin:, :]
+        df = df.loc[st.session_state.begin :, :]
 
         my_color = mpf.make_marketcolors(
             up="red", down="green", edge="i", wick="i", volume="in", inherit=True
@@ -80,7 +80,9 @@ def Candle():
             gridaxis="both", gridstyle="-.", y_on_right=False, marketcolors=my_color
         )
 
-        custom_cycler = cycler(color=["dodgerblue", "deeppink", "navy", "red", "green", "purple", "black"])
+        custom_cycler = cycler(
+            color=["dodgerblue", "deeppink", "navy", "red", "green", "purple", "black"]
+        )
 
         fig = mpf.figure(style=my_style, figsize=(12, 8))
         left, width = 0.05, 0.9

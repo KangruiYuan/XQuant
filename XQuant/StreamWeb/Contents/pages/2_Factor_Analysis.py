@@ -7,7 +7,16 @@ import plotly.express as px
 import streamlit as st
 from streamlit_ace import st_ace, KEYBINDINGS, THEMES
 
-from XQuant import BARRA, Analyzer, Strategy, BackTestRunner, BackTestOptions, RtnResult, is_date, format_dataframe
+from XQuant import (
+    BARRA,
+    Analyzer,
+    Strategy,
+    BackTestRunner,
+    BackTestOptions,
+    RtnResult,
+    is_date,
+    format_dataframe,
+)
 
 
 def code_editor(**kwargs):
@@ -18,7 +27,7 @@ def code_editor(**kwargs):
         # function_code = ["def function(x, y):", "    return x * y"]
         # function_code = "\n".join(function_code)
         function_code_file = Path(__file__).parent / "demo_web_function.txt"
-        function_code = open(function_code_file, "r", encoding='utf-8').read()
+        function_code = open(function_code_file, "r", encoding="utf-8").read()
         st.subheader("自定义代码输入区")
         content = st_ace(
             value=function_code,
@@ -44,7 +53,9 @@ def FactorBackTest():
     st.set_page_config(layout="wide")
     st.title("📈 :blue[XQuant] :red[Visual] : Backtest Platform")
 
-    st.session_state.functions_path = Path(__file__).parents[2] / "Temp" / "web_functions"
+    st.session_state.functions_path = (
+        Path(__file__).parents[3] / "Temp" / "web_functions"
+    )
     if not st.session_state.functions_path.exists():
         st.session_state.functions_path.mkdir(exist_ok=True, parents=True)
     sys.path.append(str(st.session_state.functions_path))
@@ -79,17 +90,18 @@ def FactorBackTest():
     back_col, bench_col, func_name_col = st.columns(3)
     backtest_method = back_col.selectbox("回测方法", [s.value for s in Strategy])
     bench_code = bench_col.selectbox("研究标的", ("000852", "000905", "000300"), index=0)
-    st.session_state.function_name = func_name_col.text_input("多个函数请指定主函数", "signal_to_weight")
+    st.session_state.function_name = func_name_col.text_input(
+        "多个函数请指定主函数", "signal_to_weight"
+    )
 
     col1, col2 = st.columns(2)
     opts = BackTestOptions()
-    bt = BackTestRunner(
-        signals=pd.DataFrame(),
-        options=opts
-    )
+    bt = BackTestRunner(signals=pd.DataFrame(), options=opts)
     st.session_state.content = code_editor()
 
-    if col1.button("因子回测", key="cal_backtest_button_in_backtest", use_container_width=True):
+    if col1.button(
+        "因子回测", key="cal_backtest_button_in_backtest", use_container_width=True
+    ):
         if backtest_method != Strategy.SELF_DEFINED:
             opts = BackTestOptions(
                 begin=st.session_state.date_min,
@@ -97,7 +109,7 @@ def FactorBackTest():
                 bench_code=bench_code,
                 verbose=False,
                 method=backtest_method,
-                surname=backtest_method
+                surname=backtest_method,
             )
         elif backtest_method == Strategy.SELF_DEFINED and st.session_state.content:
             pattern = r"def\s+(\w+)\s*\("
@@ -108,11 +120,13 @@ def FactorBackTest():
             else:
                 st.write(f"采用主动输入的主函数: {st.session_state.function_name}")
             with st.spinner("执行中"):
-                script_path = st.session_state.functions_path / st.session_state.function_name
+                script_path = (
+                    st.session_state.functions_path / st.session_state.function_name
+                )
                 script_path = script_path.with_suffix(".py")
                 with open(script_path, "w") as script:
                     script.write(st.session_state.content)
-                exec_code = compile(st.session_state.content, 'temp', "exec")
+                exec_code = compile(st.session_state.content, "temp", "exec")
                 scope = {}
                 exec(exec_code, scope)
                 user_defined_function = scope.get(st.session_state.function_name)
@@ -125,7 +139,7 @@ def FactorBackTest():
                     verbose=False,
                     method=backtest_method,
                     surname=backtest_method,
-                    function=user_defined_function
+                    function=user_defined_function,
                 )
         with st.spinner("请等待，计算中..."):
             bt.signals = st.session_state.factor_data
@@ -139,7 +153,9 @@ def FactorBackTest():
                 bench_res = bt.cache[bt.date_range_str]["bench_result"]
                 for group in range(bt.options.group_nums):
                     st.divider()
-                    res: RtnResult = bt.cache[bt.date_range_str][bt.options.method.value][group]["result"]
+                    res: RtnResult = bt.cache[bt.date_range_str][
+                        bt.options.method.value
+                    ][group]["result"]
                     fields = res._fields
                     st.write(f"### Group {group}")
                     cols = st.columns(len(fields))
@@ -150,7 +166,9 @@ def FactorBackTest():
                             delta=round(res[i] - bench_res[i], 2),
                         )
             else:
-                res: RtnResult = bt.cache[bt.date_range_str][bt.options.method.value]["result"]
+                res: RtnResult = bt.cache[bt.date_range_str][bt.options.method.value][
+                    "result"
+                ]
                 bench_res = bt.cache[bt.date_range_str]["bench_result"]
                 fields = res._fields
                 cols = st.columns(len(fields))
@@ -163,8 +181,12 @@ def FactorBackTest():
 
     if col2.button("ICIR", key="cal_ICIR_button_in_backtest", use_container_width=True):
         with st.spinner("请等待"):
-            if "factor_data" in st.session_state.keys() and len(st.session_state.factor_data > 0):
-                returns = BARRA(begin=st.session_state.date_min, end=st.session_state.date_max).returns
+            if "factor_data" in st.session_state.keys() and len(
+                st.session_state.factor_data > 0
+            ):
+                returns = BARRA(
+                    begin=st.session_state.date_min, end=st.session_state.date_max
+                ).returns
                 IC, IR = Analyzer.ICIR(st.session_state.factor_data, returns)
                 IC = IC.reset_index()
                 fig = px.bar(
@@ -172,10 +194,10 @@ def FactorBackTest():
                     x="index",
                     y="IC",
                     color="IC",
-                    orientation='v',
+                    orientation="v",
                     labels={"index": "Date"},
                     title=f"IR={float(IR):.2f}",
-                    color_continuous_scale="spectral"
+                    color_continuous_scale="spectral",
                 )
                 st.plotly_chart(fig, use_container_width=True)
             else:
