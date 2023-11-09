@@ -27,11 +27,24 @@ for file in table_record_directory.glob("*.json"):
 del another
 del tmp
 
+ib_future = pd.read_csv(table_record_directory / "ib_future.csv")
+ib_future = ib_future.dropna(how="any", subset=["exchange"])
+for _, row in ib_future.iterrows():
+    datatables[row["symbol"]] = {
+        "exchange": row["exchange"],
+        "timezone": row["timezone"],
+        "assets": "IB",
+        "description": "",
+        "date_column": "date",
+        "ticker_column": ""
+    }
+
 
 class Config:
     """
     常量类
     """
+
     database_dir = {
         "info": r"E:\Share\Stk_Data\dataFile",
         "dataYes": r"E:\Share\Stk_Data\dataFile",
@@ -41,6 +54,7 @@ class Config:
         "em": r"E:\Share\EM_Data",
         "jq_factor": r"E:\Share\JointQuant_Factor",
         "jq_prepare": r"E:\Share\JointQuant_prepare",
+        "IB": r"H:\global data\IB data"
     }
 
     datasets_name = list(database_dir.keys())

@@ -38,7 +38,7 @@ def read_from_h5(filepath: str | Path, key: str = "a"):
     return pd.read_hdf(filepath, key=key)
 
 
-def thread_load_file(load_list: list[str], **kwargs):
+def thread_load_file(load_list: list[str, Path], **kwargs):
     load_data = pd.DataFrame()
     res = run_thread_pool_sub(
         read_from_h5, load_list, max_work_count=kwargs.get("workers", 20)
@@ -126,6 +126,10 @@ class DataAPI:
                     ticker=ticker,
                     **kwargs,
                 )
+            elif assets in ["IB"]:
+                return cls.get_data_from_IB(
+                    name=name, begin=begin, end=end, fields=fields
+                )
 
         elif engine == "sql":
             assert Config.datatables[name]["assets"] == "sql"
@@ -136,6 +140,36 @@ class DataAPI:
                 ticker=ticker,
                 fields=fields,
             )
+
+    @classmethod
+    def get_data_from_IB(
+        cls,
+        name: str,
+        begin: TimeType = None,
+        end: TimeType = None,
+        fields: list[str] = None,
+        **kwargs,
+    ):
+        table_folder = Path(Config.database_dir["IB"]) / name
+        years_folder = list(table_folder.iterdir())
+        begin_year = begin.year
+        end_year = end.year
+        years_folder = list(
+            filter(lambda x: begin_year <= int(x.stem) <= end_year, years_folder)
+        )
+        load_list = []
+        for folder in years_folder:
+            load_list.extend(folder.iterdir())
+
+        load_list = list(
+            filter(lambda x: begin <= format_date(x.stem) <= end, load_list)
+        )
+        if load_list:
+            data = thread_load_file(load_list)
+            if fields is not None:
+                return cls.select_fields(data=data, fields=fields)
+            else:
+                return data
 
     @classmethod
     def get_data_from_sql(
