@@ -164,3 +164,5 @@ cython_debug/
 /XQuant/Scripts/VNTrade/setting.json
 /XQuant/Scripts/VNTrade/vn_schema/setting.json
 /Demo/test.ipynb
+/XQuant/Others/DAAPI/bin_x86/CoreLog
+/XQuant/Others/DAAPI/bin/CoreLog
